@@ -1,22 +1,22 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title:       Austin Taylor
+email:       email@austintaylor.io
+author:      Austin Taylor
+description: "Cybersecurity Enthusiast"
 baseurl:     ""
-url:         "http://pixyll.com"
+url:         "http://austintaylor.io"
 date_format: "%b %-d, %Y"
 
 # Google services
-google_analytics:
+google_analytics: "UA-56700721-4"
 google_verification:
 
 # Optional features
-animated:             false
+animated:             true
 show_related_posts:   false
 show_post_footers:    false
-show_social_icons:    false
-ajaxify_contact_form: false
+show_social_icons:    true
+ajaxify_contact_form: true
 enable_mathjax: false
 
 # Disqus post comments
@@ -30,7 +30,7 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-github_username:
+github_username: austin-taylor
 bitbucket_username:
 stackoverflow_id:
 twitter_username:
