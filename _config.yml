@@ -3,7 +3,7 @@ title:       Austin Taylor
 email:       email@austintaylor.io
 author:      Austin Taylor
 description: "Cybersecurity Enthusiast"
-baseurl:     "/austin-taylor"
+baseurl:     "/"
 url:         "http://austin-taylor.github.io"
 date_format: "%b %-d, %Y"
 
