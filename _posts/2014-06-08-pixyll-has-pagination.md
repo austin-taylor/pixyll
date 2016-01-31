@@ -1,9 +1,11 @@
 ---
 layout:     post
-title:      Pixyll has Pagination
-date:       2014-06-08 11:21:29
-summary:    This is an empty post to illustrate the pagination component with Pixyll.
-categories: jekyll pixyll
+title:      Migrating Blog
+date:       2016-01-30 19:06:30
+summary:    Coming Soon...
+categories: first post
 ---
 
-This is an empty post to illustrate the pagination component with Pixyll.
+Migrating my <a href="http://www.austinshomepage.com"> current blog </a><br/>
+
+<h3>Coming Soon....</h3>
