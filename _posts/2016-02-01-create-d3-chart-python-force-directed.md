@@ -24,7 +24,8 @@ products:
 
 
 
-*Our Goal*
+Our Goal
+---
 
 Create an [interactive graph](http://bl.ocks.org/mbostock/4062045) force directed graph to illustrate network traffic.
 
