@@ -24,7 +24,7 @@ products:
 
 
 
-##Our Goal
+*Our Goal*
 
 Create an [interactive graph](http://bl.ocks.org/mbostock/4062045) force directed graph to illustrate network traffic.
 
@@ -104,7 +104,8 @@ d3.json("/static/miserables.json", function(error, graph) {
 The [dataset](http://pen-testing.sans.org/holiday-challenge/2013) we're going to use is from a [SANS Holiday Challenge in 2013](http://pen-testing.sans.org/holiday-challenge/2013) which is [available here](http://pen-testing.sans.org/sansholidayhack2013.pcap)
 
 
-##Getting started...
+Getting started...
+---
 
 ---
 <head>
@@ -123,7 +124,7 @@ The [dataset](http://pen-testing.sans.org/holiday-challenge/2013) we're going to
 </ul>
 </body>
 
-##Step 1: Extract Data
+Step 1: Extract Data
 ---
 In this example, we're going to export the metadata from our PCAP using wireshark.
 
@@ -146,10 +147,10 @@ Save/Export packets as CSV format.
 Name your file something you'll remember. I named mine <b>packet_metadata.csv</b>
 
 
-##Step 2: Transform Data
+Step 2: Transform Data
 ---
 
-##Step 3: Load Data
+Step 3: Load Data
 ---
 
 
