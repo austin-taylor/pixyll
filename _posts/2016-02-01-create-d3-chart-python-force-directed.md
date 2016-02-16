@@ -30,7 +30,7 @@ Our Goal
 ---
 Create an [interactive graph](http://bl.ocks.org/mbostock/4062045) force directed graph to illustrate network traffic.
 
-To get started visit save the following code to a file named index.html to your desktop or a path you'll remember.
+To get started save the following code to a file named index.html to your desktop or a path you'll remember.
 
 <iframe src="/static/examples/force_directed/index.html" width="960px" height="500px" frameborder="0" scrolling="no"></iframe>
 
