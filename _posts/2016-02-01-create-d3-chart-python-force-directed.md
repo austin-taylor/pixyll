@@ -26,9 +26,90 @@ products:
 
 Our Goal
 ---
+![Interactive Force Directed Network Graph]({{ site.base }}/images/zoomed_out1.png)
 
 Create an [interactive graph](http://bl.ocks.org/mbostock/4062045) force directed graph to illustrate network traffic.
 
+To get started visit save the following code to a file named index.html to your desktop or a path you'll remember.
+
+_You may need to edit the width and height depending on the size of your network_
+
+##index.html
+{% highlight html %}
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-120)
+    .linkDistance(30)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("pcap_export.json", function(error, graph) {
+  if (error) throw error;
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 5)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+});
+
+</script>
+{% endhighlight %}
+
+  
+It's easiest if the dataset and index.html are all in the same directory.
 
 <style>
 
@@ -63,7 +144,7 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 
-d3.json("/static/miserables.json", function(error, graph) {
+d3.json("/static/pcap_export.json", function(error, graph) {
   if (error) throw error;
 
   force
@@ -164,13 +245,16 @@ pcap_data = pd.read_csv('packet_metadata_ipv4.csv', index_col='No.')
 
 Verify data loaded properly
 
-```python
+{% highlight python %}
 dataframe = pcap_data
-```
+{% endhighlight %}
 <br>
-```
+
+
+{% highlight python %}
 dataframe
-```
+{% endhighlight %}
+
 
 <table border="1" class="dataframe">
   <thead>
@@ -183,11 +267,9 @@ dataframe
       <th>Dst Port</th>
       <th>Protocol</th>
       <th>Length</th>
-      <th>Info</th>
     </tr>
     <tr>
       <th>No.</th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -207,7 +289,6 @@ dataframe
       <td>80</td>
       <td>TCP</td>
       <td>62</td>
-      <td>2546  &gt;  80 [SYN] Seq=0 Win=64240 Len=0 MSS=14...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -218,7 +299,6 @@ dataframe
       <td>2546</td>
       <td>TCP</td>
       <td>62</td>
-      <td>80  &gt;  2546 [SYN, ACK] Seq=0 Ack=1 Win=14600 L...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -229,7 +309,6 @@ dataframe
       <td>80</td>
       <td>TCP</td>
       <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1 Ack=1 Win=64240 Len=0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -240,7 +319,6 @@ dataframe
       <td>80</td>
       <td>HTTP</td>
       <td>360</td>
-      <td>GET / HTTP/1.1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -251,7 +329,6 @@ dataframe
       <td>2546</td>
       <td>TCP</td>
       <td>54</td>
-      <td>80  &gt;  2546 [ACK] Seq=1 Ack=307 Win=15544 Len=0</td>
     </tr>
     <tr>
       <th>6</th>
@@ -262,7 +339,6 @@ dataframe
       <td>2546</td>
       <td>HTTP</td>
       <td>1315</td>
-      <td>HTTP/1.1 200 OK  (text/html)</td>
     </tr>
     <tr>
       <th>7</th>
@@ -273,7 +349,6 @@ dataframe
       <td>80</td>
       <td>HTTP</td>
       <td>340</td>
-      <td>GET /default.css HTTP/1.1</td>
     </tr>
     <tr>
       <th>8</th>
@@ -284,7 +359,6 @@ dataframe
       <td>2546</td>
       <td>TCP</td>
       <td>1514</td>
-      <td>[TCP segment of a reassembled PDU]</td>
     </tr>
     <tr>
       <th>9</th>
@@ -295,7 +369,6 @@ dataframe
       <td>2546</td>
       <td>HTTP</td>
       <td>1194</td>
-      <td>HTTP/1.1 200 OK  (text/css)</td>
     </tr>
     <tr>
       <th>10</th>
@@ -306,7 +379,6 @@ dataframe
       <td>80</td>
       <td>TCP</td>
       <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=593 Ack=3862 Win=64240 L...</td>
     </tr>
     <tr>
       <th>11</th>
@@ -317,7 +389,6 @@ dataframe
       <td>80</td>
       <td>HTTP</td>
       <td>344</td>
-      <td>GET /img/stripes.gif HTTP/1.1</td>
     </tr>
     <tr>
       <th>12</th>
@@ -328,7 +399,6 @@ dataframe
       <td>2546</td>
       <td>HTTP</td>
       <td>579</td>
-      <td>HTTP/1.1 404 Not Found  (text/html)</td>
     </tr>
     <tr>
       <th>13</th>
@@ -339,7 +409,6 @@ dataframe
       <td>80</td>
       <td>HTTP</td>
       <td>267</td>
-      <td>GET /favicon.ico HTTP/1.1</td>
     </tr>
     <tr>
       <th>14</th>
@@ -350,7 +419,6 @@ dataframe
       <td>2546</td>
       <td>HTTP</td>
       <td>575</td>
-      <td>HTTP/1.1 404 Not Found  (text/html)</td>
     </tr>
     <tr>
       <th>15</th>
@@ -361,7 +429,6 @@ dataframe
       <td>80</td>
       <td>TCP</td>
       <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1096 Ack=4908 Win=63194 ...</td>
     </tr>
     <tr>
       <th>16</th>
@@ -372,7 +439,6 @@ dataframe
       <td>80</td>
       <td>HTTP</td>
       <td>442</td>
-      <td>GET /files/TrafficSystemNetworkMap.pdf HTTP/1.1</td>
     </tr>
     <tr>
       <th>17</th>
@@ -383,7 +449,6 @@ dataframe
       <td>2546</td>
       <td>TCP</td>
       <td>14654</td>
-      <td>[TCP segment of a reassembled PDU]</td>
     </tr>
     <tr>
       <th>18</th>
@@ -394,7 +459,6 @@ dataframe
       <td>80</td>
       <td>TCP</td>
       <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1484 Ack=19508 Win=58400...</td>
     </tr>
     <tr>
       <th>19</th>
@@ -405,7 +469,6 @@ dataframe
       <td>2546</td>
       <td>TCP</td>
       <td>16114</td>
-      <td>[TCP segment of a reassembled PDU]</td>
     </tr>
     <tr>
       <th>20</th>
@@ -416,480 +479,325 @@ dataframe
       <td>80</td>
       <td>TCP</td>
       <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1484 Ack=35568 Win=42340...</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>4.467107</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>TCP</td>
-      <td>16114</td>
-      <td>[TCP segment of a reassembled PDU]</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>4.467273</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1484 Ack=51628 Win=26280...</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>4.467324</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>TCP</td>
-      <td>19034</td>
-      <td>[TCP segment of a reassembled PDU]</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>4.467507</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1484 Ack=70608 Win=7300 ...</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>4.467518</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>TCP</td>
-      <td>7354</td>
-      <td>[TCP Window Full] [TCP segment of a reassemble...</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>4.467639</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>60</td>
-      <td>[TCP ZeroWindow] 2546  &gt;  80 [ACK] Seq=1484 Ac...</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>4.467978</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>60</td>
-      <td>[TCP Window Update] 2546  &gt;  80 [ACK] Seq=1484...</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>4.467988</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>TCP</td>
-      <td>2974</td>
-      <td>[TCP segment of a reassembled PDU]</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>4.468165</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>60</td>
-      <td>2546  &gt;  80 [ACK] Seq=1484 Ack=80828 Win=840 L...</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>4.468730</td>
-      <td>10.25.22.253</td>
-      <td>2546</td>
-      <td>10.25.22.250</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>60</td>
-      <td>[TCP Window Update] 2546  &gt;  80 [ACK] Seq=1484...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>170545</th>
-      <td>1319065.601918</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135877788 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170546</th>
-      <td>1319065.601926</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135879136 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170547</th>
-      <td>1319065.601929</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135880484 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170548</th>
-      <td>1319065.601933</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135881832 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170549</th>
-      <td>1319065.601937</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135883180 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170550</th>
-      <td>1319065.602523</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135884528 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170551</th>
-      <td>1319065.602531</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135885876 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170552</th>
-      <td>1319065.602534</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135887224 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170553</th>
-      <td>1319065.602536</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>653</td>
-      <td>80  &gt;  51085 [ACK] Seq=135888572 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170554</th>
-      <td>1319065.602540</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135889159 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170555</th>
-      <td>1319065.602543</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135890507 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170556</th>
-      <td>1319065.603154</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135891855 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170557</th>
-      <td>1319065.603162</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135893203 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170558</th>
-      <td>1319065.603166</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135894551 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170559</th>
-      <td>1319065.603169</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135895899 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170560</th>
-      <td>1319065.603172</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135897247 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170561</th>
-      <td>1319065.603175</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135898595 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170562</th>
-      <td>1319065.603289</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135899943 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170563</th>
-      <td>1319065.603745</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135901291 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170564</th>
-      <td>1319065.603752</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135902639 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170565</th>
-      <td>1319065.603758</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135903987 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170566</th>
-      <td>1319065.603765</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135905335 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170567</th>
-      <td>1319065.603892</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135906683 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170568</th>
-      <td>1319065.604386</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135908031 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170569</th>
-      <td>1319065.604393</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135909379 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170570</th>
-      <td>1319065.604396</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135910727 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170571</th>
-      <td>1319065.604399</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135912075 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170572</th>
-      <td>1319065.604513</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135913423 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170573</th>
-      <td>1319065.604519</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>TCP</td>
-      <td>1414</td>
-      <td>80  &gt;  51085 [ACK] Seq=135914771 Ack=1 Win=404...</td>
-    </tr>
-    <tr>
-      <th>170574</th>
-      <td>1319065.635116</td>
-      <td>10.16.92.79</td>
-      <td>51085</td>
-      <td>10.16.92.103</td>
-      <td>80</td>
-      <td>TCP</td>
-      <td>66</td>
-      <td>51085  &gt;  80 [ACK] Seq=1 Ack=135916119 Win=666...</td>
     </tr>
   </tbody>
 </table>
-<p>167829 rows × 8 columns</p>
 
+  
+We'll want to structure our data in the same format as the infamous [miserables.json]('https://gist.github.com/fredbenenson/4212290#file-miserables-json')
+  
+Here is a sample of miserables.json
 
+{% highlight json %}
+json_data = {
+  "nodes":[
+    {"name":"Myriel","group":1},
+    {"name":"Napoleon","group":1},
+    {"name":"Mlle.Baptistine","group":1},
+    {"name":"Mme.Magloire","group":1},
+    {"name":"CountessdeLo","group":1},
+  ],
+  "links":[
+    {"source":1,"target":0,"value":1},
+    {"source":2,"target":0,"value":8},
+    {"source":3,"target":0,"value":10},
+    {"source":3,"target":2,"value":6},
+    {"source":4,"target":0,"value":1},
+    {"source":5,"target":0,"value":1},
+  ]
+}
+{% endhighlight %}
+  
+### The data has 2 keys: <u>nodes</u> and <u>links</u>
+  
+  -Nodes: This data is used to create an object and give the node a name. The group represents the color.  
+  -Links: The _source_ is used to identify the **index position** inside of the nodes list. For example "Napoleon" is in index position 1; same holds true for target. The value is the number of times the connection occurs.
+  
+### Let's get our PCAP data into the same format.
 
+First, isolate source and destination.
 
+{% highlight python %}
 
-```python
-#isolate source and destination
 src_dst = dataframe[["Source","Destination"]]
-```
+{% endhighlight %}
 
 
-```python
+Load 10 sample pieces of data from the dataframe to validate data.
+{% highlight python %}
+
 src_dst.sample(10)
-```
+{% endhighlight %}
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Source</th>
+      <th>Destination</th>
+    </tr>
+    <tr>
+      <th>No.</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>58224</th>
+      <td>10.16.92.103</td>
+      <td>10.16.92.79</td>
+    </tr>
+    <tr>
+      <th>37454</th>
+      <td>10.16.92.103</td>
+      <td>10.16.92.79</td>
+    </tr>
+    <tr>
+      <th>22425</th>
+      <td>10.16.92.79</td>
+      <td>10.16.92.103</td>
+    </tr>
+    <tr>
+      <th>72515</th>
+      <td>10.16.92.79</td>
+      <td>10.16.92.103</td>
+    </tr>
+    <tr>
+      <th>124518</th>
+      <td>10.16.92.103</td>
+      <td>10.16.92.79</td>
+    </tr>
+    <tr>
+      <th>93352</th>
+      <td>10.16.92.103</td>
+      <td>10.16.92.79</td>
+    </tr>
+    <tr>
+      <th>166810</th>
+      <td>10.16.92.79</td>
+      <td>10.16.92.103</td>
+    </tr>
+    <tr>
+      <th>73159</th>
+      <td>10.16.92.103</td>
+      <td>10.16.92.79</td>
+    </tr>
+    <tr>
+      <th>114681</th>
+      <td>10.16.92.79</td>
+      <td>10.16.92.103</td>
+    </tr>
+    <tr>
+      <th>156581</th>
+      <td>10.16.92.103</td>
+      <td>10.16.92.79</td>
+    </tr>
+  </tbody>
+</table>
+<br/>
 
 
+Group by source and target fields and count number of connections
+
+_Use inplace=True to rename the columns inplace without having to reassign to a new variable._
+
+{% highlight python %}
+
+src_dst.rename(columns={"Source":"source","Destination":"target"}, inplace=True)
+
+grouped_src_dst = src_dst.groupby(["source","target"]).size().reset_index()
+
+{% endhighlight %}
+
+Join source and target into consolidated index to be used for index position
+{% highlight python %}
+unique_ips = pd.Index(grouped_src_dst['source']
+                      .append(grouped_src_dst['target'])
+                      .reset_index(drop=True).unique())
+{% endhighlight %}
+
+Create subnet group  
+_Note: We use regular expression here to group the various subnets to the third octect. For example, if you have 2 IP addresses (192.168.1.5, 192.168.2.5), they'd both be treated as 2 networks. We'll use this to group the subnets by color and create our groups._
+
+{% highlight python %}
+group_dict = {}
+counter = 0
+for ip in unique_ips:
+    breakout_ip = re.match("^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$", ip)
+    if breakout_ip:
+        net_id = '.'.join(breakout_ip.group(1,2,3))
+        if net_id not in group_dict:
+            counter += 1
+            group_dict[net_id] = counter
+        else:
+            pass
+
+{% endhighlight %}
+  
+Next we'll need to begin to structure our data which to reference later.
+  
+{% highlight python %}
+temp_links_list = list(grouped_src_dst.apply(lambda row: {"source": row['source'], "target": row['target'], "value": row['count']}, axis=1))
+{% endhighlight %}
+
+You should now have something like...
+{% highlight python %}
+
+temp_links_list
+[{'source': '0.0.0.0', 'target': '255.255.255.255', 'value': 157},
+ {'source': '10.16.11.5', 'target': '10.25.22.253', 'value': 24},
+ {'source': '10.16.92.103', 'target': '10.16.92.79', 'value': 105742},
+ {'source': '10.16.92.79', 'target': '10.16.92.103', 'value': 36543},
+ {'source': '10.2.2.2', 'target': '10.22.11.9', 'value': 3410},
+ {'source': '10.2.2.2', 'target': '10.25.22.253', 'value': 57},
+ {'source': '10.21.22.1', 'target': '10.21.22.22', 'value': 1},
+ {'source': '10.21.22.1', 'target': '10.21.22.23', 'value': 1},
+ {'source': '10.21.22.1', 'target': '10.21.22.24', 'value': 1},
+ {'source': '10.21.22.1', 'target': '10.21.22.253', 'value': 19},
+ {'source': '10.21.22.10', 'target': '10.21.22.22', 'value': 54},
+ {'source': '10.21.22.10', 'target': '10.21.22.23', 'value': 96},
+ {'source': '10.21.22.10', 'target': '10.21.22.24', 'value': 156},
+ {'source': '10.21.22.10', 'target': '10.21.22.253', 'value': 14},
+ {'source': '10.21.22.22', 'target': '10.21.22.1', 'value': 3},
+ {'source': '10.21.22.22', 'target': '10.21.22.10', 'value': 40},
+ {'source': '10.21.22.22', 'target': '10.21.22.23', 'value': 6},
+ {'source': '10.21.22.22', 'target': '10.21.22.24', 'value': 6},
+ {'source': '10.21.22.22', 'target': '10.21.22.253', 'value': 20}]
+ {% endhighlight %}
+  
+  Now we need to extract the index location for each unique source and destination (target) pair and append it to our links list.
+{% highlight python %}
+
+links_list = []
+for link in temp_links_list:
+    record = {"value":link['value'], "source":unique_ips.get_loc(link['source']),
+     "target": unique_ips.get_loc(link['target'])}
+    links_list.append(record)
+
+{% endhighlight %}
+
+
+Now that we have our links list, we'll need to create our nodes.
+
+{% highlight python %}
+
+nodes_list = []
+
+for ip in unique_ips:
+    breakout_ip = re.match("^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$", ip)
+    if breakout_ip:
+        net_id = '.'.join(breakout_ip.group(1,2,3))
+        nodes_list.append({"name":ip, "group": group_dict.get(net_id)})
+{% endhighlight %}
+
+Our **nodes_list** contains the IPs which we isolated earlier in **unique_ips**
+
+_validate data_
+{% highlight python %}
+nodes_list[0:8]
+
+[
+   {'group': 1, 'name': '0.0.0.0'},
+   {'group': 2, 'name': '10.16.11.5'},
+   {'group': 3, 'name': '10.16.92.103'},
+   {'group': 3, 'name': '10.16.92.79'},
+   {'group': 4, 'name': '10.2.2.2'},
+   {'group': 5, 'name': '10.21.22.1'},
+   {'group': 5, 'name': '10.21.22.10'},
+   {'group': 5, 'name': '10.21.22.22'}
+ ]
+{% endhighlight %}
+
+You should now see the index positions of the values instead of the values themselves represented in the links_list.
+
+_validate data_
+
+{% highlight python %}
+links_list
+
+[
+   {'source': 0, 'target': 58, 'value': 157},
+   {'source': 1, 'target': 23, 'value': 24},
+   {'source': 2, 'target': 3, 'value': 105742},
+   {'source': 3, 'target': 2, 'value': 36543},
+   {'source': 4, 'target': 11, 'value': 3410},
+   {'source': 4, 'target': 23, 'value': 57},
+   {'source': 5, 'target': 7, 'value': 1},
+   {'source': 5, 'target': 8, 'value': 1},
+   {'source': 5, 'target': 9, 'value': 1},
+   {'source': 5, 'target': 10, 'value': 19},
+   {'source': 6, 'target': 7, 'value': 54},
+   {'source': 6, 'target': 8, 'value': 96},
+   {'source': 6, 'target': 9, 'value': 156},
+   {'source': 6, 'target': 10, 'value': 14},
+   {'source': 7, 'target': 5, 'value': 3},
+   {'source': 7, 'target': 6, 'value': 40},
+   {'source': 7, 'target': 8, 'value': 6},
+   {'source': 7, 'target': 9, 'value': 6},
+   {'source': 7, 'target': 10, 'value': 20}
+ ]
+ {% endhighlight %}
+
+Time to prep our data to be loaded as a json and rendered in d3. This moves us into the next phase...
 
 Step 3: Load Data
 ---
 
-To be continued...
+Create a variable called json_prep and assign our two list as the values.
+{% highlight python %}
+json_prep = {"nodes":nodes_list, "links":links_list}
+
+json_prep.keys()
+   dict_keys(['links', 'nodes'])
+{% endhighlight %}
+
+_validate data (data sample)_
+{% highlight python %}
+print(json_dump)
+
+{% endhighlight %}
+
+
+{% highlight json %}
+
+{
+ "links": [
+  {
+   "source": 0,
+   "target": 58,
+   "value": 157
+  },
+  {
+   "source": 1,
+   "target": 23,
+   "value": 24
+  }
+ ],
+ "nodes": [
+  {
+   "group": 1,
+   "name": "0.0.0.0"
+  },
+  {
+   "group": 2,
+   "name": "10.16.11.5"
+  }
+ ]
+}
+{% endhighlight %}
+_**Looks good!**_
+
+Finally let's write our data out to a file to be used in our D3 Force Directed Graph
+
+{% highlight python %}
+
+filename_out = 'pcap_export.json'
+json_out = open(filename_out,'w')
+json_out.write(json_dump)
+json_out.close()
+
+{% endhighlight %}
+
+Finally, open up index.html and view your network diagram!
+
