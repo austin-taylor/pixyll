@@ -34,7 +34,7 @@ To get started visit save the following code to a file named index.html to your 
 
 _You may need to edit the width and height depending on the size of your network_
 
-##index.html
+## index.html
 
 {% highlight html %}
 <!DOCTYPE html>
