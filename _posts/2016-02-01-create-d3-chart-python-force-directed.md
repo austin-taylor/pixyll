@@ -28,7 +28,7 @@ author_github: austin-taylor
 
 Our Goal
 ---
-Create an [interactive graph](http://bl.ocks.org/mbostock/4062045) force directed graph to illustrate network traffic.
+Create an [interactive force directed graph](http://bl.ocks.org/mbostock/4062045) to illustrate network traffic.
 
 To get started save the following code to a file named index.html to your desktop or a path you'll remember.
 
