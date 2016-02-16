@@ -52,7 +52,7 @@ _You may need to edit the width and height depending on the size of your network
 
 </style>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
 var width = 960,
