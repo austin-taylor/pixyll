@@ -34,6 +34,21 @@ layout: default
   {% include post_footer.html %}
 {% endif %}
 
+<!-- Look the author details up from the site config. -->
+{% assign author = site.data.authors[page.author] %}
+
+<!-- Output author details if some exist. -->
+<span class="author-name">
+  {{ site.data.authors.[page.author_github].name }}
+  <a href="www.twitter.com/{{site.data.authors.[page.author_github].twitter}}">
+  <i class="ico-twitter"></i>
+</a>
+<a href="www.github.com/{{site.data.authors.[page.author_github].github}}">
+  <i class="ico-github"></i>
+</a>
+</span>
+
+
 {% if site.disqus_shortname %}
   <div id="disqus_thread"></div>
   <script type="text/javascript">

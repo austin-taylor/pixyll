@@ -20,6 +20,8 @@ products:
       sub-arbitrary: Sublime Text 3, iPython Notebook
  - top-level: Optional
    arbitrary: You can get iPython Notebook and Pandas together by installing Anaconda 3
+author: austin_taylor
+author_github: austin-taylor
 ---
 
 
