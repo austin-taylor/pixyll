@@ -49,12 +49,12 @@ show_sharing_icons: true
 # Change to 'true' to enable individual icons
 share_facebook: true
 share_twitter: true
-share_googleplus: false
+share_googleplus: true
 share_linkedin: true
 share_digg: false
 share_tumblr: false
-share_reddit: false
-share_stumbleupon: false
+share_reddit: true
+share_stumbleupon: true
 share_hackernews: true
 
 text:
@@ -62,7 +62,7 @@ text:
     newer: 'Newer'
     older: 'Older'
   share_buttons:
-    text:         'Share this post!'
+    text:         'Share this Article'
     facebook:     'Share on Facebook'
     twitter:      'Share on Twitter'
     googleplus:   'Share on Google+'
