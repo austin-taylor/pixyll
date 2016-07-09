@@ -49,19 +49,7 @@ For this example, we're going to convert [a User Agent tracker XML feed](http://
 
 Sample Data
 -----------
-{% highlight xml %}
-<user-agents>
-<user-agent>
-<ID>id_a_f_3</ID>
-<String>!Susie (http://www.sync2it.com/susie)</String>
-<Description>Sync2It bookmark management & clustering engine</Description>
-<Type>C R</Type>
-<Comment/>
-<Link1>http://www.sync2it.com</Link1>
-<Link2/>
-</user-agent>
-<user-agent>
-{% endhighlight %}
+![Sample XML Data]({{ site.base }}/images/xml.png)
 
 
 Code Walkthrough
