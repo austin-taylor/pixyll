@@ -24,7 +24,7 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
 
-xml_data = 'user_agents.xml'
+xml_data = '/path/user_agents.xml'
 
 def xml2df(xml_data):
     tree = ET.parse(xml_data)
@@ -66,7 +66,7 @@ from lxml import etree
 import pandas as pd
 '''END IMPORTS'''
 
-xml_data = 'user_agents.xml' #Use the path where the xml data is located.
+xml_data = '/path/user_agents.xml' #Use the path where the xml data is located.
 
 def xml2df(xml_data):
     tree = ET.parse(xml_data) #Initiates the tree Ex: <user-agents>
