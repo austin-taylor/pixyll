@@ -24,6 +24,8 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
 
+xml_data = 'user_agents.xml'
+
 def xml2df(xml_data):
     tree = ET.parse(xml_data)
     root = tree.getroot()
@@ -55,7 +57,7 @@ Sample Data
 Code Walkthrough
 ----------------
 
-It's very fairly straight forward, so I'll comment each line to explain.
+It's fairly straight forward, so I'll comment each line to explain.
 
 {% highlight python %}
 '''BEGIN IMPORTS'''
@@ -63,6 +65,8 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
 '''END IMPORTS'''
+
+xml_data = 'user_agents.xml' #Use the path where the xml data is located.
 
 def xml2df(xml_data):
     tree = ET.parse(xml_data) #Initiates the tree Ex: <user-agents>
