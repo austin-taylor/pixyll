@@ -59,6 +59,13 @@ Code Walkthrough
 
 It's fairly straight forward, so I'll comment each line to explain.
 
+Be sure to download the xml file above. 
+
+{% highlight code %}
+wget http://www.user-agents.org/allagents.xml
+{% endhighlight %}
+
+
 {% highlight python %}
 '''BEGIN IMPORTS'''
 import xml.etree.ElementTree as ET
