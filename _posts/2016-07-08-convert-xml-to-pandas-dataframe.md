@@ -53,18 +53,17 @@ Sample Data
 -----------
 ![Sample XML Data]({{ site.base }}/images/xml.png)
 
-
-Code Walkthrough
-----------------
-
-It's fairly straight forward, so I'll comment each line to explain.
-
-Be sure to download the xml file above. 
+Before running the sure to download the xml file above. 
 
 {% highlight code %}
 wget http://www.user-agents.org/allagents.xml
 {% endhighlight %}
 
+
+Code Walkthrough
+----------------
+
+It's fairly straight forward, so I'll comment each line to explain.
 
 {% highlight python %}
 '''BEGIN IMPORTS'''
