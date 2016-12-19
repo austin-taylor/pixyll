@@ -50,7 +50,7 @@ A few caveats:
 * All products with links are personal preference. I'm sharing the setup of my network, but feel free to use replacements.
 * There are many ways to monitor network traffic. Network TAPs are the cleanest way to do it. The recommended TAP above serves as a gigabit switch and can be powered by a USB. Choose a TAP that suits you. In many cases, 100Mbps is okay, but may suffer from packet loss if the network operates at greater speeds.
 * It is possible to listen on the same interface that you're management port is on (the port with an IP address), but it is best to have a dedicated interface.
-* Per [SELKS Github](https://github.com/StamusNetworks/SELKS) the minimal configuration for production usage is 2 cores and 4 Gb of memory. As Suricata and Elastisearch are multithreaded, the more cores you have the better it is. Regarding memory, the more traffic to monitor you have, the more getting some extra memory will be interesting. See [Running SELKS in production](https://github.com/StamusNetworks/SELKS/wiki/Running-SELKS-in-production) page for more info.
+* Per [SELKS Github](https://github.com/StamusNetworks/SELKS) the minimal configuration for production usage is 2 cores and 4 Gb of memory. As Suricata and Elastisearch are multithreaded, the more cores you have the better it is. Regarding memory, the more traffic to monitor you have, the more extra memory will be required. See [Running SELKS in production](https://github.com/StamusNetworks/SELKS/wiki/Running-SELKS-in-production) page for more info.
 
 Software
 -----
