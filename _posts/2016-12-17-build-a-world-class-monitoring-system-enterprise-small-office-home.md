@@ -64,7 +64,7 @@ Our Goal
 ---
 Gain network visibility into an enterprise, small office, or home network.
 
-Here is an example of a network topology. The topology below may be more relevant toward a small office, but we'll use segments to emulate a home network. Many home networks may not have a switch or firewall connected (not be a bad idea to get one though!)
+Here is an example of a network topology. The topology below may be more relevant toward a small office, but we'll use segments to emulate a home network. Many home networks may not have a switch or firewall connected (not a bad idea to get one though!)
 
 ![NETWORK_TOPOLOGY]({{ site.base }}/images/all_together_labeled.png)
 
