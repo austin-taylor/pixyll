@@ -39,7 +39,7 @@ First we'll need to get a few pieces of hardware.
 | Hardware | Description | Cost |
 | ------------- |:-------------:| -----:|
 | TAP or Switch     | TAP or Switch that supports spanning [Dualcomm-DCGS-1000Base-T](https://www.amazon.com/Dualcomm-DCGS-2005L-1000Base-T-Gigabit-Network/dp/B004EWVFAY/)  | $179 |
-| Server     | Server will run [SELKS](https://www.stamus-networks.com/open-source/) -- See below for minimum requirements|   $0-2000+ |
+| Server     | [Server](https://www.amazon.com/SHUTTLE-LGA1151-Skylake-Barebone-SZ170R8/dp/B01C87CQEK/) will run [SELKS](https://www.stamus-networks.com/open-source/) -- See below for minimum requirements|   $0-2000+ |
 | Dual NIC Card | Server should be equipped with two ports. One for management and another for sniffing. NICs available [here](https://www.amazon.com/Intel-1000-Dual-Server-Adapter/dp/B000BMZHX2) | $46 |
 | Management Switch | [Network switch](https://www.amazon.com/Netgear-ProSafe-48-Port-Gigabit-GS748TNA/dp/B00062WV9U) to separate your management network. |    $10-$400+ |
 | ISP Provided Router | This is the DSL/Cable modem provided by your internet provider | Monthly Bill |
