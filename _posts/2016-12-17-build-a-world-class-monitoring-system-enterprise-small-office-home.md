@@ -87,7 +87,7 @@ Setup
 
    * Your server should now be collecting network traffic!
 
-5. Login to your server via a web browser. https://<server.assigned.ip.address>
+5. Login to your server via a web browser. https://server.assigned.ip.address
 
 Tuning
 ---
