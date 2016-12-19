@@ -101,7 +101,7 @@ Recommendations on the page include:
     3. Data and Logs
     4. Troubleshooting and Getting Help
 
-If you don't tune Elasticsearch or Suricata, the stack will fail. Your server **MUST** be configured or the availability will not be reliable.
+If you don't tune Elasticsearch or Suricata, the stack will eventually fail. Your server **MUST** be configured or the availability will not be reliable.
 
 Hope you found this guide helpful and if you have any questions, please post them in the comments section below.
 
