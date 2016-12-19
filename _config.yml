@@ -18,6 +18,13 @@ show_post_footers:    false
 show_social_icons:    true
 ajaxify_contact_form: true
 enable_mathjax: false
+extended_fonts: false
+enable_anchorjs: false
+
+# Facebook Page integration
+# (for instant articles and other stuff)
+fb_page: false
+fb_page_id: 
 
 # Disqus post comments
 # (leave blank to disable Disqus)
@@ -33,7 +40,7 @@ facebook_comments_number: 10
 github_username: austin-taylor
 bitbucket_username:
 stackoverflow_id:
-twitter_username:
+twitter_username: HuntOperator
 skype_username:
 steam_nickname:
 google_plus_id:
@@ -88,7 +95,7 @@ text:
       sent:     'Message sent!'
       error:    'Error!'
   thanks: 'Thanks for contacting us. We will reply as soon as possible.'
-
+  og_locale: 'en_US'
 
 # Build settings
 markdown:     kramdown

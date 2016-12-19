@@ -55,7 +55,7 @@ Sample Data
 
 Before running the sure to download the xml file above. 
 
-{% highlight code %}
+{% highlight bash %}
 wget http://www.user-agents.org/allagents.xml
 {% endhighlight %}
 
@@ -66,11 +66,11 @@ Code Walkthrough
 It's fairly straight forward, so I'll comment each line to explain.
 
 {% highlight python %}
-'''BEGIN IMPORTS'''
+# BEGIN IMPORTS
 import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
-'''END IMPORTS'''
+# END IMPORTS
 
 xml_data = '/path/user_agents.xml' #Use the path where the xml data is located.
 

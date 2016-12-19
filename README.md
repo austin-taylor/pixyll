@@ -17,31 +17,25 @@ This Jekyll theme was crafted with <3 by [John Otander](http://johnotander.com)
 
 If you're completely new to Jekyll, I recommend checking out the documentation at <http://jekyllrb.com> or there's a tutorial by [Smashing Magazine](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/).
 
-### Installing Jekyll
-
-If you don't have Jekyll already installed, you will need to go ahead and do that.
-
 ```
-$ gem install jekyll
+$ git clone git@github.com:johnotander/pixyll.git
+$ cd pixyll
+$ gem install bundler # If you don't have bundler installed
+$ bundle install
 ```
+
+If you don't want to install anything in your local machine, you can create a free development environment for this Pixyll project in the cloud on [Nitrous.io](https://www.nitrous.io) by clicking the button below.
+
+<a href="https://www.nitrous.io/quickstart">
+  <img src="https://nitrous-image-icons.s3.amazonaws.com/quickstart.png" alt="Nitrous Quickstart" width=142 height=34>
+</a>
+
+In the IDE, start Pixyll via `Run > Start Pixyll` and access your site via `Preview > 3000`.
 
 #### Verify your Jekyll version
 
 It's important to also check your version of Jekyll since this project uses Native Sass which
 is [only supported by 2.0+](http://jekyllrb.com/news/2014/05/06/jekyll-turns-2-0-0/).
-
-```
-$ jekyll -v
-# This should be jekyll 2.0.0 or later
-```
-
-#### Install via Bundler
-
-```
-$ git clone git@github.com:johnotander/pixyll.git
-$ cd pixyll
-$ bundle install
-```
 
 ### Fork, then clone
 
@@ -141,9 +135,52 @@ All variables can be found in the `_sass/_variables.scss` file, toggle these as 
 
 If you would like to add a [fade-in-down effect](http://daneden.github.io/animate.css/), you can add `animated: true` to your `_config.yml`.
 
+### AnchorJS
+
+[AnchorJS](https://github.com/bryanbraun/anchorjs): _A JavaScript utility for adding deep anchor links to existing page content. AnchorJS is lightweight, accessible, and has no dependencies._ You can turn it on by toggling `enable_anchorjs`. Because it offers many ways for customization, tweaks should be done in `_includes/footer.html`. Default settings after turning AnchorJS on are:
+
+```html
+<script>
+    anchors.options.visible = 'always';
+    anchors.add('article h2, article h3, article h4, article h5, article h6');
+</script>
+```
+
+See [documentation](http://bryanbraun.github.io/anchorjs/#basic-usage) for more options.
+
 ### Put in a Pixyll Plug
 
 If you want to give credit to the Pixyll theme with a link to <http://pixyll.com> or my personal website <http://johnotander.com> somewhere, that'd be awesome. No worries if you don't.
+
+### Web analytics and search engines
+
+You can measure visits to your website either by using [Google Analytics](https://www.google.com/analytics/) tracking embed or the more advanced [Google Tag Manager](https://www.google.com/analytics/tag-manager/) container.
+* For Google Analytics set up the value for `google_analytics`, it should be something like `google_analytics: UA-XXXXXXXX-X`.
+* For Google Tag Manager set up the value for `google_tag_manager`, it should be something like: `google_tag_manager: GTM-XXXXX`.
+* _Do not_ set both of above methods because this will cause conflicts and skew your reporting data.
+* Remember that you need to properly configure the GTM container in its admin panel if you want it to work. More info is available in [GTM's docs](https://www.google.com/analytics/tag-manager/resources/).
+
+Your website is, by default, set to be allowed for crawling and indexing by search engines. (Unless you made yourself a custom robots.txt file). You can use front matter settings on each page to control how search engines will it. Sometimes you may want to exclude a particular page from indexing or forbid Google to store a copy of your page in its cache. It is up to you. Use the `meta_robots` frontmatter key and assign values based on [this table](https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag?hl=en#valid-indexing--serving-directives). Some examples:
+
+```yaml
+# exclude page from index
+meta_robots: noindex
+
+# allow indexing, disallow caching
+meta_robots: noarchive
+
+# allow indexing, disallow crawling links
+meta_robots: nofollow
+
+# disallow indexing, follow links
+meta_robots: noindex,follow
+```
+
+In order to get more information about your website's status in search engines, you can register it in [Google Search Console](https://www.google.com/webmasters/tools/home) and/or [Bing Webmaster Tools](http://www.bing.com/toolbox/webmaster). Both these tools will ask you to authorize your website with them and there are couple of ways to do that. Pixyll supports verification via meta tags - just fill in values for `google_verification` and/or `bing_verification` in `_config.yml`, the verification strings and meta tags will then be added automatically.
+
+If search engine optimization is your thing, you can also set up `meta_description` values for each page/post. By default Pixyll uses `summary` to populate the `<meta name="description" content="...">` tag and falls back to `description` from `_config.yml` if `summary` is not present in page/post's front matter. The `summary` is also used for generating Open Graph tags. Why would you want to use a dedicated variable for meta description? Because character limit to properly display this description in search results (as a snippet) is way smaller than in Open Graph. It is recommended to keep it at 155-160 characters, for more in-depth info read [this article](https://moz.com/blog/i-cant-drive-155-meta-descriptions-in-2015).
+
+And lastly - if you happen to write in language other than English be sure to change `og_locale` in `_config.yml` to reflect it.
 
 ### Enjoy
 
