@@ -2,7 +2,7 @@
 title:       Austin Taylor
 email:       email@austintaylor.io
 author:      Austin Taylor
-description: "Cybersecurity Enthusiast"
+description: "Blog for hacking, continuous monitoring, data science and other lessons learned in the Cybersecurity realm."
 baseurl:     ""
 url:         "http://austin-taylor.github.io"
 date_format: "%b %-d, %Y"
