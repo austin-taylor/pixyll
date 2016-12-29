@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/austin_taylor
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://austintaylor.io
+  * I am austin_taylor (https://keybase.io/austin_taylor) on keybase.
+  * I have a public key with fingerprint 5777 2172 A257 D7BD FF82  18D3 5743 219E 1A0F 236A
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101796aac170e3d6bbd63ed8be8db24119e000bc392444bf09996baa51506125bb40a",
+            "fingerprint": "57772172a257d7bdff8218d35743219e1a0f236a",
+            "host": "keybase.io",
+            "key_id": "5743219e1a0f236a",
+            "kid": "0101796aac170e3d6bbd63ed8be8db24119e000bc392444bf09996baa51506125bb40a",
+            "uid": "b742e5319c971c56406bf2cc96b7ab19",
+            "username": "austin_taylor"
+        },
+        "service": {
+            "hostname": "austintaylor.io",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1483045361,
+    "expire_in": 157680000,
+    "prev": "3306c91b51e82ffa9a2eff04b7bade655886617bf0baa7ab63db509c06d04338",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.61
+Comment: https://keybase.io/crypto
+
+yMIfAnicrVJdSBVBGL32cytNCUREiqjFQPIiM7O7M7u3shL8KSOECgrjXmZ2Z3Xr
+tnvdu9cS0QfrwUKIqMxILMogqJ4qKhLMfqAfKiMICoxQAvMhLLtECdWs1UPQY0/D
+zHfOmXMO373c2aHsrCVlHy71Hl96I+vxUF86tJ23fGyVmGu2SNFWaTefOXjC5Ck/
+vts2pagEIIBEx5QakAAum5gxE8vc1BjXTIYUCHUOAGCGrCNFUZgFdF3HjFIVqgBD
+pDKmACpFJMt2GriX9GzHF7IqIQRBgihSiUmYaVkagpopq0SRkZCEFFhIxgGx0U0F
+DGGO0RQvs13xJi7xGXv/wP9n3+kZOUYUxFUZ6oZOoKFiBWBmIcMQFEIZ1ANginsO
+3cMFmqZTvu3EfdqScD2pLSKJUbNt8KDdIM5fsF+oX7mSnuu7hpsQw0bfT0YDrt+S
+DMB7OYv/lokz2zFFnYLQzL2U7TpSFAqk4duBLlQ0GSiqjGFE4vuStsfjdoBQCdZE
+ZBB8w5uFpCwDbOiQqZBryLKoThG3LKAwwqjJsapqGsaQiG5ELyImlk2mAt0A2ASK
+LGtSEKzJcaWoImzSBiGZshsc6qc9LrXdub1zTigrOxSeOytYs1D2gkV/li/cP+97
+8bLkB3Bx8GVf54Wr0i3v2rpxjixQ31geI7GK5sUPel41lWdKau6MdD+DGVjR+zbn
+66WnU9NkYm1R+4L9kb2TN8MDS/Lj52pPDW0rHT1T3eH0+Oujn29U9D9aNTz8qjq3
+d4SeeLmxaNORx7XjhaSy0hwb60ITlajg9VmNgUzVu2lSg7aWN17OT7zZOYY7V85L
+5+WgMRiJ4bqeNU8Py6HrB2LLV1dtuZqz6H193pMNefNP0kPT3YPh4tGFk0Uj+aMF
+R64cnPpxv31xYelRevdY8bjSdXv6Rb788OH3tokV0QFq5JSw7q9lmwt3HP2W+RKu
+i3U0nd71PPLJ2Hq+8ycCcT6S
+=+Iz9
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/austin_taylor
+
+==================================================================
+
