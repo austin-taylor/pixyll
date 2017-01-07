@@ -33,3 +33,7 @@
 @import 'gists';
 @import 'measure';
 @import 'pagination';
+
+body > div > div > div > div.post-header.mb2 > h1{
+  text-align: center;
+}

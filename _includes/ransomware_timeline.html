@@ -1,0 +1,2449 @@
+
+  <!-- load handlebars for templating, and create a template -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script id="item-template" type="text/x-handlebars-template">
+{% raw %}
+    <table class="ransbox {{className}}">
+      <tr>
+        <td class="description">{{name}}</td>
+      </tr>
+    </table>
+    {% endraw %}
+  </script>
+  <script src='{{ "/js/vis.js" | prepend: site.baseurl }}'></script>
+  <link href='{{ "/css/vis-timeline-graph2d.min.css" | prepend: site.baseurl }}' rel="stylesheet" type="text/css" />
+<style>
+
+  /*
+    body, html {
+      font-family: sans-serif;
+      font-size: 10pt;
+      color:black;
+    }
+*/
+  .measure {
+    margin: 0 auto;
+    max-width: 60rem;
+}
+
+
+    .vis-item.eventblue{
+      background-color:#4298c3;
+      border-color:#2483B1;
+
+    }
+    .vis-item.eventorange{
+      background-color: #f4b183;
+      border-color:#CD8350;
+    }
+    .vis-item.eventred{
+      background-color: #f06262;
+      border-color: #D33C3C;
+    }
+    .vis-item.eventgreen{
+      background-color: #a9d18e;
+      border-color:#598F36;
+    }
+
+    .vis.timeline .item {
+      /*border-color: #acacac;*/
+      /*background-color: #efefef;*/
+      /*box-shadow: 5px 5px 10px rgba(128,128,128, 0.3);*/
+
+    }
+    /*
+
+    table .description {
+      font-weight: bold;
+      width:100px;
+      font-size:10px;
+      word-break:break-word;
+    }
+    */
+
+    #visualization {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .logo img {
+      width: 120px;
+    }
+    .ransbox{
+    width:100px;
+    font-size:10px;
+    word-break:break-word;;
+    }
+
+        body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .vis-timeline {
+      /*border: 2px solid #DF740C;*/
+      font-family: 'Roboto', sans-serif;
+      font-size: 12pt;
+      background: #111;
+    }
+
+    .vis-item {
+      border-color: #6FC3DF;
+      background-color: #111;
+      font-size: 10pt;
+      color: black;
+      box-shadow: 5px 5px 20px rgba(128,128,128, 0.5);
+    }
+
+    .vis-item,
+    .vis-item.vis-line {
+      border-width: 3px;
+    }
+
+    .vis-item.vis-dot {
+      border-width: 10px;
+      border-radius: 10px;
+    }
+
+    .vis-item.vis-selected {
+      border-color: gray;
+      background-color: lightgray;
+    }
+
+    .vis-time-axis .vis-text {
+      color: #ddd;
+      /*font-weight:bold;*/
+      padding-top: 5px;
+      padding-left: 5px;
+    }
+
+    .vis-time-axis .vis-text.vis-major {
+      font-weight: bold;
+    }
+
+    .vis-time-axis .vis-grid.vis-minor {
+      border-width: 2px;
+      border-color: gray;
+    }
+
+    .vis-time-axis .vis-grid.vis-major {
+      border-width: 2px;
+      border-color: gray;
+    }
+
+  table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td, table > tfoot > tr > th, table > tfoot > tr > td {
+    padding: 0px;
+    line-height: 1;
+    vertical-align: top;
+    border-top: 0px solid #333;
+}
+  </style>
+
+<body>
+
+
+
+
+<div id="visualization">
+</div>
+
+<script type="text/javascript">
+  // create a handlebars template
+  var source   = document.getElementById('item-template').innerHTML;
+  var template = Handlebars.compile(document.getElementById('item-template').innerHTML);
+
+  // DOM element where the Timeline will be attached
+  var container = document.getElementById('visualization');
+
+  // Create a DataSet (allows two way data-binding)
+  var items = new vis.DataSet([
+    {
+        className: "eventblue",
+        start: "2016-05-09 00:00:00",
+        name: "THE ENIGMA RANSOMWARE SURFACES",
+        title: "Targets Russian-speaking victims. Appends the .enigma extension. Creates the enigma_encr.txt ransom note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-09 00:00:00",
+        name: "CRYPTXXX 2.0 EDITION",
+        title: "Kaspersky’s free decryptor defeated. Concatenates the .crypt extension. Ransom notes named after victim ID."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-10 00:00:00",
+        name: "SHUJIN RANSOMWARE SPREADING IN CHINA",
+        title: "Zeroes in on Chinese victims only. Very complex decryption routine. Uses the 文件解密帮助.txt ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-11 00:00:00",
+        name: "GNL LOCKER (GERMAN NETHERLANDS LOCKER)",
+        title: "Targets German and Dutch users. Adds the .locked extension. UNLOCK_FILES_INSTRUCTIONS.txt manual."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-12 00:00:00",
+        name: "CRYPTOHITMAN, A JIGSAW RANSOMWARE SPINOFF",
+        title: "Hitman video game themed. Appends the .porno extension and uses X-rated images on warning screen."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-05-12 00:00:00",
+        name: "CRYPREN RANSOMWARE DISTRIBUTION UPTICK",
+        title: "Uses the .encrypted extension and drops READ_THIS_TO_DECRYPT.html help manual. Decryptable for free."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-12 00:00:00",
+        name: "PETYA RANSOMWARE GOES WITH THE MISCHA BUNDLE",
+        title: "If the MBR-overwriting Petya fails to get admin privileges, it installs Mischa, a typical file-encrypting Trojan."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-05-13 00:00:00",
+        name: "PETYA AND MISCHA COMBO AS PART OF A RAAS",
+        title: "Ransomware-as-a-Service platform launched allowing crooks to spread Petya and Mischa on an affiliate basis."
+    },
+    {
+        className: "eventred",
+        start: "2016-05-13 00:00:00",
+        name: "CRYPTXXX 2.0 CRACKED",
+        title: "Kaspersky Lab upstartd their free decryptor for CryptXXX ransomware, version 2.0 now covered."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-14 00:00:00",
+        name: "8LOCK8 RANSOMWARE DISCOVERED",
+        title: "New sample. Adds the .8lock8 extension and creates READ_IT.txt ransom notes. Interaction over email."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-16 00:00:00",
+        name: "SHADE RANSOMWARE UPstart",
+        title: "New variant of the Shade aka Troldesh ransomware uses the .da_vinci_code extension to stain locked files."
+    },
+    {
+        className: "eventred",
+        start: "2016-05-16 00:00:00",
+        name: "FREE DECRYPTOR FOR GHOSTCRYPT AVAILABLE",
+        title: "GhostCrypt ransomware (.Z81928819 extension, READ_THIS_FILE.txt ransom note) decrypted by researchers."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-16 00:00:00",
+        name: "SNSLOCKER HITS THE HEADLINES",
+        title: "New strain. Leverages AES cipher, appends the .RSNSlocked extension and demands $300 worth of Bitcoin."
+    },
+    {
+        className: "eventred",
+        start: "2016-05-17 00:00:00",
+        name: "XORIST RANSOMWARE LINEAGE DECRYPTED",
+        title: "Decryptor for the Xorist family released by Emsisoft. Requires one encrypted file and its original copy."
+    },
+    {
+        className: "eventred",
+        start: "2016-05-17 00:00:00",
+        name: "777 RANSOMWARE FAIL",
+        title: "Appends the ._[timestamp]_$[email]$.777 extension. Decrypted by Emsisoft’s Fabian Wosar."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-18 00:00:00",
+        name: "NEW ZYKLON LOCKER IN ROTATION",
+        title: "A GNL Locker spinoff. Uses the .locked extension and drops UNLOCK_FILES_INSTRUCTIONS.html/txt manuals."
+    },
+    {
+        className: "eventred",
+        start: "2016-05-19 00:00:00",
+        name: "THE END OF TESLACRYPT: MASTER KEY RELEASED",
+        title: "TeslaCrypt ransomware authors close the project and release the Master Decryption Key."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-19 00:00:00",
+        name: "WEBSITE-ENCRYPTING RANSOMWARE",
+        title: "New infection exploiting Drupal vulnerability. About 400 sites affected. Demands 1.4 BTC to decrypt content."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-20 00:00:00",
+        name: "DMA LOCKER 4.0 DISCOVERED",
+        title: "Doesn’t modify filenames. Creates Cryptinfo.txt ransom manual and extorts 1.5 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-21 00:00:00",
+        name: "CRYPTXXX UPstartD TO VERSION 3.0",
+        title: "Crypto flaw patched. Kaspersky’s decryptor no longer capable of restoring files."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-05-22 00:00:00",
+        name: "TESLACRYPT DEVS RECOMMEND A RESEARCHER’S TOOL",
+        title: "Crooks provide a link to expert-tailored decoder on Tor payment site for the defunct TeslaCrypt."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-22 00:00:00",
+        name: "ODCODC: NEW RANSOMWARE ON THE TABLE",
+        title: "File renaming format as follows: [attacker’s_email]-[original_filename].odcodc. Not decryptable for free."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-24 00:00:00",
+        name: "ZCRYPT SPREADS VIA USB AND NETWORK SHARES",
+        title: "New one. Appends the .zcrypt string. Propagates over autorun.inf files on memory sticks and network drives."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-24 00:00:00",
+        name: "ZYKLON RANSOMWARE SWITCHES TO APROPOS EXTENSION",
+        title: "New Zyklon edition switches from the .locked extension to .zyklon string. No more changes made."
+    },
+    {
+        className: "eventblue",
+        start: "2016-05-24 00:00:00",
+        name: "BADBLOCK IS ON THE BLOCK",
+        title: "New BadBlock ransomware doesn’t append any extension to files. Ransom size is 2 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-26 00:00:00",
+        name: "INVISIBLE EMPIRE THEMED TROJAN",
+        title: "Another Jigsaw ransomware version. Deletes files unless a victim pays up. Decryptable for free."
+    },
+    {
+        className: "eventorange",
+        start: "2016-05-27 00:00:00",
+        name: "JOBCRYPTER UPstart",
+        title: "A modified variant of the JobCrypter ransomware discovered. Uses the .css extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-01 00:00:00",
+        name: "JUICYLEMON RANSOMWARE DISCOVERED",
+        title: "New sample telling victims to send email to support@juicylemon.biz for instructions. Demands 1000 Euros."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-01 00:00:00",
+        name: "CRYPTXXX MORPHS INTO ULTRACRYPTER",
+        title: "Multiple design tweaks of ransom notes and payment page. Decryptor now called UltraDeCrypter."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-01 00:00:00",
+        name: "GOOD NEWS: BADBLOCK DECRYPTED",
+        title: "The BadBlock strain, which cripples both data files and Windows EXEs, is decrypted courtesy of Emsisoft."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-02 00:00:00",
+        name: "ANOTHER JIGSAW VARIANT EMERGES",
+        title: "This descendant of the Jigsaw ransomware displays NSFW wallpaper and uses the .paybtc extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-03 00:00:00",
+        name: "BLACK SHADES CRYPTER WANTS A SMALL RANSOM",
+        title: "Targets English and Russian-speaking users, appends the .silent extension and demands $30."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-04 00:00:00",
+        name: "HERBST RANSOMWARE TARGETING GERMAN USERS",
+        title: "This sample uses symmetric AES cryptosystem, appends the .herbst extension to files and extorts $50."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-05 00:00:00",
+        name: "RUSSIAN RANSOMWARE CALLED CRIPTOKOD",
+        title: "Attacks Russian-speaking audience, adds the .criptokod extension to locked files. Decryptable for free."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-06 00:00:00",
+        name: "MULTIPLE JIGSAW RANSOMWARE SPINOFFS DISCOVERED",
+        title: "New Jigsaw variants use the .paymst, .payms, .pays, .paym, .paymrs, .payrms and .paymts extensions."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-06 00:00:00",
+        name: "CRYSIS RANSOMWARE FAMILY EXPANDED",
+        title: "Another Crysis ransomware offspring appends files with the .centurion_legion.aol.com.xtbl extension."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-06-07 00:00:00",
+        name: "CRYSIS PLAGUE RUNS RAMPANT",
+        title: "According to a research by ESET, the Crysis ransomware is gaining momentum with cybercrooks."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-09 00:00:00",
+        name: "NEMUCOD TROJAN SCRAMBLES FILES USING PHP",
+        title: "Researchers defeat a new iteration of the Nemucod ransomware that uses the .crypted extension."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-10 00:00:00",
+        name: "CISCO CREATES A UNIVERSAL TESLACRYPT DECODER",
+        title: "Cisco’s Talos Group releases a tool that decrypts all known versions of the TeslaCrypt ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-11 00:00:00",
+        name: "CRYPTXXX RANSOMWARE TWEAK",
+        title: "New CryptXXX (UltraCrypter) version labels encrypted entries with the .cryptz extension."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-13 00:00:00",
+        name: "APOCALYPSE RANSOMWARE DECRYPTED",
+        title: "Emsisoft researcher tailors a decryptor for Apocalypse ransomware, which uses the .encrypted extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-13 00:00:00",
+        name: "JAVASCRIPT-BASED RAA RANSOMWARE",
+        title: "Built with JavaScript, the RAA ransomware (.locked extension) also installs the Pony password stealer."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-13 00:00:00",
+        name: "FLOCKER ATTACKS ANDROID GADGETS",
+        title: "The FLocker pest targets Android devices, including Smart TV, and extorts $200 worth of iTunes gift cards."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-16 00:00:00",
+        name: "DED CRYPTOR BASED ON EDA2 PROOF-OF-CONCEPT",
+        title: "Affixes the .ded extension to files, imposes email interaction with the attacker and demands 2 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-17 00:00:00",
+        name: "JIGSAW OFFSPRING PAYS HOMAGE TO THE ANONYMOUS",
+        title: "The Anonymous themed Jigsaw ransomware variant concatenates the .epic string to scrambled files."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-17 00:00:00",
+        name: "DR.JIMBO@BK.RU RANSOMWARE SETS A DEADLINE",
+        title: "Instructs victims to reach the devs via email within 48 hours otherwise threatens to erase files."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-17 00:00:00",
+        name: "CRYPT38 RANSOMWARE WITH WEAK CRYPTO",
+        title: "Targets Russian users, appends .crypt38 to files and asks for $15 in Rubles. Free decryptor released."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-17 00:00:00",
+        name: "POTENTIALLY DECRYPTABLE CRYPTOSHOCKER",
+        title: "New sample using AES algorithm and appending the .locked extension. Experts found a workaround."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-06-20 00:00:00",
+        name: "LOCKY DISTRIBUTION BACKED BY NECURS BOTNET",
+        title: "New Locky proliferation campaign discovered, leverages the Necurs botnet to generate harmful spam."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-20 00:00:00",
+        name: "DECRYPTOR FOR APOCALYPSEVM RELEASED",
+        title: "Researchers create a decryptor for ApocalypseVM ransomware that uses advanced anti-VM features."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-20 00:00:00",
+        name: "RUSSIAN USERS TARGETED BY KOZY.JOZY PEST",
+        title: "Uses asymmetric RSA crypto. Victims are instructed to email the attacker at kozy.jozy@yahoo.com."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-21 00:00:00",
+        name: "CRYPTOROGER, A NEW SAMPLE OUT THERE",
+        title: "Employs AES algo, uses the .crptrgr extension and creates !Where_are_my_files!.html ransom note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-21 00:00:00",
+        name: "CRYPTXXX ADDS RANDOMNESS TO THE MIX",
+        title: "CryptXXX ransomware starts appending random 5-char extension to files instead of .crypz."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-22 00:00:00",
+        name: "ZIMBRA RANSOMWARE ENCRYPTS EMAILS",
+        title: "Python-based strain. Targets the Zimbra open-source email platform. Ransom amounts to 3 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-22 00:00:00",
+        name: "NEW APOCALYPSE SPINOFF DISCOVERED AND DECRYPTED",
+        title: "Appends the .SecureCrypted extension. Emsisoft Apocalypse Decryptor upstartd to restore files."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-23 00:00:00",
+        name: "TOWERWEB@YANDEX.COM RANSOMWARE",
+        title: "Tells victims to email the dev at towerweb@yandex.com for instructions. Demands $100 worth of Bitcoin."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-23 00:00:00",
+        name: "KRATOSCRYPT, A HIDDEN TEAR SPINOFF",
+        title: "Ransomware based on open-source educational code. Concatenates the .kratos extension to files."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-25 00:00:00",
+        name: "BART RANSOMARE DOESN’T ACTUALLY UTILIZE CRYPTO",
+        title: "Stores files in password-protected ZIP folder rather than encrypt them. Demands 3 BTC."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-25 00:00:00",
+        name: "SATANA BOOTKIT IS DOUBLE TROUBLE",
+        title: "Encrypts files and wreaks havoc with Master Boot Record. Displays a lock screen asking for 0.5 BTC."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-26 00:00:00",
+        name: "THE DIDACTIC EDUCRYPT RANSOMWARE",
+        title: "Locks victims’ personal data but doesn’t request a ransom. Decrypt password available in a hidden .txt file."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-27 00:00:00",
+        name: "ZEPTO EDITION OF LOCKY RANSOMWARE",
+        title: "New Locky variant appends the "
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-28 00:00:00",
+        name: "MONEY-HUNGRY MICROCOP INFECTION",
+        title: "Uses DES (Data Encryption Standard) and requests an astounding 48.48 BTC. Decrypted by analysts."
+    },
+    {
+        className: "eventorange",
+        start: "2016-06-28 00:00:00",
+        name: "SHADE RANSOMWARE TWEAK",
+        title: "New Shade iteration switches from using the .da_vinci_code to .Windows10 extension."
+    },
+    {
+        className: "eventred",
+        start: "2016-06-29 00:00:00",
+        name: "AVG DEVISES DECRYPTORS FOR SIX RANSOMWARE STRAINS",
+        title: "The tools restore files scrambled by TeslaCrypt, Apocalypse, BadBlock, Crypt888, Legion, and SZFLocker."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-30 00:00:00",
+        name: "UNLOCK92 RANSOMWARE",
+        title: "Targerts Russian-speaking audience. Email for interaction: unlock92@india.com. Decryptable for free."
+    },
+    {
+        className: "eventblue",
+        start: "2016-06-30 00:00:00",
+        name: "EMERGENCE OF WILDFIRE LOCKER",
+        title: "A likely Zyklon copycat. Circulates mostly in the Netherlands and Belgium. Appends the .wflx extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-03 00:00:00",
+        name: "ALFA RANSOMWARE DISCOVERED",
+        title: "Alfa, aka Alpha, ransomware uses the .bin extension and appears to be created by Cerber devs."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-03 00:00:00",
+        name: "NEW APOCALYPSE VARIANT DECRYPTED",
+        title: "Emsisoft’s decryptor now handles the .bleepYourFiles version of the Apocalypse ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-06 00:00:00",
+        name: "ANOTHER CRYPTXXX RANSOMWARE UPstart",
+        title: "New edition creates README.html (.bmp, .txt) ransom notes and upsells a tool called “Microsoft Decryptor”."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-06 00:00:00",
+        name: "THE BUGGY CRYPTOFINANCIAL SPECIMEN",
+        title: "Requests 0.2 BTC to unlock files but irreversibly deletes the data instead."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-07 00:00:00",
+        name: "BITSTAK RANSOMWARE WITH WEAK CRYPTO",
+        title: "Appends the .bitstak extension to scrambled files. Researcher named Michael Gillespie created a decryptor."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-07 00:00:00",
+        name: "PIZZACRYPTS PROPAGATING VIA NEUTRINO EXPLOIT KIT",
+        title: "Uses the .id-[unique_victim_id]-maestro@pizzacrypts.info extension to brand all encoded files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-08 00:00:00",
+        name: "THE PADCRYPT CAMPAIGN REVIVES",
+        title: "Having stayed dormant for several months, the PadCrypt ransomware (.padcrypt extension) re-emerges."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-09 00:00:00",
+        name: "UNLOCK92 ENCRYPTION ENHANCEMENTS",
+        title: "New variant uses RSA-2048 cryptosystem, cannot be decrypted. Appends the .CCCRRRPPP extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-11 00:00:00",
+        name: "A LAME CTB-LOCKER COPYCAT APPEARS",
+        title: "Sample dubbed CTB-Faker moves files to a password-protected ZIP archive. Potentially crackable."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-11 00:00:00",
+        name: "ODCODC RANSOMWARE FINALLY DEFEATED",
+        title: "Researcher going by the handle BloodDolly came up with a method to decrypt ODCODC-encoded files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-12 00:00:00",
+        name: "NEW XORIST VERSION POSES AS CERBER",
+        title: "Although this sample uses the .cerber extension, it’s a mere copycat. Doesn’t link to Tor decryptor page."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-07-13 00:00:00",
+        name: "WILDFIRE LOCKER ON THE RISE",
+        title: "According to OpenDNS, there is an upswing in WildFire Locker distribution via the Kelihos botnet."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-13 00:00:00",
+        name: "LOW-COST STAMPADO RANSOMWARE FOR SALE",
+        title: "Appends the .locked extension. Criminals can buy a copy on the dark web for as little as $39."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-14 00:00:00",
+        name: "DECRYPTION KEYS GIVEAWAY BY CRYPTXXX DEVS",
+        title: "For whatever reason, CryptXXX Tor payment sites provide free keys to decrypt .cryp1 and .crypz files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-18 00:00:00",
+        name: "PETYA RANSOMWARE UPstartD",
+        title: "Petya authors improved their Salsa20 algo implementation to encrypt Master File Table more reliably."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-19 00:00:00",
+        name: "CRYPTXXX BADLY CRIPPLES FILENAMES",
+        title: "A fresh edition of CryptXXX replaces filenames with 32 hex characters and appends random extensions."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-20 00:00:00",
+        name: "PYTHON-BASED HOLYCRYPT RANSOMWARE",
+        title: "Written in Python, the HolyCrypt sample installs all components as a single Windows executable."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-20 00:00:00",
+        name: "AUTOMATIC ODCODC DECRYPTOR RELEASED",
+        title: "ODCODC ransomware victims can now use an automatic free decryptor. The infection’s C&C server is dead."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-21 00:00:00",
+        name: "AVG CRACKS THE BART RANSOMWARE",
+        title: "Free recovery tool by AVG allows Bart ransomware victims to crack the ZIP archive password."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-21 00:00:00",
+        name: "POWERWARE IS NOTHING BUT A LOCKY COPYCAT",
+        title: "PowerWare ransomware masquerades itself as Locky. Decryptor available courtesy of Michael Gillespie."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-22 00:00:00",
+        name: "STAMPADO RANSOMWARE DECRYPTED",
+        title: "Emsisoft team member Fabian Wosar created a free decrypt tool for the relatively new Stampado pest."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-25 00:00:00",
+        name: "CRYPMIC, A CRYPTXXX LOOKALIKE",
+        title: "CrypMIC bears a strong resemblance to CryptXXX. Researchers provide a comparative review of the two."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-25 00:00:00",
+        name: "SIMPLE_ENCODER APPENDS FILENAMES WITH A TILDE",
+        title: "New sample. Uses the .~ file extension and creates _RECOVER_INSTRUCTIONS.ini ransom note."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-07-25 00:00:00",
+        name: "THE NOMORERANSOM PROJECT GOES LIVE",
+        title: "A true breakthrough in fighting ransomware. Created by law enforcement agencies and security companies."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-26 00:00:00",
+        name: "CHIMERA RANSOMWARE DECRYPTION KEYS RELEASED",
+        title: "Petya and Mischa ransomware authors publish about 3500 decryption keys for a strain called Chimera."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-07-26 00:00:00",
+        name: "JANUS RAAS BECOMES OPEN TO WANNABE CRIMINALS",
+        title: "Crooks behind Petya and Mischa make their Ransomware-as-a-Service platform available to the public."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-26 00:00:00",
+        name: "THE SHORT-LIVED JAGER RANSOMWARE",
+        title: "Incremental ransom size starting with $100 worth of Bitcoin. C&C server went down shortly after launch."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-28 00:00:00",
+        name: "UYARI RANSOMWARE GOES AFTER TURKISH USERS",
+        title: "Appends the .locked extension to scrambled items. Ransom notes in Turkish asking for 2 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-07-29 00:00:00",
+        name: "JIGSAW FAMILY KEEPS EXPANDING",
+        title: "“We Are Anonymous” Jigsaw ransomware variant with a new warning background. Decryptable."
+    },
+    {
+        className: "eventred",
+        start: "2016-07-29 00:00:00",
+        name: "KASPERSKY’S DECRYPT TOOL UPstartD",
+        title: "RakhniDecryptor solution by Kaspersky Lab decrypts Chimera-locked files with the keys previously leaked."
+    },
+    {
+        className: "eventblue",
+        start: "2016-07-31 00:00:00",
+        name: "THE RAZY RANSOMWARE PREDICAMENT",
+        title: "New strain, uses AES crypto and concatenates the .razy extension. Even the devs cannot decrypt files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-01 00:00:00",
+        name: "LOCKY VARIANT USES BOOBY-TRAPPED WSF ATTACHMENTS",
+        title: "The Zepto version of Locky ransomware circulates via malware-tainted WSF email attachments."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-03 00:00:00",
+        name: "SHINOLOCKER, A NEW PROOF-OF-CONCEPT",
+        title: "Japanese researcher creates educational ransomware called ShinoLocker. Another controversial initiative."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-03 00:00:00",
+        name: "ASTONISHING SURVEY RESULTS",
+        title: "50% of U.S. companies were targeted by ransomware in the past 12 months, Osterman Research reveals."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-04 00:00:00",
+        name: "CERBER RANSOMWARE 2.0 RELEASED",
+        title: "Switches to .cerber2 extension and uses a new desktop background. Ransom notes unaltered."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-04 00:00:00",
+        name: "VENUS LOCKER, AN EDA2 SPINOFF",
+        title: "The EDA2 PoC gave birth to a new real-world strain. Uses AES-256 standard and appends .venusf extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-08 00:00:00",
+        name: "HITLER-RANSOMWARE DISCOVERED",
+        title: "Buggy sample that deletes extensions rather than encrypt files. Demands a 25 Euros worth Vodafone card."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-09 00:00:00",
+        name: "REKTLOCKER BASED ON EDUCATIONAL HIDDEN TEAR",
+        title: "Uses open-source Hidden Tear code with some modifications. Appends files with the .rekt extension."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-10 00:00:00",
+        name: "RANSOMWARE ON IOT DEVICES",
+        title: "Researchers demonstrate a viable ransomware hitting thermostats at the DEFCON event."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-11 00:00:00",
+        name: "SMRSS32 RANSOMWARE, A CRYPTOWALL COPYCAT",
+        title: "Impostor pretending to be "
+    },
+    {
+        className: "eventred",
+        start: "2016-08-12 00:00:00",
+        name: "PIZZACRYPTS AND JUICYLEMON DECRYPTED",
+        title: "Ransomware analyst nicknamed BloodDolly creates a free decryptor for PizzaCrypts and JuicyLemon strains."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-12 00:00:00",
+        name: "POKEMONGO TROJAN DROPS ARABIC RANSOM NOTES",
+        title: "Appends the .locked extension. Creates a backdoor Windows user account (Hack3r) for future PC access."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-14 00:00:00",
+        name: "TORRENTLOCKER TARGETS ITALIAN VICTIMS",
+        title: "Aka Crypt0L0cker. Uses the .enc file extension. Infects computers via rogue energy bills sent over email."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-15 00:00:00",
+        name: "THE SHARK RANSOMWARE-AS-A-SERVICE",
+        title: "New RaaS platform that allows for extensive ransomware customization. Devs get 20% revenue cut."
+    },
+    {
+        className: "eventred",
+        start: "2016-08-16 00:00:00",
+        name: "CERBER RANSOMWARE DECRYPTION INITIATIVE",
+        title: "Check Point "
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-16 00:00:00",
+        name: "CERBER RAAS REVENUE UNCOVERED",
+        title: "According to an investigative research, Cerver devs’ annual revnue is on the order of $1 million."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-16 00:00:00",
+        name: "NEW STRAIN TARGETING KOREAN VICTIMS",
+        title: "Based on the educational Hidden Tear code. Apparent ties to the CripMIC ransomware discovered."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-16 00:00:00",
+        name: "APOCALYPSE RANSOMWARE AUTHORS GET UPSET",
+        title: "The crooks keep insulting Fabian Wosar who cracks every new edition of the pest."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-17 00:00:00",
+        name: "CERBER DEVS PATCH FLAWS",
+        title: "Threat actors behind Cerber ransomware make Check Point’s automatic decryptor inefficient."
+    },
+    {
+        className: "eventred",
+        start: "2016-08-17 00:00:00",
+        name: "SMRSS32 RANSOMWARE DECRYPTED",
+        title: "Researchers release a free decrypt tool for the Smrss32.exe ransomware."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-18 00:00:00",
+        name: "FSOCIETY RANSOMWARE DISCOVERED",
+        title: "An EDA2 spinoff. Sets a Mr. Robot TV series themed wallpaper with Fsociety hacking group logo."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-18 00:00:00",
+        name: "BART RANSOMWARE SWITCHES TO REAL CRYPTO",
+        title: "Starts to actually encrypt files and append the .bart extension rather than simply password-protect them."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-19 00:00:00",
+        name: "DETOXCRYPTO MIMICKING POKEMONGO FOR WINDOWS",
+        title: "Payload pretends to be PokemonGO game. Takes a screenshot of Windows screen for intimidation purpose."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-22 00:00:00",
+        name: "ALMA LOCKER USES RANDOM 5-CHAR EXTENSION",
+        title: "Distributed via RIG exploit kit. Uses Tor C&C server. Ransom of 1 BTC to be submitted during 5 days."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-23 00:00:00",
+        name: "ANOTHER CTB-LOCKER LOOKALIKE SURFACES",
+        title: "Another CTB-Locker copycat, uses a similar ransom note and color scheme. Demands 0.5 BTC."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-24 00:00:00",
+        name: "THE PURGE MOVIE-THEMED GLOBE RANSOMWARE",
+        title: "Desktop wallpaper styling pays homage to the Purge movies. Appends the .purge extension to files."
+    },
+    {
+        className: "eventred",
+        start: "2016-08-24 00:00:00",
+        name: "WILDFIRE LOCKER TAKEDOWN",
+        title: "Dutch police and NHTCU agency seize WildFire Locker ransomware’s C&C server. Free decryptor released."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-24 00:00:00",
+        name: "ALMA LOCKER DECRYPTION OPTIONS",
+        title: "According to PhishLabs, Alma Locker’s private key can be obtained with network sniffer during the attack."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-25 00:00:00",
+        name: "FANTOM RANSOMWARE RUNS A FAKE WINDOWS UPstart",
+        title: "New strain based on EDA2. Displays a bogus Windows upstart screen to obfuscate the encryption process."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-26 00:00:00",
+        name: "DOMINO RANSOMWARE POSING AS KMSPICO",
+        title: "Based on educational Hidden Tear code. Payload disguised as KMSPico Windows crack."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-26 00:00:00",
+        name: "LOCKY SWITCHES TO DLL INSTALLER TO AVADE AV",
+        title: "The Zepto alias of Locky ransomware begins leveraging a DLL installer rather than an executable to spread."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-26 00:00:00",
+        name: "SMRSS32 RANSOMWARE USES U.S. ELECTION SPAM",
+        title: "New Smrss32 spam campaign delivering files masqueraded as U.S. Election news."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-26 00:00:00",
+        name: "THE SERPICO VERSION OF DETOXCRYPTO",
+        title: "Targets uses in Serbia and Croatia. Doesn’t modify filenames. Requests 50 EUR for decryption."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-29 00:00:00",
+        name: "FAIRWARE RANSOMWARE, A THREAT TO LINUX USERS",
+        title: "Adversaries compromise Linux servers, erase web folders and extort 2 BTC for recovery."
+    },
+    {
+        className: "eventblue",
+        start: "2016-08-29 00:00:00",
+        name: "RAA RANSOMWARE APPEARS IN THE WILD",
+        title: "Instructs victims to send email to raaconsult@mail2tor.com for decryption steps."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-30 00:00:00",
+        name: "THE CURIOUS CASE OF FABIANSOMWARE",
+        title: "Apocalypse ransomware devs name their new variant “Fabiansomware” to insult researcher Fabian Wosar."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-31 00:00:00",
+        name: "CERBER SWITCHES TO USING A NEW EXTENSION",
+        title: "New edition of the Cerber ransomware concatenates the .cerber3 extension to locked files."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-08-31 00:00:00",
+        name: "REDIS SERVERS HACKED TO INSTALL RANSOMWARE",
+        title: "Crooks reportedly used insecure Redis servers to infect Linux machines with the Fairware ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-08-31 00:00:00",
+        name: "STAMPADO STARTS SCRAMBLING FILENAMES",
+        title: "New Stampado variant replaces filenames with hexadecimal chars and uses the .locked extension."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-01 00:00:00",
+        name: "THE NULLBYTE RANSOMWARE FAIL",
+        title: "Pretends to be a PokemonGO bot app. Demands 0.1 BTC. Decrypted by Michael Gillespie."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-01 00:00:00",
+        name: "NEW CRYLOCKER IMPERSONATES A FAKE ORGANIZATION",
+        title: "Acts on behalf of inexistent Central Security Treatment Organization. Appends the .cry extension"
+    },
+    {
+        className: "eventgreen",
+        start: "2016-09-05 00:00:00",
+        name: "CRYLOCKER DETAILS REVEALED",
+        title: "CryLocker propagates via Sundown exploit kit and sends victims’ details to its C2 server over UDP."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-06 00:00:00",
+        name: "LOCKY SWITCHES TO AUTOPILOT MODE",
+        title: "New Locky samples go with built-in RSA keys and don’t communicate with C&C servers."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-06 00:00:00",
+        name: "NO ACTUAL CRYPTO BY THE RARVAULT RANSOMWARE",
+        title: "Targets Russian users. Moves files to password-protected RAR archive, creates RarVault.htm ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-07 00:00:00",
+        name: "KAWAIILOCKER GOES AFTER RUSSIAN-SPEAKING AUDIENCE",
+        title: "Hits Russian victims. Creates “How Decrypt Files.txt” ransom manual. Free decryptor released."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-08 00:00:00",
+        name: "PHILADELPHIA RANSOMWARE SPOTTED IN THE WILD",
+        title: "New Stampado version sold on the darknet for $400. Features a Mercy button."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-08 00:00:00",
+        name: "FLYPER RANSOMWARE POPS UP",
+        title: "Appends the .locked extension and requests 0.5 BTC. Attacker’s email address is flyper01@sigaint.org."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-09 00:00:00",
+        name: "PYTHON-BASED CRYPY THREAT",
+        title: "Uses AES encryption, adds the .cry extension and drops README_FOR_DECRYPT.txt help file."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-10 00:00:00",
+        name: "PHILADELPHIA RANSOMWARE DECRYPTED",
+        title: "Emsisoft’s Fabian Wosar creates a free decryptor for the Philadelphia pest."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-10 00:00:00",
+        name: "CROOKS FORGE SUPPORT FOR THE HOMELESS",
+        title: "New Crysis ransomware rips users off under the guise of helping the homeless."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-12 00:00:00",
+        name: "NOOBCRYPT TURNS OUT TO BE A LAME SAMPLE",
+        title: "New ransomware, uses the same set of crypto keys for all victims. Decryption keys published by analysts."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-12 00:00:00",
+        name: "LOCKLOCK, ANOTHER EDA2 SPINOFF",
+        title: "Leverages AES-256 algo, appends the .locklock extension to files and creates READ_ME.txt ransom note."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-09-14 00:00:00",
+        name: "NEW RAAS CALLED ATOM",
+        title: "Shark RaaS rebranded as the Atom Ransomware Affiliate Program. Available on the public Internet."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-14 00:00:00",
+        name: "STAMPADO DECRYPTOR UPstartD",
+        title: "Fabian Wosar releases a decrypt tool handling new variants of the Stampado ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-14 00:00:00",
+        name: "LOCKY PERSEVERES WITH OFFLINE ENCRYPTION",
+        title: "Locky ransomware’s autopilot crypto gets improved to prevent AV detection."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-15 00:00:00",
+        name: "STAMPADO ENCRYPTS WHAT’S ALREADY ENCRYPTED",
+        title: "New version encrypts files that were locked by other ransomware strains, so it’s double trouble."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-15 00:00:00",
+        name: "RAZY RANSOMWARE MIMICKS JIGSAW WARNING STYLE",
+        title: "Razy asks for 10 EUR worth PaySafeCard to unlock files. Ransom screen resembles one by Jigsaw ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-15 00:00:00",
+        name: "FANTOM RANSOMWARE UPstart",
+        title: "New edition can encrypt data offline, similarly to Locky. Now targets network shares."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-17 00:00:00",
+        name: "FENIXLOCKER AUTHOR SPAWNS LOVE NOTES",
+        title: "FenixLocker ransomware dev found to leave the “FenixIloveyou!!” message in each encrypted file."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-18 00:00:00",
+        name: "HDDCRYPTOR REWRITES MASTER BOOT RECORD",
+        title: "A highly dangerous sample that locks victims out of their computers by overwriting MBR."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-18 00:00:00",
+        name: "FENIXLOCKER DECRYPTED",
+        title: "Emsisoft releases a free decrypt tool for FenixLocker, which adds secret mash notes to encrypted files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-21 00:00:00",
+        name: "FANTOM RANSOMWARE TWEAKS",
+        title: "New iteration sets desktop wallpapers randomly and derives ransom size from payload name."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-22 00:00:00",
+        name: "STAMPADO AND APOCALYPSE UPstartD AND CRACKED",
+        title: "Fabian Wosar stays busy upsetting ransomware makers with his upstartd free decryptors."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-22 00:00:00",
+        name: "LOCKY OPTS OUT OF OFFLINE-ONLY MODE",
+        title: "New Locky samples switch back to using C&C infrastructure for encryption, according to Avira."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-09-22 00:00:00",
+        name: "CERBER CIRCULATION GROWTH",
+        title: "A major increase in Cerber ransomware distribution: daily infections reach 80,000."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-23 00:00:00",
+        name: "CYBER SPLITTER VBS RANSOMWARE DISCOVERED",
+        title: "Spotted by GData, Cyber SpLiTTer Vbs asks for 1 BTC but fails to actually encrypt any files."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-23 00:00:00",
+        name: "UNBLOCKUPC RANSOMWARE SURFACES",
+        title: "New sample, drops “Files encrypted.txt” ransom manual and demands 0.18 BTC for decryption."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-24 00:00:00",
+        name: "MARSJOKE, ONE MORE CTB-LOCKER COPYCAT",
+        title: "Bears a strong resemblance to CTB-Locker. Mainly targets U.S. governmental and educational institutions."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-24 00:00:00",
+        name: "NAGINI RANSOMWARE FOLLOWS POP CULTURE",
+        title: "Warning screen contains an image of Lord Voldemort, an evil character from the Harry Potter films."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-26 00:00:00",
+        name: "NEW HELP_DCFILE RANSOMWARE",
+        title: "Named after ransom note help_dcfile.txt. Appends files with the .XXX extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-26 00:00:00",
+        name: "THE DONALD TRUMP RANSOMWARE",
+        title: "In-development sample with a photo of Donald Trump on the ransomware GUI."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-26 00:00:00",
+        name: "LOCKY GIVES BIRTH TO A NEW .ODIN PERSONA",
+        title: "New variant adds the .odin extension to files and creates _HOWDO_text.html/bmp ransom notes."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-26 00:00:00",
+        name: "DXXD RANSOMWARE FINALLY CRACKED",
+        title: "Michael Gillespie, aka @demonslay335, creates a decryptor for the DXXD ransom Trojan."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-26 00:00:00",
+        name: "OPEN-SOURCE RANSOMWARE FOR LINUX",
+        title: "New educational Linux ransomware called CryptoTrooper gets negative feedback from security community."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-28 00:00:00",
+        name: "PRINCESS LOCKER WANTS TOO MUCH FOR DECRYPTION",
+        title: "Decryptor page resembles Cerber’s. The ransom is 3 BTC (about $2200), doubles after deadline."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-28 00:00:00",
+        name: "AL-NAMROOD RANSOMWARE DECRYPTED",
+        title: "Appends the .unavailable extension. Emsisoft creates an automatic decrypt tool for this sample."
+    },
+    {
+        className: "eventorange",
+        start: "2016-09-28 00:00:00",
+        name: "RAZY RANSOMWARE EXPANDS ITS GEOGRAPHY",
+        title: "New version targets German users. Extorts ransom in PaySafeCard. Deadline for payment is 72 hours."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-09-29 00:00:00",
+        name: "KASPERSKY DISSECTS BRAZILIAN CYBERCRIME",
+        title: "A write-up by Kaspersky analyzes Brazilian TeamXRat ransomware that targets enterprises and hospitals."
+    },
+    {
+        className: "eventblue",
+        start: "2016-09-29 00:00:00",
+        name: "NUKE RANSOMWARE SPOTTED",
+        title: "New one. Uses the AES standard and creates !!_RECOVERY_instructions _!!.html/txt ransom notes."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-09-29 00:00:00",
+        name: "RANSOMWARE MAKER JOINS SECURITY FORUM",
+        title: "Apocalypse ransomware dev starts posting on BleepingComputer forums to insult researcher Fabian Wosar."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-30 00:00:00",
+        name: "KASPERSKY DECRYPTS MARSJOKE RANSOMWARE",
+        title: "Kaspersky upstartd their RannohDecryptor solution to so that it can crack the MarsJoke ransomware."
+    },
+    {
+        className: "eventred",
+        start: "2016-09-30 00:00:00",
+        name: "TREND MICRO BEATS THE GLOBE RANSOMWARE",
+        title: "The Trend Micro Ransomware File Decryptor tool is now capable of decoding the Globe ransomware."
+    },
+    {
+        className: "eventred",
+        start: "2016-10-01 00:00:00",
+        name: "EMSISOFT CREATES THEIR OWN DECRYPTOR FOR GLOBE",
+        title: "The tool can crack the Blowfish cipher used by the Globe ransomware."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-01 00:00:00",
+        name: "KILLERLOCKER USES A FRIGHTNING TACTIC",
+        title: "The strain appends files with the .rip extension and displays an image of a spooky clown."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-02 00:00:00",
+        name: "FSOCIETY LOCKER BETA VERSION DISCOVERED",
+        title: "Concatenates the .realfsociety@sigaint.org.fsociety extension to files and drops fsociety.html ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-03 00:00:00",
+        name: "CRYPTOLOCKER 5.1 BASED ON HIDDEN TEAR",
+        title: "Another example of criminals abusing educational ransomware code. No in-the-wild propagation."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-04 00:00:00",
+        name: "MAJOR CERBER RANSOMWARE UPstart",
+        title: "New variant adds a random 4-character extension and creates README.hta ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-05 00:00:00",
+        name: "HADES LOCKER, A WILDFIRE LOCKER HEIR",
+        title: "Hades Locker occupies the niche of WildFire Locker, which had been taken down by Dutch law enforcement."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-06 00:00:00",
+        name: "THE GLOBE RANSOMWARE FAMILY REPLENISHED",
+        title: "Globe devs release multiple new spinoffs appending the .encrypted, .raid10, and .globe extensions."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-07 00:00:00",
+        name: "CZECH USERS ENDANGERED BY KOSTYA RANSOMWARE",
+        title: "Appends the .kostya extension. The ransom of 2,000 CZK (about $78) doubles after 12 hours."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-08 00:00:00",
+        name: "THE COMRADE CIRCLE RANSOMWARE",
+        title: "Adds the .comrade extension to files and displays RESTORE-FILES![ID] ransom note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-10 00:00:00",
+        name: "ENIGMA RANSOMWARE UPstart",
+        title: "New edition appends the .1txt extension and leaves enigma_info.txt ransom manual."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-10 00:00:00",
+        name: "DEADLY FOR A GOOD PURPOSE RANSOMWARE",
+        title: "Uses AES-256 algo and requests a Bitcoin equivalent of $500. Configured to encrypt data in 2017."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-11 00:00:00",
+        name: "VENISRANSOMWARE DISCOVERED",
+        title: "Uses VenisRansom@protonmail.com for communication. Enables RDP and steals passwords."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-13 00:00:00",
+        name: "FIRST RANSOMWARE WRITTEN IN THE GO LANGUAGE",
+        title: "Detected as Trojan.Encoder.6491, it appends the .enc extension. Cracked by Doctor Web."
+    },
+    {
+        className: "eventred",
+        start: "2016-10-13 00:00:00",
+        name: "DXXD VERSION 2 DECRYPTED",
+        title: "Researchers create a decryptor for the 2nd iteration of the DXXD Ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-13 00:00:00",
+        name: "NUKE RANSOMWARE UPstart",
+        title: "New Nuke variant spotted in the wild. Concatenates the .nuclear55 extension to encoded files."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-10-14 00:00:00",
+        name: "LOCKYDUMP TOOL RELEASED",
+        title: "Cisco Talos create LockyDump, a data aggregate with configuration parameters of all Locky versions."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-14 00:00:00",
+        name: "EXOTIC RANSOMWARE ENCRYPTS EXECUTABLES",
+        title: "Dev’s handle is EvilTwin. Encrypts all data on target computers, including executable files."
+    },
+    {
+        className: "eventred",
+        start: "2016-10-15 00:00:00",
+        name: "NEW DMALOCKER VERSION DECRYPTED",
+        title: "Malwarebytes releases a tool that decrypts DMALocker’s latest !XPTLOCK5.0 version."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-15 00:00:00",
+        name: "NOOBCRYPT RANSOMWARE TWEAK",
+        title: "NoobCrypt 2.0 demands $50. Attackers decided to stick with the ransomware name given by a researcher."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-15 00:00:00",
+        name: "ANUBIS RANSOMWARE EMERGES",
+        title: "Based on EDA2 ransomware. Appends the .coded extension, attacker’s email is support.code@aol.com."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-17 00:00:00",
+        name: "NEW SCREEN LOCKER SPOTTED",
+        title: "Only locks one’s screen without encrypting anything. Demands 10 EUR PaySafeCard to unlock."
+    },
+    {
+        className: "eventred",
+        start: "2016-10-18 00:00:00",
+        name: "7EV3N RANSOMWARE DECRYPTOR RELEASED",
+        title: "Malwarebytes researcher nicknamed “hasherezade” contrives a free 7ev3n Ransomware decryptor."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-19 00:00:00",
+        name: "RANSOM TROJAN POSING AS A CLICK ME GAME",
+        title: "Obfuscates the encryption process with an amusing Click Me game."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-20 00:00:00",
+        name: "JAPANLOCKER TARGETING WEBSITES",
+        title: "PHP-based ransomware encrypts data on web servers. Appears to have Indonesian origin."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-10-20 00:00:00",
+        name: "MBRFILTER COUNTERS DISK-ENCRYPTING THREATS",
+        title: "MBRFilter tool by Cisco Talos blocks ransom Trojans that attempt to overwrite the Master Boot Record."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-22 00:00:00",
+        name: "LOCK93 RANSOMWARE ASKS FOR RUSSIAN RUBLES",
+        title: "Low-quality sample. Appends the .lock93 extension to files and requests 1000 RUR. Decryptable."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-23 00:00:00",
+        name: "ANGRY DUCK RANSOMWARE IS HUNGRY FOR BTC",
+        title: "Uses the .adk extension to brand affected files. Demands a huge ransom of 10 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-24 00:00:00",
+        name: "N1N1N1 RANSOMWARE UPstart",
+        title: "The variant uses a different filemarker (999999) and leaves the “decrypt explanations.html” ransom note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-24 00:00:00",
+        name: "LOCKY DEVS USE SOME BAD LANGUAGE",
+        title: "New version appends files with the .shit extension and creates _WHAT_is.html/bmp recovery manuals."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-24 00:00:00",
+        name: "CHANGES IN THE BART RANSOMWARE",
+        title: "Now adds the .perl extension. Ransom notes are called recover.bmp and recover.txt."
+    },
+    {
+        className: "eventorange",
+        start: "2016-10-25 00:00:00",
+        name: "THE THOR VARIANT OF LOCKY",
+        title: "Concatenates the "
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-25 00:00:00",
+        name: "A LOCKY COPYCAT WITH HUNGARIAN ROOTS",
+        title: "Dubbed “Hucky” (Hungarian Locky), the sample mimicks Locky’s wallpaper and ransom notes."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-27 00:00:00",
+        name: "RANSOMWARE IMPOSING A SURVEY",
+        title: "An odd strain that asks victims to complete a sponsored survey before unlocking the computer."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-10-27 00:00:00",
+        name: "CROOK TRIES TO SELL DECRYPT KEYS TO A RESEARCHER",
+        title: "Emsisoft’s Fabian Wosar declined “realfs0ciety” cyber gang’s offer to buy their decrypt keys on the cheap."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-27 00:00:00",
+        name: "ANOTHER LAME SCREEN LOCKER",
+        title: "GData experts discover and defeat a screen locker that uses cuzimvirus@yahoo.com email for interaction."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-10-27 00:00:00",
+        name: "ISSUES WITH THE CRYPTOWIRE PROOF-OF-CONCEPT",
+        title: "One more educational ransomware, CryptoWire, gave rise to a real-world sample."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-27 00:00:00",
+        name: "ONYX RANSOMWARE TARGETS GEORGIAN USERS",
+        title: "Ransom message is written in Georgian. Warning screen contains an image of No-Face anime character."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-27 00:00:00",
+        name: "THE OFFBEAT IFN643 RANSOMWARE",
+        title: "Leaves the IFN643_Malware_Readme ransom note. Requests $1000 worth of Bitcoin."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-27 00:00:00",
+        name: "THE BUGGY JACK.POT RANSOMWARE",
+        title: "No mechanism to reach the attackers. Demands 3 BTC but provides a Litecoin address instead of Bitcoin."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-29 00:00:00",
+        name: "MASTERBUSTER RANSOMWARE",
+        title: "Based on EDA2 open-source project. Drops ransom note called CreatesReadThisFileImportant.txt."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-29 00:00:00",
+        name: "SCREEN LOCKER CALLED RANSOMWARE 2.0 SPOTTED",
+        title: "Does not encode any data but locks the screen instead. Demands 1 BTC otherwise threatens to delete files."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-29 00:00:00",
+        name: "NEW SAMPLE USING !LOCKED#2.0 FILEMARKER",
+        title: "Discovered by Michael Gillespie, aka @demonslay335. Malwarebytes analysts create a decryptor."
+    },
+    {
+        className: "eventblue",
+        start: "2016-10-30 00:00:00",
+        name: "ALCATRAZ LOCKER DISCOVERED",
+        title: "Appends the .alcatraz extension and leaves ransomed.html ransom note. Ransom size is 0.5 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-01 00:00:00",
+        name: "CERBER NOW DISPLAYS VERSION NUMBER",
+        title: "Cerber Ransomware devs start indicating version number in v4.1.0 and onward."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-03 00:00:00",
+        name: "SMASH RANSOMWARE ISN’T MUCH OF AN ISSUE",
+        title: "Displays a “File Kill Timer” window with a funny image of Super Mushroom. Doesn’t delete any files for real."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-03 00:00:00",
+        name: "DUMMYLOCKER WITH HYBRID PROPERTIES",
+        title: "Encrypts data and locks a victim’s screen. Files are appended with the .dCrypt extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-03 00:00:00",
+        name: "ZSCREENLOCKER VIRUS SUGGESTS BANNING ISLAM",
+        title: "Having encrypted one’s files, the zScreenLocker ransomware displays a “Ban Islam” image."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-03 00:00:00",
+        name: "NEW ENCRYPTOJJS RANSOMWARE",
+        title: "Appends the .enc extension and creates “How to recover.enc.txt” ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-04 00:00:00",
+        name: "PAYDOS RANSOMWARE, AN OLD SCHOOL STRAIN",
+        title: "Displays a ransom note within command prompt. Requests 0.33 BTC for the passcode to decrypt."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-04 00:00:00",
+        name: "GREMIT RANSOMWARE EMERGING",
+        title: "New one. Concatenates the .rnsmwr extension to encoded files."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-04 00:00:00",
+        name: "RSA PUBLISHES AN ARTICLE ON CERBER 4.1.x",
+        title: "Titled “The Evolution of Cerber… v4.1.x”, the article dissects new versions of the ransomware."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-05 00:00:00",
+        name: "CLOCK.WIN32.RANSOMWARE SPOTTED",
+        title: "Doesn’t encrypt any data, simply displays a lock screen. Demands $20 through PayPal."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-07 00:00:00",
+        name: "CERBER 4.1.4 APPEARS",
+        title: "Spreads via phishing emails with fake Word invoice attached. Version number indicated in ransom notes."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-07 00:00:00",
+        name: "NOOBCRYPT RANSOMWARE UPstart",
+        title: "New version uses an expired build of C# obfuscator. Accepts random, including blank, unlock key input."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-07 00:00:00",
+        name: "CERBERTEAR, A CERBER COPYCAT",
+        title: "A variant of Hidden Tear proof-of-concept pretending to be the Cerber ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-07 00:00:00",
+        name: "JIGSAW RANSOMWARE EDITION WITH FRENCH ROOTS",
+        title: "Decryptable sample that affixes the .encrypted extension to files and leaves a ransom note in French."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-08 00:00:00",
+        name: "FSOCIETY RANSOMWARE APPENDING .DLL EXTENSION",
+        title: "Based on RemindMe ransomware. Uses .dll extension and drops DECRYPT_YOUR_FILES.html ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-08 00:00:00",
+        name: "RANSOMWARE DISGUISED AS PAYSAFECARD GENERATOR",
+        title: "Uses a fake PaySafeCard generator window to obfuscate file encryption. Prepends “.cry_” to extensions."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-08 00:00:00",
+        name: "AIRACROP RANSOMWARE BY TEAMXRAT RING",
+        title: "Appends the ._AiraCropEncrypted extension to files. Distributed by the TeamXRat cybercrime gang."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-08 00:00:00",
+        name: "IRANSOM INFECTION KIT SOLD ONLINE",
+        title: "The sample can be purchased on underground resources. Adds the .Locked extension to data entries."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-09 00:00:00",
+        name: "THE HEIMDALL PHP RANSOMWARE",
+        title: "A proof-of-concept written in PHP that targets web servers. Created by Brazilian researcher."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-09 00:00:00",
+        name: "TELECRYPT RANSOMWARE DISCOVERED",
+        title: "The sample leverages the Telegram communication protocol to interact with its C2 infrastructure."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-09 00:00:00",
+        name: "FAIRYTALE-ISH SAMPLE TARGETING RUSSIAN USERS",
+        title: "A new specimen using a popular Russian “Kolobok” fairytale theme for the desktop background."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-10 00:00:00",
+        name: "FAKE OPM BANK NOTIFICATIONS SPREADING LOCKY",
+        title: "Spam emails disguised as alerts from U.S. Office of Personnel Management deliver Locky payloads."
+    },
+    {
+        className: "eventred",
+        start: "2016-11-14 00:00:00",
+        name: "CRYSIS RANSOMWARE DEVS RELEASE DECRYPT KEYS",
+        title: "CrySiS ransomware authors set up a Pastebin page with Master Decryption Keys for their infection."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-14 00:00:00",
+        name: "KARMA RANSOMWARE MIMICKING PC OPTIMIZATION",
+        title: "New ransomware disguised as “Windows-TuneUp” app. Propagates over pay-per-install network."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-14 00:00:00",
+        name: "PADCRYPT 3.0 AFFILIATE PLATFORM LAUNCHED",
+        title: "The upstartd PadCrypt version 3.0 can now be distributed on a Ransomware-as-a-Service basis."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-14 00:00:00",
+        name: "THE ANGELA MERKEL RANSOMWARE",
+        title: "Displays a photo of Angela Merkel in the ransom notes. Asks for a BTC equivalent of 1200 EUR."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-15 00:00:00",
+        name: "RANSOC SCREEN LOCKER’S PENALTY NOTICE",
+        title: "Locks the desktop rather than encrypt files. Blackmails users with sensitive content found on their PCs."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-15 00:00:00",
+        name: "CRYPTOLUCK SPREADING VIA AN EXPLOIT KIT",
+        title: "CryptoLuck mimics the warning screen of "
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-15 00:00:00",
+        name: "RANSOMWARE TARGETING JPG FILES ONLY",
+        title: "Dubbed the “Demo” ransomware, this one only encodes JPGs and appends the .encrypted extension."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-16 00:00:00",
+        name: "CROOK SEEKING RESEARCHER’S ASSISTANCE",
+        title: "One of Apocalypse ransomware devs contacts Emsisoft’s Fabian Wosar, asking for help with a code bug."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-16 00:00:00",
+        name: "PCLOCK IN ROTATION AGAIN",
+        title: "A CryptoLocker copycat. Returns after almost 2 years of inactivity. Demands 1 Bitcoin for decryption."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-16 00:00:00",
+        name: "PRINCESS LOCKER DECRYPTOR IN DEVELOPMENT",
+        title: "Researcher nicknamed ‘hasherezade’ gets close to cracking the Princess Locker ransomware."
+    },
+    {
+        className: "eventred",
+        start: "2016-11-17 00:00:00",
+        name: "GLOBE RANSOMWARE DECRYPTOR UPstart",
+        title: "Fabian Wosar releases a decryptor for Globe2 (.zendr4, .raid10, .blt, .globe, and .encrypted extensions)."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-17 00:00:00",
+        name: "LOCKY ARRIVES WITH PHONY FLASH PLAYER UPstart",
+        title: "A variant of the Locky ransomware found to be propagating via rogue Flash Player upstart sites."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-17 00:00:00",
+        name: ".NET-BASED CRYPTON RANSOMWARE",
+        title: "Uses a mix of RSA and AES algorithms to lock files and demands 0.2-2 Bitcoins for decryption."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-17 00:00:00",
+        name: "NEW SHELLLOCKER RANSOM TROJAN",
+        title: "One more sample coded with .NET programming language. Adds the .L0cked file extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-17 00:00:00",
+        name: "THE DHARMA REINCARNATION OF CRYSIS",
+        title: "Dharma ransomware is a new variant of the defunct CrySiS. Uses the .[email_address].dharma extension."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-18 00:00:00",
+        name: "THE HELPFUL “ID RANSOMWARE” PROJECT",
+        title: "The ID Ransomware service by MalwareHunterTeam now includes 238 ransomware strains."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-18 00:00:00",
+        name: "CHIP RANSOMWARE SPREADING VIA RIG-E EK",
+        title: "New sample called the CHIP ransomware relies on the RIG-E exploit kit for proliferation."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-18 00:00:00",
+        name: "NEW DEADLY RANSOMWARE VARIANT APPEARS",
+        title: "Corrupts victims’ data and provides no way to restore them due to a buggy key saving routine."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-19 00:00:00",
+        name: "TRICKY OBFUSCATION BY PADCRYPT 3.0",
+        title: "Uses a rogue Visa Credit Card generator to camouflage payload execution."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-21 00:00:00",
+        name: "LOCKY SPREADING VIA FACEBOOK SPAM",
+        title: "Malicious .svg images sent via Facebook’s instant messaging system install Nemucod Trojan and Locky."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-21 00:00:00",
+        name: "CRYPT888 SETS A DEADLINE FOR PAYMENT",
+        title: "New variant claims to delete the AES-256 key unless a ransom is sent within 36 hours. Decrypted by Avast."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-21 00:00:00",
+        name: "AESIR VERSION OF THE LOCKY RANSOMWARE",
+        title: "Appends the .aesir extension and leaves _[random_number]-INSTRUCTION.html/bmp ransom notes."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-21 00:00:00",
+        name: "VINDOWS LOCKER IS NOT A MISSPELLING",
+        title: "New ransomware telling victims to call a “Microsoft Support technician”. Appends the .vindows extension."
+    },
+    {
+        className: "eventred",
+        start: "2016-11-22 00:00:00",
+        name: "PRINCESS LOCKER DECRYPTED",
+        title: "Security analyst @hasherezade defeats Princess Locker’s crypto and releases a decryption tool."
+    },
+    {
+        className: "eventred",
+        start: "2016-11-23 00:00:00",
+        name: "DECRYPTOR AVAILABLE FOR TELECRYPT",
+        title: "Malwarebytes releases a free decryptor for Telecrypt ransomware, which uses Telegram’s API."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-23 00:00:00",
+        name: "MHT FILES DELIVERING LOCKY",
+        title: "Cisco Talos spot a Locky spam wave delivering booby-trapped MHT email attachments."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-23 00:00:00",
+        name: "THANKSGIVING RANSOMWARE",
+        title: "New ransomware appears that displays an image of a turkey on its warning screen."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-23 00:00:00",
+        name: "OZOZALOCKER IS NO BIG DEAL",
+        title: "Uses the .Locked extension and Santa_helper@protonmail.com email for communication. Decryptor available."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-24 00:00:00",
+        name: "LOCKY’S NEW ZZZZZ VARIANT",
+        title: "Another edition of the Locky ransomware appending the .zzzzz extension to encrypted files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-24 00:00:00",
+        name: "CERBER RANSOMWARE 5.0 EMERGES",
+        title: "Proliferates via RIG-V exploit kit and spam. Still appends a random 4-character extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-24 00:00:00",
+        name: "ONE MORE HIDDEN TEAR SPINOFF IN ROTATION",
+        title: "Based off of open-source Hidden Tear proof-of-concept. Uses a Jigsaw movie-themed background."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-24 00:00:00",
+        name: "LOMIX RANSOMWARE USING CRYPTOWIRE’S CODE",
+        title: "A byproduct of educational ransomware project called CryptoWire. Asks for a Bitcoin equivalent of $500."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-24 00:00:00",
+        name: "COCKBLOCKER AKA RANSOMWAREDISPLAY",
+        title: "Appears to be an in-development ransomware sample. Appends the .hannah extension to locked files."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-25 00:00:00",
+        name: "CERBER’S RANSOM NOTE TWEAK",
+        title: "New variant of the Cerber ransomware creates _README_.hta ransom notes."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-26 00:00:00",
+        name: "NEW SCREEN LOCKER BEING DISTRIBUTED",
+        title: "Claims to have found viruses and displays “Your computer is locked!” warning. Unlock password released."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-26 00:00:00",
+        name: "CRYPTER RANSOMWARE TARGETING BRAZILIAN USERS",
+        title: "Attack are isolated to Brazil. Renames files rather than encrypt them. Demands 1 Bitcoin for recovery."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-26 00:00:00",
+        name: "A PRIMITIVE SCREEN LOCKER DISCOVERED",
+        title: "Displays “Your Windows Has Been Banned” message. The unlock password is 123456."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-28 00:00:00",
+        name: "THE UNUSUAL KANGAROO RANSOMWARE",
+        title: "An Apocalypse ransomware spinoff. Encrypts files and displays a warning screen before Windows boots up."
+    },
+    {
+        className: "eventred",
+        start: "2016-11-28 00:00:00",
+        name: "VINDOWS LOCKER DECRYPTED",
+        title: "Security researchers create a decryptor for Vindows Locker, which uses tech support scam tactic."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-28 00:00:00",
+        name: "SAN FRANCISCO MUNI HIT BY RANSOMWARE",
+        title: "HDDCryptor ransomware paralyzes San Francisco Municipal Transit Agency’s IT infrastructure."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-28 00:00:00",
+        name: "NEW RANSOMWARE BASED ON POWERSHELL",
+        title: "This PowerShell-based sample uses the ps2exe script and overwrites the original files."
+    },
+    {
+        className: "eventblue",
+        start: "2016-11-28 00:00:00",
+        name: "HTCRYPTOR HARNESSING HIDDEN TEAR CODE",
+        title: "HTCryptor’s code is based on open-source Hidden Tear ransomware. Tries to disable Windows firewall."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-29 00:00:00",
+        name: "SFMTA DENIES DATA THEFT",
+        title: "San Francisco Muni’s officials deny allegations about corporate data being stolen by ransomware devs."
+    },
+    {
+        className: "eventred",
+        start: "2016-11-29 00:00:00",
+        name: "NMOREIRA RANSOMWARE CRACKED",
+        title: "Emsisoft analyst Fabian Wosar creates a free decryptor for NMoreira/XPan ransomware."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-11-29 00:00:00",
+        name: "RANSOMWARE ATTACKS A CANADIAN UNIVERSITY",
+        title: "Unidentified rasomware sample compromises Carleton University in Canada, demanding 39 BTC."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-30 00:00:00",
+        name: "JIGSAW RANSOMWARE’S NEW CAMOUFLAGE",
+        title: "A new Jigsaw variant uses a phony Electrum Coin Adder app’s GUI to mask the ransomware installation."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-30 00:00:00",
+        name: "ZETA RANSOMWARE STAINING FILES WITH NEW EXTENSION",
+        title: "New edition of the Zeta ransomware uses .rmd extension and # HELP_DECRYPT_YOUR_FILES #.txt ransom note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-30 00:00:00",
+        name: "TORRENTLOCKER UPstart",
+        title: "The latest version of TorrentLocker, aka Crypt0L0cker, appends files with 6 random characters."
+    },
+    {
+        className: "eventorange",
+        start: "2016-11-30 00:00:00",
+        name: "PRINCESS LOCKER CHANGES TAKING EFFECT",
+        title: "New iteration uses random extensions of 4-6 chars and !_HOW_TO_RESTORE_[random].txt ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-01 00:00:00",
+        name: "MATRIX RANSOMWARE USING GNUPG",
+        title: "This sample locks data using the free GnuPG implementation of OpenPGP cryptographic standard."
+    },
+    {
+        className: "eventred",
+        start: "2016-12-01 00:00:00",
+        name: "MORE FREE DECRYPTORS BY AVAST",
+        title: "Avast releases 4 free decrypt tools for CrySiS, Globe, NoobCrypt and Alcatraz Locker ransomware strains."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-02 00:00:00",
+        name: "ALPHA LOCKER FOR SALE ON DARKNET RESOURCES",
+        title: "Wannabe crooks can purchase the new C# based Alpha Locker ransomware on underground forums for $65."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-02 00:00:00",
+        name: "HIDDEN MESSAGE IN NMOREIRA/XPAN CODE",
+        title: "Code of the upstartd ransomware contains a message to Fabian Wosar who cracked the previous version."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-02 00:00:00",
+        name: "THE IN-DEV PHOENIX RANSOMWARE",
+        title: "Based on the Hidden Tear POC. Appends the .R.i.P extension to files and drops Important!.txt ransom note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-03 00:00:00",
+        name: "PADCRYPT 3.1.2 GOES LIVE",
+        title: "Version 3.1.2 of the PadCrypt ransomware is out. This build doesn’t feature any noteworthy changes."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-04 00:00:00",
+        name: "RANSOMWARE DEV ARRESTED IN RUSSIA",
+        title: "The man nicknamed “Pornopoker” is accused of creating and distributing Ransomlock.P police ransomware."
+    },
+    {
+        className: "eventred",
+        start: "2016-12-04 00:00:00",
+        name: "NEWEST NEMUCOD VARIANT CRACKED",
+        title: "Emsisoft’s Fabian Wosar creates a decrypt tool for the latest variant of the Nemucod ransomware."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-04 00:00:00",
+        name: "NEW ITERATION OF THE APOCALYPSE RANSOMWARE",
+        title: "The upstartd Apocalypse Trojan leaves *md5*.txt ransom note and a new extension with country code in it."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-04 00:00:00",
+        name: "ANOTHER GLOBE RANSOMWARE VERSION IS OUT",
+        title: "New sample. Adds the .8lock8 extension and creates READ_IT.txt ransom notes. Interaction over email."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-05 00:00:00",
+        name: "SHADE/TROLDESH RANSOMWARE DISTRIBUTION TWEAK",
+        title: "New Shade, aka Troldesh, ransomware variant (.no_more_ransom extension) uses the Kelihos botnet to spread."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-05 00:00:00",
+        name: "NEW SCREEN LOCKER THAT DOESN’T FUNCTION RIGHT",
+        title: "It’s supposed to lock one’s screen and encode files (.encrypted extension), but the crypto part doesn’t work."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-05 00:00:00",
+        name: "LOCKY STARTS USING THE .OSIRIS EXTENSION",
+        title: "New Locky ransomware variant appends the "
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-06 00:00:00",
+        name: "GOLDENEYE RANSOMWARE, A PETYA HEIR",
+        title: "Affects master boot record (MBR) and encrypts master file table (MFT), thus completely blocking PCs."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-08 00:00:00",
+        name: "NASTY MARKETING OF POPCORN TIME RANSOMWARE",
+        title: "Victims are suggested to infect two more users and thereby get their decryption key free of charge."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-08 00:00:00",
+        name: "JIGSAW VARIANT CALLED THE “HACKED” RANSOMWARE",
+        title: "New Jigsaw ransomware build featuring “HACKED” logo. The ransom size starts at 0.25 BTC."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-08 00:00:00",
+        name: "NEW SAMSAM RANSOMWARE SPOTTED",
+        title: "Appends the .VforVendetta file extension and leaves 000-PLEASE-READ-WE-HELP.html ransom note."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-08 00:00:00",
+        name: "EDA2/HIDDEN TEAR VARIANT FOR SALE",
+        title: "A cybercrime ring made tweaks to open-source EDA2/Hidden Tear code, now selling it on the dark web."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-09 00:00:00",
+        name: "CRYPTOWIRE POC GIVES BIRTH TO REAL THREATS",
+        title: "Crooks use new proof-of-concept ransomware called CryptoWire to create Lomix and Ultralocker strains."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-09 00:00:00",
+        name: "ULTRALOCKER, A CRYPTOWIRE SPINOFF",
+        title: "Arrives at PCs with malicious Microsoft Wod documents. Demands a BTC equivalent of $1000 for decryption."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-09 00:00:00",
+        name: "CYBER SPLITTER 2.0 DISCOVERED",
+        title: "Cyber SpLiTTer Vbs ransomware version 2.0 is out. Based off of the Hidden Tear POC. Demands 0.5 BTC."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-09 00:00:00",
+        name: "THE LOCKED-IN RANSOMWARE APPEARS",
+        title: "Ransom notes are called RESTORE_CORUPTED_FILES.html. The payment deadline is set to 15 days."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-10 00:00:00",
+        name: "CHIP RANSOMWARE UPstart",
+        title: "Now uses the .dale extension and leaves DALE_FILES.txt ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-10 00:00:00",
+        name: "DEADLY_60 SCREEN LOCKER SPOTTED",
+        title: "Uses an animated Matrix-style lock screen. Demands a Bitcoin equivalent of $400."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-10 00:00:00",
+        name: "PADCRYPT UPstartD TO VERSION 3.1.5",
+        title: "Other than the new version number, no significant differences from the previous edition."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-10 00:00:00",
+        name: "M4N1F3STO VIRUS WITH LOW IMPACT",
+        title: "Locks the screen and asks for 0.3 BTC. The unlock code is “suckmydicknigga”."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-12 00:00:00",
+        name: "SAMAS RANSOMWARE GROUP EARNINGS REVEALED",
+        title: "According to Palo Alto Networks, the Samas ring’s profits in 2016 amounted to more than $450,000."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-12 00:00:00",
+        name: "THE PORTUGUESE PAYDAY RANSOMWARE",
+        title: "A Hidden Tear spinoff. Uses the .sexy extension and drops !!!!!ATENÇÃO!!!!!.html ransom notes in Portuguese."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-12 00:00:00",
+        name: "“YOU HAVE BEEN HACKED!!!” RANSOMWARE",
+        title: "Appends the .Locked extension to encrypted files and demands 0.25 BTC. Steals passwords along the way."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-12 00:00:00",
+        name: "NEW KRAKEN RANSOMWARE",
+        title: "Renames files to base64 strings, adds the .kraken extension and creates _HELP_YOUR_FILES.html ransom notes."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-13 00:00:00",
+        name: "“YOUR WINDOWS HAS BEEN BANNED” SCREEN LOCKER",
+        title: "Claims to have banned a victim’s PC for terms of use violations. The unlock code is “nvidiagpuareshit”."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-13 00:00:00",
+        name: "CRYPTOMIX RANSOMWARE UPstart",
+        title: "Uses the .lesli extension. Ransom notes are called INSTRUCTION RESTORE FILE.txt."
+    },
+    {
+        className: "eventred",
+        start: "2016-12-13 00:00:00",
+        name: "LOCKED-IN RANSOMWARE DECRYPTED",
+        title: "Michael Gillespie (@demonslay335) releases a free decryptor for the Locked-In ransomware."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-14 00:00:00",
+        name: "NEW CERBER DISTRIBUTION TACTIC",
+        title: "Cerber ransomware payload arrives with rogue credit card reports that dupe users into opening a Word attachment."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-14 00:00:00",
+        name: "ANOTHER XORIST VARIANT DISCOVERED",
+        title: "New edition of the Xorist ransomware appends the .antihacker2017 string to files. Decryptable for free."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-14 00:00:00",
+        name: "GLOBE RANSOMWARE UPstart",
+        title: "The only tweak is the new unlockvt@india.com extension for mutilated files. Demands 1.5 Bitcoin."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-14 00:00:00",
+        name: "CIA SPECIAL AGENT 767 TROJAN",
+        title: "Clone of the M4N1F3STO screen locker using a new background. The unlock code is the same (see above)."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-14 00:00:00",
+        name: "NEW FENIXLOCKER VARIANT RELEASED",
+        title: "Drops “Help to decrypt.txt” ransom manual and provides thedon78@mail.com email address for payment directions."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-14 00:00:00",
+        name: "KOOLOVA RANSOMWARE TARGETS ITALIAN USERS",
+        title: "This sample is currently in development. Only scrambles data in the Test path on a targeted computer’s desktop."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-15 00:00:00",
+        name: "“NO MORE RANSOM” PROJECT ENGAGES NEW PARTNERS",
+        title: "Bitdefender, Emsisoft, Trend Micro and Check Point are now on the team. 32 new decryptors added, too."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-15 00:00:00",
+        name: "AD-SUPPORTED BANDACHOR TROJAN DISTRIBUTION",
+        title: "New BandaChor ransomware spreads via malvertising on X-rated sites and an e-commerce web page."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-15 00:00:00",
+        name: "CHRIS’ EXPERIMENTS OVER HIDDEN TEAR",
+        title: "Researchers spotted an instance of tweaking the Hidden Tear code by a wannabe crook named Chris."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-15 00:00:00",
+        name: "THE BUGGY CRYPTORIUM RANSOMWARE",
+        title: "New sample using the .ENC extension. Simply renames files rather than encode them."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-16 00:00:00",
+        name: "A GLOBE RANSOMWARE REPLICA",
+        title: "Analysts discovered a Globe clone that appends the .crypt extension and leaves HOW_OPEN_FILES.hta note."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-16 00:00:00",
+        name: "CERBER RANSOMWARE’S IP RANGE CHANGED",
+        title: "According to MalwareHunterTeam, Cerber starts using several new IP ranges for UDP statistics."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-16 00:00:00",
+        name: "GLOBE RANSOMWARE TWEAK",
+        title: "The upstartd infection switches to using the rescuers@india.com email address for interaction with victims."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-18 00:00:00",
+        name: "DHARMA RANSOMWARE UPstart",
+        title: "New Dharma edition instructs victims to reach the attacker via amagnus@india.com email address."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-18 00:00:00",
+        name: "CRYPTOBLOCK RANSOMWARE IN DEVELOPMENT",
+        title: "Researchers discover CryptoBlock strain whose ransom notes resemble Cerber’s. No actual encryption yet."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-19 00:00:00",
+        name: "ANDROID BANKING TROJANS EVOLVE",
+        title: "New variants of Android banking malware turn out to accommostart ransomware properties."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-19 00:00:00",
+        name: "RANSOMFREE TOOL COMBATS RANSOMWARE",
+        title: "The RansomFree app by Cybereason detects and blocks over 40 widespread ransom Trojans."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-19 00:00:00",
+        name: "APOCALYPSE RANSOMWARE TWEAK",
+        title: "Creates *MD5*.txt ransom note and uses cryptcorp@inbox.ru for interacting with victims."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-19 00:00:00",
+        name: "M4N1F3STO SCREEN LOCKER STARTS USING CRYPTO",
+        title: "New edition of M4N1F3STO screen locker encrypts data along the way. Decryption routine is buggy."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-19 00:00:00",
+        name: "MNS CRYPTOLOCKER SURFACES",
+        title: "Leaves RESTORE_YOUR_FILES.txt ransom manual and uses alex.vas@dr.com email address for communication."
+    },
+    {
+        className: "eventred",
+        start: "2016-12-20 00:00:00",
+        name: "KASPERSKY’S RANNOHDECRYPTOR TOOL UPstartD",
+        title: "RannohDecryptor now handles CryptXXX ransomware variants using the .crypt, .crypz and .cryp1 extensions."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-20 00:00:00",
+        name: "NEW VARIANT OF SAMAS RANSOMWARE GOES LIVE",
+        title: "Appends .theworldisyours extension and creates CHECK-IT-HELP-FILES.html ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-20 00:00:00",
+        name: "NEW GO-BASED RANSOMWARE SAMPLE",
+        title: "Written in Go, the strain uses .braincrypt extension and !!! HOW TO DECRYPT FILES !!!.txt ransom manual."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-20 00:00:00",
+        name: "ENKRIPSIPC RANSOMWARE SPOTTED IN THE WILD",
+        title: "Aka IDRANSOMv3, targets Indonesian users. Decrypted by Michael Gillespie (@demonslay335)."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-21 00:00:00",
+        name: "MANIFESTUS RANSOMWARE APPEARS",
+        title: "Mimics a Windows upstart while encrypting data. Demands 0.2 BTC for decryption."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-21 00:00:00",
+        name: "PROPOSALCRYPT IS UNDERWAY",
+        title: "New sample. Appends the .crypted extension to files and asks for 1 BTC. Decrypted by Michael Gillespie."
+    },
+    {
+        className: "eventred",
+        start: "2016-12-21 00:00:00",
+        name: "PADLOCK SCREENLOCKER IS EASY TO GET AROUND",
+        title: "Researchers found a way to defeat the PadLock screen locker. The unlock code is ajVr/G\RJzoR"
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-21 00:00:00",
+        name: "FREE-FREEDOM RANSOMWARE MADE BY A TEENAGER",
+        title: "The alert by Free-freedom ransomware says it was coded by a 13-year-old boy. The unlock code is ‘adam’."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-22 00:00:00",
+        name: "BLEEPINGCOMPUTER RELEASES A USEFUL TUTORIAL",
+        title: "Researchers at BleepingComputer publish a comprehensive guide on ransomware protection."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-22 00:00:00",
+        name: "CERBER RANSOMWARE CHANGES ITS TACTIC",
+        title: "New Cerber edition doesn’t delete Volume Shadow Copies and primarily targets Microsoft Office documents."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-22 00:00:00",
+        name: "WINNIX CRYPTOR TEAM CAMPAIGN DISSECTED",
+        title: "The Winnix Cryptor Team ransomware is executed on servers via a BAT file and uses GPG crypto."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-22 00:00:00",
+        name: "CERBER OPTS FOR NEW IP RANGES FOR STATS",
+        title: "Cerber starts using 115.22.15.0/27, 114.23.16.0/27, and 91.239.24.0/23 IP ranges for UDP statistics."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-22 00:00:00",
+        name: "THE OBNOXIOUS GUSTER RANSOMWARE",
+        title: "New sample. Alerts victims with an irritating warning screen and audio. Appends the .locked extension."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-22 00:00:00",
+        name: "FREE-FREEDOM MORPHS INTO ROGA RANSOMWARE",
+        title: "Coded by the already familiar Adam kid. Appends the .madebyadam extension. Decrypt password is ‘adamdude9’."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-23 00:00:00",
+        name: "KOOLOVA RANSOMWARE WANTS TO TEACH YOU A LESSON",
+        title: "New in-dev version of Koolova decrypts files for free if a victim reads a few articles about ransomware."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-23 00:00:00",
+        name: "ONE MORE CRYPTOLOCKER COPYCAT",
+        title: "Another sample calling itself CryptoLocker concatenates the .cryptolocker string to encrypted entries."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-23 00:00:00",
+        name: "CERBER DEVS ARE IN HOLIDAY MOOD",
+        title: "The bad guys are getting ready to celebrate. Several C2 domains used by Cerber have ‘christmaas’ in their URLs."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-23 00:00:00",
+        name: "VENUS LOCKER UPstart",
+        title: "New variant of the Venus Locker ransomware demands 1 BTC and sets a deadline of 72 hours."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-23 00:00:00",
+        name: "ALPHABET RANSOMWARE IS ON ITS WAY",
+        title: "The sample is still a debug version, hence not fully functional. Provides the decrypt key for free at this point."
+    },
+    {
+        className: "eventred",
+        start: "2016-12-24 00:00:00",
+        name: "GLOBEIMPOSTER RANSOMWARE DEFEATED",
+        title: "A Globe ransomware copycat using the .crypt extension and HOW_OPEN_FILES.hta ransom notes. Decrypted by Emsisoft."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-24 00:00:00",
+        name: "DERIALOCK SCREEN LOCKER DISCOVERED",
+        title: "Demands $30. Victims must contact “Arizonacode” Skype user for payment steps. The code contains an “unlock all” command."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-24 00:00:00",
+        name: "CERBER RANSOMWARE TWEAK",
+        title: "The upstart has brought about new IP ranges for statistical purposes, as well as _[random]_README.hta/jpg ransom notes."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-25 00:00:00",
+        name: "BADENCRIPT RANSOMWARE APPEARS",
+        title: "Appends the .bript extension to mutilated files and leaves a recovery walkthrough called More.html."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-25 00:00:00",
+        name: "NEW JIGSAW RANSOMWARE VERSION RELEASED",
+        title: "The new .hush extension being added to files is the only change made to Jigsaw in the course of this upstart."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-25 00:00:00",
+        name: "NMOREIRA RANSOMWARE DECRYPTOR UPstartD",
+        title: "Emsisoft’s Fabian Wosar makes changes to his NMoreira decryptor, which can now handle the .maktub extension variant."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-27 00:00:00",
+        name: "ODCODC RANSOMWARE RE-EMERGES",
+        title: "Creates HOW_TO_RESTORE_FILES.txt ransom note and uses the C-email-[attacker_email_address]-[filename].odcodc extension."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-28 00:00:00",
+        name: "LG SMART TV TARGETED BY A SCREEN LOCKER",
+        title: "Android ransomware attacks LG Smart TVs, generating an FBI-themed lock screen and asking for $500 to unlock."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-28 00:00:00",
+        name: "ANOTHER COMMONPLACE SAMPLE GOES LIVE",
+        title: "A new strain spotted that appends the -opentoyou@india.com extension to files and drops !!!.txt ransom note."
+    },
+    {
+        className: "eventblue",
+        start: "2016-12-29 00:00:00",
+        name: "KILLDISK MALWARE GETS NASTIER",
+        title: "The file-deleting virus called KillDisk can now encode data. The ransom amounts to hundreds of Bitcoins."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-29 00:00:00",
+        name: "ROGUE ANTIVIRUS INSTALLER SPREADS RANSOMWARE",
+        title: "A sample of the GoldenEye ransomware was found to proliferate via a bogus ESET AV installer."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-29 00:00:00",
+        name: "DHARMA RANSOMWARE GOES WITH NEW RANSOM NOTES",
+        title: "The mkgoro@india.com version of the Dharma ransomware uses HTA format for its ransom notes (Info.hta)."
+    },
+    {
+        className: "eventorange",
+        start: "2016-12-30 00:00:00",
+        name: "SAMAS INFECTION UNDERGOES A CHANGE",
+        title: "New Samas ransomware iteration uses the .whereisyourfiles extension and WHERE-YOUR-FILES.html help file."
+    },
+    {
+        className: "eventgreen",
+        start: "2016-12-30 00:00:00",
+        name: "PROOF-OF-CONCEPT RANSOMWARE CRITICIZED",
+        title: "An article posted on MalwareTech blog explains why open source ransomware is a bad idea."
+    }
+]);
+
+
+  // Configuration for the Timeline
+  var options = {
+    // specify a template for the items
+    template: template,
+    autoResize: false,
+    max: '2017-1-15',
+    min: '2016-04-16',
+    maxHeight: '1200px',
+    clickToUse: false,
+    horizontalScroll: false,
+    verticalScroll: true,
+    zoomMin: 1000 * 60 * 60 * 24, // one day in milliseconds
+    zoomMax: 1000 * 60 * 60 * 24 * 31 * 12 // about three months in milliseconds
+
+  };
+
+  // Create a Timeline
+  var timeline = new vis.Timeline(container, items, options);
+</script>
+</body>
