@@ -79,6 +79,8 @@ There was a steady increase in Ransomware events throughout the year and I predi
 
 ![Malware_Trend]({{ site.base }}/images/upward_trend.png){: class="center-image"}
 
+The converted raw dataset is [available here]({{ site.base }}/static/ransomware_data_2016.csv)
+
 Hope you found this post helpful and if you have any questions, please post them in the comments section below.
 
 

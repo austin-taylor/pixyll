@@ -1,0 +1,378 @@
+date,name,desc
+2016-05-09,THE ENIGMA RANSOMWARE SURFACES,Targets Russian-speaking victims. Appends the .enigma extension. Creates the enigma_encr.txt ransom note.
+2016-05-09,CRYPTXXX 2.0 EDITION,Kaspersky\u2019s free decryptor defeated. Concatenates the .crypt extension. Ransom notes named after victim ID.
+2016-05-10,SHUJIN RANSOMWARE SPREADING IN CHINA,Zeroes in on Chinese victims only. Very complex decryption routine. Uses the \u6587\u4ef6\u89e3\u5bc6\u5e2e\u52a9.txt ransom note.
+2016-05-11,GNL LOCKER (GERMAN NETHERLANDS LOCKER),Targets German and Dutch users. Adds the .locked extension. UNLOCK_FILES_INSTRUCTIONS.txt manual.
+2016-05-12,"CRYPTOHITMAN, A JIGSAW RANSOMWARE SPINOFF",Hitman video game themed. Appends the .porno extension and uses X-rated images on warning screen.
+2016-05-12,CRYPREN RANSOMWARE DISTRIBUTION UPTICK,Uses the .encrypted extension and drops READ_THIS_TO_DECRYPT.html help manual. Decryptable for free.
+2016-05-12,PETYA RANSOMWARE GOES WITH THE MISCHA BUNDLE,"If the MBR-overwriting Petya fails to get admin privileges, it installs Mischa, a typical file-encrypting Trojan."
+2016-05-13,PETYA AND MISCHA COMBO AS PART OF A RAAS,Ransomware-as-a-Service platform launched allowing crooks to spread Petya and Mischa on an affiliate basis.
+2016-05-13,CRYPTXXX 2.0 CRACKED,"Kaspersky Lab updated their free decryptor for CryptXXX ransomware, version 2.0 now covered."
+2016-05-14,8LOCK8 RANSOMWARE DISCOVERED,New sample. Adds the .8lock8 extension and creates READ_IT.txt ransom notes. Interaction over email.
+2016-05-16,SHADE RANSOMWARE UPDATE,New variant of the Shade aka Troldesh ransomware uses the .da_vinci_code extension to stain locked files.
+2016-05-16,FREE DECRYPTOR FOR GHOSTCRYPT AVAILABLE,"GhostCrypt ransomware (.Z81928819 extension, READ_THIS_FILE.txt ransom note) decrypted by researchers."
+2016-05-16,SNSLOCKER HITS THE HEADLINES,"New strain. Leverages AES cipher, appends the .RSNSlocked extension and demands $300 worth of Bitcoin."
+2016-05-17,XORIST RANSOMWARE LINEAGE DECRYPTED,Decryptor for the Xorist family released by Emsisoft. Requires one encrypted file and its original copy.
+2016-05-17,777 RANSOMWARE FAIL,Appends the ._[timestamp]_$[email]$.777 extension. Decrypted by Emsisoft\u2019s Fabian Wosar.
+2016-05-18,NEW ZYKLON LOCKER IN ROTATION,A GNL Locker spinoff. Uses the .locked extension and drops UNLOCK_FILES_INSTRUCTIONS.html/txt manuals.
+2016-05-19,THE END OF TESLACRYPT: MASTER KEY RELEASED,TeslaCrypt ransomware authors close the project and release the Master Decryption Key.
+2016-05-19,WEBSITE-ENCRYPTING RANSOMWARE,New infection exploiting Drupal vulnerability. About 400 sites affected. Demands 1.4 BTC to decrypt content.
+2016-05-20,DMA LOCKER 4.0 DISCOVERED,Doesn\u2019t modify filenames. Creates Cryptinfo.txt ransom manual and extorts 1.5 BTC.
+2016-05-21,CRYPTXXX UPDATED TO VERSION 3.0,Crypto flaw patched. Kaspersky\u2019s decryptor no longer capable of restoring files.
+2016-05-22,TESLACRYPT DEVS RECOMMEND A RESEARCHER’S TOOL,Crooks provide a link to expert-tailored decoder on Tor payment site for the defunct TeslaCrypt.
+2016-05-22,ODCODC: NEW RANSOMWARE ON THE TABLE,File renaming format as follows: [attacker\u2019s_email]-[original_filename].odcodc. Not decryptable for free.
+2016-05-24,ZCRYPT SPREADS VIA USB AND NETWORK SHARES,New one. Appends the .zcrypt string. Propagates over autorun.inf files on memory sticks and network drives.
+2016-05-24,ZYKLON RANSOMWARE SWITCHES TO APROPOS EXTENSION,New Zyklon edition switches from the .locked extension to .zyklon string. No more changes made.
+2016-05-24,BADBLOCK IS ON THE BLOCK,New BadBlock ransomware doesn\u2019t append any extension to files. Ransom size is 2 BTC.
+2016-05-26,INVISIBLE EMPIRE THEMED TROJAN,Another Jigsaw ransomware version. Deletes files unless a victim pays up. Decryptable for free.
+2016-05-27,JOBCRYPTER UPDATE,A modified variant of the JobCrypter ransomware discovered. Uses the .css extension.
+2016-06-01,JUICYLEMON RANSOMWARE DISCOVERED,New sample telling victims to send email to support@juicylemon.biz for instructions. Demands 1000 Euros.
+2016-06-01,CRYPTXXX MORPHS INTO ULTRACRYPTER,Multiple design tweaks of ransom notes and payment page. Decryptor now called UltraDeCrypter.
+2016-06-01,GOOD NEWS: BADBLOCK DECRYPTED,"The BadBlock strain, which cripples both data files and Windows EXEs, is decrypted courtesy of Emsisoft."
+2016-06-02,ANOTHER JIGSAW VARIANT EMERGES,This descendant of the Jigsaw ransomware displays NSFW wallpaper and uses the .paybtc extension.
+2016-06-03,BLACK SHADES CRYPTER WANTS A SMALL RANSOM,"Targets English and Russian-speaking users, appends the .silent extension and demands $30."
+2016-06-04,HERBST RANSOMWARE TARGETING GERMAN USERS,"This sample uses symmetric AES cryptosystem, appends the .herbst extension to files and extorts $50."
+2016-06-05,RUSSIAN RANSOMWARE CALLED CRIPTOKOD,"Attacks Russian-speaking audience, adds the .criptokod extension to locked files. Decryptable for free."
+2016-06-06,MULTIPLE JIGSAW RANSOMWARE SPINOFFS DISCOVERED,"New Jigsaw variants use the .paymst, .payms, .pays, .paym, .paymrs, .payrms and .paymts extensions."
+2016-06-06,CRYSIS RANSOMWARE FAMILY EXPANDED,Another Crysis ransomware offspring appends files with the .centurion_legion.aol.com.xtbl extension.
+2016-06-07,CRYSIS PLAGUE RUNS RAMPANT,"According to a research by ESET, the Crysis ransomware is gaining momentum with cybercrooks."
+2016-06-09,NEMUCOD TROJAN SCRAMBLES FILES USING PHP,Researchers defeat a new iteration of the Nemucod ransomware that uses the .crypted extension.
+2016-06-10,CISCO CREATES A UNIVERSAL TESLACRYPT DECODER,Cisco\u2019s Talos Group releases a tool that decrypts all known versions of the TeslaCrypt ransomware.
+2016-06-11,CRYPTXXX RANSOMWARE TWEAK,New CryptXXX (UltraCrypter) version labels encrypted entries with the .cryptz extension.
+2016-06-13,APOCALYPSE RANSOMWARE DECRYPTED,"Emsisoft researcher tailors a decryptor for Apocalypse ransomware, which uses the .encrypted extension."
+2016-06-13,JAVASCRIPT-BASED RAA RANSOMWARE,"Built with JavaScript, the RAA ransomware (.locked extension) also installs the Pony password stealer."
+2016-06-13,FLOCKER ATTACKS ANDROID GADGETS,"The FLocker pest targets Android devices, including Smart TV, and extorts $200 worth of iTunes gift cards."
+2016-06-16,DED CRYPTOR BASED ON EDA2 PROOF-OF-CONCEPT,"Affixes the .ded extension to files, imposes email interaction with the attacker and demands 2 BTC."
+2016-06-17,JIGSAW OFFSPRING PAYS HOMAGE TO THE ANONYMOUS,The Anonymous themed Jigsaw ransomware variant concatenates the .epic string to scrambled files.
+2016-06-17,DR.JIMBO@BK.RU RANSOMWARE SETS A DEADLINE,Instructs victims to reach the devs via email within 48 hours otherwise threatens to erase files.
+2016-06-17,CRYPT38 RANSOMWARE WITH WEAK CRYPTO,"Targets Russian users, appends .crypt38 to files and asks for $15 in Rubles. Free decryptor released."
+2016-06-17,POTENTIALLY DECRYPTABLE CRYPTOSHOCKER,New sample using AES algorithm and appending the .locked extension. Experts found a workaround.
+2016-06-20,LOCKY DISTRIBUTION BACKED BY NECURS BOTNET,"New Locky proliferation campaign discovered, leverages the Necurs botnet to generate harmful spam."
+2016-06-20,DECRYPTOR FOR APOCALYPSEVM RELEASED,Researchers create a decryptor for ApocalypseVM ransomware that uses advanced anti-VM features.
+2016-06-20,RUSSIAN USERS TARGETED BY KOZY.JOZY PEST,Uses asymmetric RSA crypto. Victims are instructed to email the attacker at kozy.jozy@yahoo.com.
+2016-06-21,"CRYPTOROGER, A NEW SAMPLE OUT THERE","Employs AES algo, uses the .crptrgr extension and creates !Where_are_my_files!.html ransom note."
+2016-06-21,CRYPTXXX ADDS RANDOMNESS TO THE MIX,CryptXXX ransomware starts appending random 5-char extension to files instead of .crypz.
+2016-06-22,ZIMBRA RANSOMWARE ENCRYPTS EMAILS,Python-based strain. Targets the Zimbra open-source email platform. Ransom amounts to 3 BTC.
+2016-06-22,NEW APOCALYPSE SPINOFF DISCOVERED AND DECRYPTED,Appends the .SecureCrypted extension. Emsisoft Apocalypse Decryptor updated to restore files.
+2016-06-23,TOWERWEB@YANDEX.COM RANSOMWARE,Tells victims to email the dev at towerweb@yandex.com for instructions. Demands $100 worth of Bitcoin.
+2016-06-23,"KRATOSCRYPT, A HIDDEN TEAR SPINOFF",Ransomware based on open-source educational code. Concatenates the .kratos extension to files.
+2016-06-25,BART RANSOMARE DOESN’T ACTUALLY UTILIZE CRYPTO,Stores files in password-protected ZIP folder rather than encrypt them. Demands 3 BTC.
+2016-06-25,SATANA BOOTKIT IS DOUBLE TROUBLE,Encrypts files and wreaks havoc with Master Boot Record. Displays a lock screen asking for 0.5 BTC.
+2016-06-26,THE DIDACTIC EDUCRYPT RANSOMWARE,Locks victims\u2019 personal data but doesn\u2019t request a ransom. Decrypt password available in a hidden .txt file.
+2016-06-27,ZEPTO EDITION OF LOCKY RANSOMWARE,New Locky variant appends the 
+2016-06-28,MONEY-HUNGRY MICROCOP INFECTION,Uses DES (Data Encryption Standard) and requests an astounding 48.48 BTC. Decrypted by analysts.
+2016-06-28,SHADE RANSOMWARE TWEAK,New Shade iteration switches from using the .da_vinci_code to .Windows10 extension.
+2016-06-29,AVG DEVISES DECRYPTORS FOR SIX RANSOMWARE STRAINS,"The tools restore files scrambled by TeslaCrypt, Apocalypse, BadBlock, Crypt888, Legion, and SZFLocker."
+2016-06-30,UNLOCK92 RANSOMWARE,Targerts Russian-speaking audience. Email for interaction: unlock92@india.com. Decryptable for free.
+2016-06-30,EMERGENCE OF WILDFIRE LOCKER,A likely Zyklon copycat. Circulates mostly in the Netherlands and Belgium. Appends the .wflx extension.
+2016-07-03,ALFA RANSOMWARE DISCOVERED,"Alfa, aka Alpha, ransomware uses the .bin extension and appears to be created by Cerber devs."
+2016-07-03,NEW APOCALYPSE VARIANT DECRYPTED,Emsisoft\u2019s decryptor now handles the .bleepYourFiles version of the Apocalypse ransomware.
+2016-07-06,ANOTHER CRYPTXXX RANSOMWARE UPDATE,"New edition creates README.html (.bmp, .txt) ransom notes and upsells a tool called \u201cMicrosoft Decryptor\u201d."
+2016-07-06,THE BUGGY CRYPTOFINANCIAL SPECIMEN,Requests 0.2 BTC to unlock files but irreversibly deletes the data instead.
+2016-07-07,BITSTAK RANSOMWARE WITH WEAK CRYPTO,Appends the .bitstak extension to scrambled files. Researcher named Michael Gillespie created a decryptor.
+2016-07-07,PIZZACRYPTS PROPAGATING VIA NEUTRINO EXPLOIT KIT,Uses the .id-[unique_victim_id]-maestro@pizzacrypts.info extension to brand all encoded files.
+2016-07-08,THE PADCRYPT CAMPAIGN REVIVES,"Having stayed dormant for several months, the PadCrypt ransomware (.padcrypt extension) re-emerges."
+2016-07-09,UNLOCK92 ENCRYPTION ENHANCEMENTS,"New variant uses RSA-2048 cryptosystem, cannot be decrypted. Appends the .CCCRRRPPP extension."
+2016-07-11,A LAME CTB-LOCKER COPYCAT APPEARS,Sample dubbed CTB-Faker moves files to a password-protected ZIP archive. Potentially crackable.
+2016-07-11,ODCODC RANSOMWARE FINALLY DEFEATED,Researcher going by the handle BloodDolly came up with a method to decrypt ODCODC-encoded files.
+2016-07-12,NEW XORIST VERSION POSES AS CERBER,"Although this sample uses the .cerber extension, it\u2019s a mere copycat. Doesn\u2019t link to Tor decryptor page."
+2016-07-13,WILDFIRE LOCKER ON THE RISE,"According to OpenDNS, there is an upswing in WildFire Locker distribution via the Kelihos botnet."
+2016-07-13,LOW-COST STAMPADO RANSOMWARE FOR SALE,Appends the .locked extension. Criminals can buy a copy on the dark web for as little as $39.
+2016-07-14,DECRYPTION KEYS GIVEAWAY BY CRYPTXXX DEVS,"For whatever reason, CryptXXX Tor payment sites provide free keys to decrypt .cryp1 and .crypz files."
+2016-07-18,PETYA RANSOMWARE UPDATED,Petya authors improved their Salsa20 algo implementation to encrypt Master File Table more reliably.
+2016-07-19,CRYPTXXX BADLY CRIPPLES FILENAMES,A fresh edition of CryptXXX replaces filenames with 32 hex characters and appends random extensions.
+2016-07-20,PYTHON-BASED HOLYCRYPT RANSOMWARE,"Written in Python, the HolyCrypt sample installs all components as a single Windows executable."
+2016-07-20,AUTOMATIC ODCODC DECRYPTOR RELEASED,ODCODC ransomware victims can now use an automatic free decryptor. The infection\u2019s C&C server is dead.
+2016-07-21,AVG CRACKS THE BART RANSOMWARE,Free recovery tool by AVG allows Bart ransomware victims to crack the ZIP archive password.
+2016-07-21,POWERWARE IS NOTHING BUT A LOCKY COPYCAT,PowerWare ransomware masquerades itself as Locky. Decryptor available courtesy of Michael Gillespie.
+2016-07-22,STAMPADO RANSOMWARE DECRYPTED,Emsisoft team member Fabian Wosar created a free decrypt tool for the relatively new Stampado pest.
+2016-07-25,"CRYPMIC, A CRYPTXXX LOOKALIKE",CrypMIC bears a strong resemblance to CryptXXX. Researchers provide a comparative review of the two.
+2016-07-25,SIMPLE_ENCODER APPENDS FILENAMES WITH A TILDE,New sample. Uses the .~ file extension and creates _RECOVER_INSTRUCTIONS.ini ransom note.
+2016-07-25,THE NOMORERANSOM PROJECT GOES LIVE,A true breakthrough in fighting ransomware. Created by law enforcement agencies and security companies.
+2016-07-26,CHIMERA RANSOMWARE DECRYPTION KEYS RELEASED,Petya and Mischa ransomware authors publish about 3500 decryption keys for a strain called Chimera.
+2016-07-26,JANUS RAAS BECOMES OPEN TO WANNABE CRIMINALS,Crooks behind Petya and Mischa make their Ransomware-as-a-Service platform available to the public.
+2016-07-26,THE SHORT-LIVED JAGER RANSOMWARE,Incremental ransom size starting with $100 worth of Bitcoin. C&C server went down shortly after launch.
+2016-07-28,UYARI RANSOMWARE GOES AFTER TURKISH USERS,Appends the .locked extension to scrambled items. Ransom notes in Turkish asking for 2 BTC.
+2016-07-29,JIGSAW FAMILY KEEPS EXPANDING,\u201cWe Are Anonymous\u201d Jigsaw ransomware variant with a new warning background. Decryptable.
+2016-07-29,KASPERSKY’S DECRYPT TOOL UPDATED,RakhniDecryptor solution by Kaspersky Lab decrypts Chimera-locked files with the keys previously leaked.
+2016-07-31,THE RAZY RANSOMWARE PREDICAMENT,"New strain, uses AES crypto and concatenates the .razy extension. Even the devs cannot decrypt files."
+2016-08-01,LOCKY VARIANT USES BOOBY-TRAPPED WSF ATTACHMENTS,The Zepto version of Locky ransomware circulates via malware-tainted WSF email attachments.
+2016-08-03,"SHINOLOCKER, A NEW PROOF-OF-CONCEPT",Japanese researcher creates educational ransomware called ShinoLocker. Another controversial initiative.
+2016-08-03,ASTONISHING SURVEY RESULTS,"50% of U.S. companies were targeted by ransomware in the past 12 months, Osterman Research reveals."
+2016-08-04,CERBER RANSOMWARE 2.0 RELEASED,Switches to .cerber2 extension and uses a new desktop background. Ransom notes unaltered.
+2016-08-04,"VENUS LOCKER, AN EDA2 SPINOFF",The EDA2 PoC gave birth to a new real-world strain. Uses AES-256 standard and appends .venusf extension.
+2016-08-08,HITLER-RANSOMWARE DISCOVERED,Buggy sample that deletes extensions rather than encrypt files. Demands a 25 Euros worth Vodafone card.
+2016-08-09,REKTLOCKER BASED ON EDUCATIONAL HIDDEN TEAR,Uses open-source Hidden Tear code with some modifications. Appends files with the .rekt extension.
+2016-08-10,RANSOMWARE ON IOT DEVICES,Researchers demonstrate a viable ransomware hitting thermostats at the DEFCON event.
+2016-08-11,"SMRSS32 RANSOMWARE, A CRYPTOWALL COPYCAT",Impostor pretending to be 
+2016-08-12,PIZZACRYPTS AND JUICYLEMON DECRYPTED,Ransomware analyst nicknamed BloodDolly creates a free decryptor for PizzaCrypts and JuicyLemon strains.
+2016-08-12,POKEMONGO TROJAN DROPS ARABIC RANSOM NOTES,Appends the .locked extension. Creates a backdoor Windows user account (Hack3r) for future PC access.
+2016-08-14,TORRENTLOCKER TARGETS ITALIAN VICTIMS,Aka Crypt0L0cker. Uses the .enc file extension. Infects computers via rogue energy bills sent over email.
+2016-08-15,THE SHARK RANSOMWARE-AS-A-SERVICE,New RaaS platform that allows for extensive ransomware customization. Devs get 20% revenue cut.
+2016-08-16,CERBER RANSOMWARE DECRYPTION INITIATIVE,Check Point 
+2016-08-16,CERBER RAAS REVENUE UNCOVERED,"According to an investigative research, Cerver devs\u2019 annual revnue is on the order of $1 million."
+2016-08-16,NEW STRAIN TARGETING KOREAN VICTIMS,Based on the educational Hidden Tear code. Apparent ties to the CripMIC ransomware discovered.
+2016-08-16,APOCALYPSE RANSOMWARE AUTHORS GET UPSET,The crooks keep insulting Fabian Wosar who cracks every new edition of the pest.
+2016-08-17,CERBER DEVS PATCH FLAWS,Threat actors behind Cerber ransomware make Check Point\u2019s automatic decryptor inefficient.
+2016-08-17,SMRSS32 RANSOMWARE DECRYPTED,Researchers release a free decrypt tool for the Smrss32.exe ransomware.
+2016-08-18,FSOCIETY RANSOMWARE DISCOVERED,An EDA2 spinoff. Sets a Mr. Robot TV series themed wallpaper with Fsociety hacking group logo.
+2016-08-18,BART RANSOMWARE SWITCHES TO REAL CRYPTO,Starts to actually encrypt files and append the .bart extension rather than simply password-protect them.
+2016-08-19,DETOXCRYPTO MIMICKING POKEMONGO FOR WINDOWS,Payload pretends to be PokemonGO game. Takes a screenshot of Windows screen for intimidation purpose.
+2016-08-22,ALMA LOCKER USES RANDOM 5-CHAR EXTENSION,Distributed via RIG exploit kit. Uses Tor C&C server. Ransom of 1 BTC to be submitted during 5 days.
+2016-08-23,ANOTHER CTB-LOCKER LOOKALIKE SURFACES,"Another CTB-Locker copycat, uses a similar ransom note and color scheme. Demands 0.5 BTC."
+2016-08-24,THE PURGE MOVIE-THEMED GLOBE RANSOMWARE,Desktop wallpaper styling pays homage to the Purge movies. Appends the .purge extension to files.
+2016-08-24,WILDFIRE LOCKER TAKEDOWN,Dutch police and NHTCU agency seize WildFire Locker ransomware\u2019s C&C server. Free decryptor released.
+2016-08-24,ALMA LOCKER DECRYPTION OPTIONS,"According to PhishLabs, Alma Locker\u2019s private key can be obtained with network sniffer during the attack."
+2016-08-25,FANTOM RANSOMWARE RUNS A FAKE WINDOWS UPDATE,New strain based on EDA2. Displays a bogus Windows update screen to obfuscate the encryption process.
+2016-08-26,DOMINO RANSOMWARE POSING AS KMSPICO,Based on educational Hidden Tear code. Payload disguised as KMSPico Windows crack.
+2016-08-26,LOCKY SWITCHES TO DLL INSTALLER TO AVADE AV,The Zepto alias of Locky ransomware begins leveraging a DLL installer rather than an executable to spread.
+2016-08-26,SMRSS32 RANSOMWARE USES U.S. ELECTION SPAM,New Smrss32 spam campaign delivering files masqueraded as U.S. Election news.
+2016-08-26,THE SERPICO VERSION OF DETOXCRYPTO,Targets uses in Serbia and Croatia. Doesn\u2019t modify filenames. Requests 50 EUR for decryption.
+2016-08-29,"FAIRWARE RANSOMWARE, A THREAT TO LINUX USERS","Adversaries compromise Linux servers, erase web folders and extort 2 BTC for recovery."
+2016-08-29,RAA RANSOMWARE APPEARS IN THE WILD,Instructs victims to send email to raaconsult@mail2tor.com for decryption steps.
+2016-08-30,THE CURIOUS CASE OF FABIANSOMWARE,Apocalypse ransomware devs name their new variant \u201cFabiansomware\u201d to insult researcher Fabian Wosar.
+2016-08-31,CERBER SWITCHES TO USING A NEW EXTENSION,New edition of the Cerber ransomware concatenates the .cerber3 extension to locked files.
+2016-08-31,REDIS SERVERS HACKED TO INSTALL RANSOMWARE,Crooks reportedly used insecure Redis servers to infect Linux machines with the Fairware ransomware.
+2016-08-31,STAMPADO STARTS SCRAMBLING FILENAMES,New Stampado variant replaces filenames with hexadecimal chars and uses the .locked extension.
+2016-09-01,THE NULLBYTE RANSOMWARE FAIL,Pretends to be a PokemonGO bot app. Demands 0.1 BTC. Decrypted by Michael Gillespie.
+2016-09-01,NEW CRYLOCKER IMPERSONATES A FAKE ORGANIZATION,Acts on behalf of inexistent Central Security Treatment Organization. Appends the .cry extension
+2016-09-05,CRYLOCKER DETAILS REVEALED,CryLocker propagates via Sundown exploit kit and sends victims\u2019 details to its C2 server over UDP.
+2016-09-06,LOCKY SWITCHES TO AUTOPILOT MODE,New Locky samples go with built-in RSA keys and don\u2019t communicate with C&C servers.
+2016-09-06,NO ACTUAL CRYPTO BY THE RARVAULT RANSOMWARE,"Targets Russian users. Moves files to password-protected RAR archive, creates RarVault.htm ransom note."
+2016-09-07,KAWAIILOCKER GOES AFTER RUSSIAN-SPEAKING AUDIENCE,Hits Russian victims. Creates \u201cHow Decrypt Files.txt\u201d ransom manual. Free decryptor released.
+2016-09-08,PHILADELPHIA RANSOMWARE SPOTTED IN THE WILD,New Stampado version sold on the darknet for $400. Features a Mercy button.
+2016-09-08,FLYPER RANSOMWARE POPS UP,Appends the .locked extension and requests 0.5 BTC. Attacker\u2019s email address is flyper01@sigaint.org.
+2016-09-09,PYTHON-BASED CRYPY THREAT,"Uses AES encryption, adds the .cry extension and drops README_FOR_DECRYPT.txt help file."
+2016-09-10,PHILADELPHIA RANSOMWARE DECRYPTED,Emsisoft\u2019s Fabian Wosar creates a free decryptor for the Philadelphia pest.
+2016-09-10,CROOKS FORGE SUPPORT FOR THE HOMELESS,New Crysis ransomware rips users off under the guise of helping the homeless.
+2016-09-12,NOOBCRYPT TURNS OUT TO BE A LAME SAMPLE,"New ransomware, uses the same set of crypto keys for all victims. Decryption keys published by analysts."
+2016-09-12,"LOCKLOCK, ANOTHER EDA2 SPINOFF","Leverages AES-256 algo, appends the .locklock extension to files and creates READ_ME.txt ransom note."
+2016-09-14,NEW RAAS CALLED ATOM,Shark RaaS rebranded as the Atom Ransomware Affiliate Program. Available on the public Internet.
+2016-09-14,STAMPADO DECRYPTOR UPDATED,Fabian Wosar releases a decrypt tool handling new variants of the Stampado ransomware.
+2016-09-14,LOCKY PERSEVERES WITH OFFLINE ENCRYPTION,Locky ransomware\u2019s autopilot crypto gets improved to prevent AV detection.
+2016-09-15,STAMPADO ENCRYPTS WHAT’S ALREADY ENCRYPTED,"New version encrypts files that were locked by other ransomware strains, so it\u2019s double trouble."
+2016-09-15,RAZY RANSOMWARE MIMICKS JIGSAW WARNING STYLE,Razy asks for 10 EUR worth PaySafeCard to unlock files. Ransom screen resembles one by Jigsaw ransomware.
+2016-09-15,FANTOM RANSOMWARE UPDATE,"New edition can encrypt data offline, similarly to Locky. Now targets network shares."
+2016-09-17,FENIXLOCKER AUTHOR SPAWNS LOVE NOTES,FenixLocker ransomware dev found to leave the \u201cFenixIloveyou!!\u201d message in each encrypted file.
+2016-09-18,HDDCRYPTOR REWRITES MASTER BOOT RECORD,A highly dangerous sample that locks victims out of their computers by overwriting MBR.
+2016-09-18,FENIXLOCKER DECRYPTED,"Emsisoft releases a free decrypt tool for FenixLocker, which adds secret mash notes to encrypted files."
+2016-09-21,FANTOM RANSOMWARE TWEAKS,New iteration sets desktop wallpapers randomly and derives ransom size from payload name.
+2016-09-22,STAMPADO AND APOCALYPSE UPDATED AND CRACKED,Fabian Wosar stays busy upsetting ransomware makers with his updated free decryptors.
+2016-09-22,LOCKY OPTS OUT OF OFFLINE-ONLY MODE,"New Locky samples switch back to using C&C infrastructure for encryption, according to Avira."
+2016-09-22,CERBER CIRCULATION GROWTH,"A major increase in Cerber ransomware distribution: daily infections reach 80,000."
+2016-09-23,CYBER SPLITTER VBS RANSOMWARE DISCOVERED,"Spotted by GData, Cyber SpLiTTer Vbs asks for 1 BTC but fails to actually encrypt any files."
+2016-09-23,UNBLOCKUPC RANSOMWARE SURFACES,"New sample, drops \u201cFiles encrypted.txt\u201d ransom manual and demands 0.18 BTC for decryption."
+2016-09-24,"MARSJOKE, ONE MORE CTB-LOCKER COPYCAT",Bears a strong resemblance to CTB-Locker. Mainly targets U.S. governmental and educational institutions.
+2016-09-24,NAGINI RANSOMWARE FOLLOWS POP CULTURE,"Warning screen contains an image of Lord Voldemort, an evil character from the Harry Potter films."
+2016-09-26,NEW HELP_DCFILE RANSOMWARE,Named after ransom note help_dcfile.txt. Appends files with the .XXX extension.
+2016-09-26,THE DONALD TRUMP RANSOMWARE,In-development sample with a photo of Donald Trump on the ransomware GUI.
+2016-09-26,LOCKY GIVES BIRTH TO A NEW .ODIN PERSONA,New variant adds the .odin extension to files and creates _HOWDO_text.html/bmp ransom notes.
+2016-09-26,DXXD RANSOMWARE FINALLY CRACKED,"Michael Gillespie, aka @demonslay335, creates a decryptor for the DXXD ransom Trojan."
+2016-09-26,OPEN-SOURCE RANSOMWARE FOR LINUX,New educational Linux ransomware called CryptoTrooper gets negative feedback from security community.
+2016-09-28,PRINCESS LOCKER WANTS TOO MUCH FOR DECRYPTION,"Decryptor page resembles Cerber\u2019s. The ransom is 3 BTC (about $2200), doubles after deadline."
+2016-09-28,AL-NAMROOD RANSOMWARE DECRYPTED,Appends the .unavailable extension. Emsisoft creates an automatic decrypt tool for this sample.
+2016-09-28,RAZY RANSOMWARE EXPANDS ITS GEOGRAPHY,New version targets German users. Extorts ransom in PaySafeCard. Deadline for payment is 72 hours.
+2016-09-29,KASPERSKY DISSECTS BRAZILIAN CYBERCRIME,A write-up by Kaspersky analyzes Brazilian TeamXRat ransomware that targets enterprises and hospitals.
+2016-09-29,NUKE RANSOMWARE SPOTTED,New one. Uses the AES standard and creates !!_RECOVERY_instructions _!!.html/txt ransom notes.
+2016-09-29,RANSOMWARE MAKER JOINS SECURITY FORUM,Apocalypse ransomware dev starts posting on BleepingComputer forums to insult researcher Fabian Wosar.
+2016-09-30,KASPERSKY DECRYPTS MARSJOKE RANSOMWARE,Kaspersky updated their RannohDecryptor solution to so that it can crack the MarsJoke ransomware.
+2016-09-30,TREND MICRO BEATS THE GLOBE RANSOMWARE,The Trend Micro Ransomware File Decryptor tool is now capable of decoding the Globe ransomware.
+2016-10-01,EMSISOFT CREATES THEIR OWN DECRYPTOR FOR GLOBE,The tool can crack the Blowfish cipher used by the Globe ransomware.
+2016-10-01,KILLERLOCKER USES A FRIGHTNING TACTIC,The strain appends files with the .rip extension and displays an image of a spooky clown.
+2016-10-02,FSOCIETY LOCKER BETA VERSION DISCOVERED,Concatenates the .realfsociety@sigaint.org.fsociety extension to files and drops fsociety.html ransom note.
+2016-10-03,CRYPTOLOCKER 5.1 BASED ON HIDDEN TEAR,Another example of criminals abusing educational ransomware code. No in-the-wild propagation.
+2016-10-04,MAJOR CERBER RANSOMWARE UPDATE,New variant adds a random 4-character extension and creates README.hta ransom note.
+2016-10-05,"HADES LOCKER, A WILDFIRE LOCKER HEIR","Hades Locker occupies the niche of WildFire Locker, which had been taken down by Dutch law enforcement."
+2016-10-06,THE GLOBE RANSOMWARE FAMILY REPLENISHED,"Globe devs release multiple new spinoffs appending the .encrypted, .raid10, and .globe extensions."
+2016-10-07,CZECH USERS ENDANGERED BY KOSTYA RANSOMWARE,"Appends the .kostya extension. The ransom of 2,000 CZK (about $78) doubles after 12 hours."
+2016-10-08,THE COMRADE CIRCLE RANSOMWARE,Adds the .comrade extension to files and displays RESTORE-FILES![ID] ransom note.
+2016-10-10,ENIGMA RANSOMWARE UPDATE,New edition appends the .1txt extension and leaves enigma_info.txt ransom manual.
+2016-10-10,DEADLY FOR A GOOD PURPOSE RANSOMWARE,Uses AES-256 algo and requests a Bitcoin equivalent of $500. Configured to encrypt data in 2017.
+2016-10-11,VENISRANSOMWARE DISCOVERED,Uses VenisRansom@protonmail.com for communication. Enables RDP and steals passwords.
+2016-10-13,FIRST RANSOMWARE WRITTEN IN THE GO LANGUAGE,"Detected as Trojan.Encoder.6491, it appends the .enc extension. Cracked by Doctor Web."
+2016-10-13,DXXD VERSION 2 DECRYPTED,Researchers create a decryptor for the 2nd iteration of the DXXD Ransomware.
+2016-10-13,NUKE RANSOMWARE UPDATE,New Nuke variant spotted in the wild. Concatenates the .nuclear55 extension to encoded files.
+2016-10-14,LOCKYDUMP TOOL RELEASED,"Cisco Talos create LockyDump, a data aggregate with configuration parameters of all Locky versions."
+2016-10-14,EXOTIC RANSOMWARE ENCRYPTS EXECUTABLES,"Dev\u2019s handle is EvilTwin. Encrypts all data on target computers, including executable files."
+2016-10-15,NEW DMALOCKER VERSION DECRYPTED,Malwarebytes releases a tool that decrypts DMALocker\u2019s latest !XPTLOCK5.0 version.
+2016-10-15,NOOBCRYPT RANSOMWARE TWEAK,NoobCrypt 2.0 demands $50. Attackers decided to stick with the ransomware name given by a researcher.
+2016-10-15,ANUBIS RANSOMWARE EMERGES,"Based on EDA2 ransomware. Appends the .coded extension, attacker\u2019s email is support.code@aol.com."
+2016-10-17,NEW SCREEN LOCKER SPOTTED,Only locks one\u2019s screen without encrypting anything. Demands 10 EUR PaySafeCard to unlock.
+2016-10-18,7EV3N RANSOMWARE DECRYPTOR RELEASED,Malwarebytes researcher nicknamed \u201chasherezade\u201d contrives a free 7ev3n Ransomware decryptor.
+2016-10-19,RANSOM TROJAN POSING AS A CLICK ME GAME,Obfuscates the encryption process with an amusing Click Me game.
+2016-10-20,JAPANLOCKER TARGETING WEBSITES,PHP-based ransomware encrypts data on web servers. Appears to have Indonesian origin.
+2016-10-20,MBRFILTER COUNTERS DISK-ENCRYPTING THREATS,MBRFilter tool by Cisco Talos blocks ransom Trojans that attempt to overwrite the Master Boot Record.
+2016-10-22,LOCK93 RANSOMWARE ASKS FOR RUSSIAN RUBLES,Low-quality sample. Appends the .lock93 extension to files and requests 1000 RUR. Decryptable.
+2016-10-23,ANGRY DUCK RANSOMWARE IS HUNGRY FOR BTC,Uses the .adk extension to brand affected files. Demands a huge ransom of 10 BTC.
+2016-10-24,N1N1N1 RANSOMWARE UPDATE,The variant uses a different filemarker (999999) and leaves the \u201cdecrypt explanations.html\u201d ransom note.
+2016-10-24,LOCKY DEVS USE SOME BAD LANGUAGE,New version appends files with the .shit extension and creates _WHAT_is.html/bmp recovery manuals.
+2016-10-24,CHANGES IN THE BART RANSOMWARE,Now adds the .perl extension. Ransom notes are called recover.bmp and recover.txt.
+2016-10-25,THE THOR VARIANT OF LOCKY,Concatenates the 
+2016-10-25,A LOCKY COPYCAT WITH HUNGARIAN ROOTS,"Dubbed \u201cHucky\u201d (Hungarian Locky), the sample mimicks Locky\u2019s wallpaper and ransom notes."
+2016-10-27,RANSOMWARE IMPOSING A SURVEY,An odd strain that asks victims to complete a sponsored survey before unlocking the computer.
+2016-10-27,CROOK TRIES TO SELL DECRYPT KEYS TO A RESEARCHER,Emsisoft\u2019s Fabian Wosar declined \u201crealfs0ciety\u201d cyber gang\u2019s offer to buy their decrypt keys on the cheap.
+2016-10-27,ANOTHER LAME SCREEN LOCKER,GData experts discover and defeat a screen locker that uses cuzimvirus@yahoo.com email for interaction.
+2016-10-27,ISSUES WITH THE CRYPTOWIRE PROOF-OF-CONCEPT,"One more educational ransomware, CryptoWire, gave rise to a real-world sample."
+2016-10-27,ONYX RANSOMWARE TARGETS GEORGIAN USERS,Ransom message is written in Georgian. Warning screen contains an image of No-Face anime character.
+2016-10-27,THE OFFBEAT IFN643 RANSOMWARE,Leaves the IFN643_Malware_Readme ransom note. Requests $1000 worth of Bitcoin.
+2016-10-27,THE BUGGY JACK.POT RANSOMWARE,No mechanism to reach the attackers. Demands 3 BTC but provides a Litecoin address instead of Bitcoin.
+2016-10-29,MASTERBUSTER RANSOMWARE,Based on EDA2 open-source project. Drops ransom note called CreatesReadThisFileImportant.txt.
+2016-10-29,SCREEN LOCKER CALLED RANSOMWARE 2.0 SPOTTED,Does not encode any data but locks the screen instead. Demands 1 BTC otherwise threatens to delete files.
+2016-10-29,NEW SAMPLE USING !LOCKED#2.0 FILEMARKER,"Discovered by Michael Gillespie, aka @demonslay335. Malwarebytes analysts create a decryptor."
+2016-10-30,ALCATRAZ LOCKER DISCOVERED,Appends the .alcatraz extension and leaves ransomed.html ransom note. Ransom size is 0.5 BTC.
+2016-11-01,CERBER NOW DISPLAYS VERSION NUMBER,Cerber Ransomware devs start indicating version number in v4.1.0 and onward.
+2016-11-03,SMASH RANSOMWARE ISN’T MUCH OF AN ISSUE,Displays a \u201cFile Kill Timer\u201d window with a funny image of Super Mushroom. Doesn\u2019t delete any files for real.
+2016-11-03,DUMMYLOCKER WITH HYBRID PROPERTIES,Encrypts data and locks a victim\u2019s screen. Files are appended with the .dCrypt extension.
+2016-11-03,ZSCREENLOCKER VIRUS SUGGESTS BANNING ISLAM,"Having encrypted one\u2019s files, the zScreenLocker ransomware displays a \u201cBan Islam\u201d image."
+2016-11-03,NEW ENCRYPTOJJS RANSOMWARE,Appends the .enc extension and creates \u201cHow to recover.enc.txt\u201d ransom note.
+2016-11-04,"PAYDOS RANSOMWARE, AN OLD SCHOOL STRAIN",Displays a ransom note within command prompt. Requests 0.33 BTC for the passcode to decrypt.
+2016-11-04,GREMIT RANSOMWARE EMERGING,New one. Concatenates the .rnsmwr extension to encoded files.
+2016-11-04,RSA PUBLISHES AN ARTICLE ON CERBER 4.1.x,"Titled \u201cThe Evolution of Cerber\u2026 v4.1.x\u201d, the article dissects new versions of the ransomware."
+2016-11-05,CLOCK.WIN32.RANSOMWARE SPOTTED,"Doesn\u2019t encrypt any data, simply displays a lock screen. Demands $20 through PayPal."
+2016-11-07,CERBER 4.1.4 APPEARS,Spreads via phishing emails with fake Word invoice attached. Version number indicated in ransom notes.
+2016-11-07,NOOBCRYPT RANSOMWARE UPDATE,"New version uses an expired build of C# obfuscator. Accepts random, including blank, unlock key input."
+2016-11-07,"CERBERTEAR, A CERBER COPYCAT",A variant of Hidden Tear proof-of-concept pretending to be the Cerber ransomware.
+2016-11-07,JIGSAW RANSOMWARE EDITION WITH FRENCH ROOTS,Decryptable sample that affixes the .encrypted extension to files and leaves a ransom note in French.
+2016-11-08,FSOCIETY RANSOMWARE APPENDING .DLL EXTENSION,Based on RemindMe ransomware. Uses .dll extension and drops DECRYPT_YOUR_FILES.html ransom note.
+2016-11-08,RANSOMWARE DISGUISED AS PAYSAFECARD GENERATOR,Uses a fake PaySafeCard generator window to obfuscate file encryption. Prepends \u201c.cry_\u201d to extensions.
+2016-11-08,AIRACROP RANSOMWARE BY TEAMXRAT RING,Appends the ._AiraCropEncrypted extension to files. Distributed by the TeamXRat cybercrime gang.
+2016-11-08,IRANSOM INFECTION KIT SOLD ONLINE,The sample can be purchased on underground resources. Adds the .Locked extension to data entries.
+2016-11-09,THE HEIMDALL PHP RANSOMWARE,A proof-of-concept written in PHP that targets web servers. Created by Brazilian researcher.
+2016-11-09,TELECRYPT RANSOMWARE DISCOVERED,The sample leverages the Telegram communication protocol to interact with its C2 infrastructure.
+2016-11-09,FAIRYTALE-ISH SAMPLE TARGETING RUSSIAN USERS,A new specimen using a popular Russian \u201cKolobok\u201d fairytale theme for the desktop background.
+2016-11-10,FAKE OPM BANK NOTIFICATIONS SPREADING LOCKY,Spam emails disguised as alerts from U.S. Office of Personnel Management deliver Locky payloads.
+2016-11-14,CRYSIS RANSOMWARE DEVS RELEASE DECRYPT KEYS,CrySiS ransomware authors set up a Pastebin page with Master Decryption Keys for their infection.
+2016-11-14,KARMA RANSOMWARE MIMICKING PC OPTIMIZATION,New ransomware disguised as \u201cWindows-TuneUp\u201d app. Propagates over pay-per-install network.
+2016-11-14,PADCRYPT 3.0 AFFILIATE PLATFORM LAUNCHED,The updated PadCrypt version 3.0 can now be distributed on a Ransomware-as-a-Service basis.
+2016-11-14,THE ANGELA MERKEL RANSOMWARE,Displays a photo of Angela Merkel in the ransom notes. Asks for a BTC equivalent of 1200 EUR.
+2016-11-15,RANSOC SCREEN LOCKER’S PENALTY NOTICE,Locks the desktop rather than encrypt files. Blackmails users with sensitive content found on their PCs.
+2016-11-15,CRYPTOLUCK SPREADING VIA AN EXPLOIT KIT,CryptoLuck mimics the warning screen of 
+2016-11-15,RANSOMWARE TARGETING JPG FILES ONLY,"Dubbed the \u201cDemo\u201d ransomware, this one only encodes JPGs and appends the .encrypted extension."
+2016-11-16,CROOK SEEKING RESEARCHER’S ASSISTANCE,"One of Apocalypse ransomware devs contacts Emsisoft\u2019s Fabian Wosar, asking for help with a code bug."
+2016-11-16,PCLOCK IN ROTATION AGAIN,A CryptoLocker copycat. Returns after almost 2 years of inactivity. Demands 1 Bitcoin for decryption.
+2016-11-16,PRINCESS LOCKER DECRYPTOR IN DEVELOPMENT,Researcher nicknamed \u2018hasherezade\u2019 gets close to cracking the Princess Locker ransomware.
+2016-11-17,GLOBE RANSOMWARE DECRYPTOR UPDATE,"Fabian Wosar releases a decryptor for Globe2 (.zendr4, .raid10, .blt, .globe, and .encrypted extensions)."
+2016-11-17,LOCKY ARRIVES WITH PHONY FLASH PLAYER UPDATE,A variant of the Locky ransomware found to be propagating via rogue Flash Player update sites.
+2016-11-17,.NET-BASED CRYPTON RANSOMWARE,Uses a mix of RSA and AES algorithms to lock files and demands 0.2-2 Bitcoins for decryption.
+2016-11-17,NEW SHELLLOCKER RANSOM TROJAN,One more sample coded with .NET programming language. Adds the .L0cked file extension.
+2016-11-17,THE DHARMA REINCARNATION OF CRYSIS,Dharma ransomware is a new variant of the defunct CrySiS. Uses the .[email_address].dharma extension.
+2016-11-18,THE HELPFUL “ID RANSOMWARE” PROJECT,The ID Ransomware service by MalwareHunterTeam now includes 238 ransomware strains.
+2016-11-18,CHIP RANSOMWARE SPREADING VIA RIG-E EK,New sample called the CHIP ransomware relies on the RIG-E exploit kit for proliferation.
+2016-11-18,NEW DEADLY RANSOMWARE VARIANT APPEARS,Corrupts victims\u2019 data and provides no way to restore them due to a buggy key saving routine.
+2016-11-19,TRICKY OBFUSCATION BY PADCRYPT 3.0,Uses a rogue Visa Credit Card generator to camouflage payload execution.
+2016-11-21,LOCKY SPREADING VIA FACEBOOK SPAM,Malicious .svg images sent via Facebook\u2019s instant messaging system install Nemucod Trojan and Locky.
+2016-11-21,CRYPT888 SETS A DEADLINE FOR PAYMENT,New variant claims to delete the AES-256 key unless a ransom is sent within 36 hours. Decrypted by Avast.
+2016-11-21,AESIR VERSION OF THE LOCKY RANSOMWARE,Appends the .aesir extension and leaves _[random_number]-INSTRUCTION.html/bmp ransom notes.
+2016-11-21,VINDOWS LOCKER IS NOT A MISSPELLING,New ransomware telling victims to call a \u201cMicrosoft Support technician\u201d. Appends the .vindows extension.
+2016-11-22,PRINCESS LOCKER DECRYPTED,Security analyst @hasherezade defeats Princess Locker\u2019s crypto and releases a decryption tool.
+2016-11-23,DECRYPTOR AVAILABLE FOR TELECRYPT,"Malwarebytes releases a free decryptor for Telecrypt ransomware, which uses Telegram\u2019s API."
+2016-11-23,MHT FILES DELIVERING LOCKY,Cisco Talos spot a Locky spam wave delivering booby-trapped MHT email attachments.
+2016-11-23,THANKSGIVING RANSOMWARE,New ransomware appears that displays an image of a turkey on its warning screen.
+2016-11-23,OZOZALOCKER IS NO BIG DEAL,Uses the .Locked extension and Santa_helper@protonmail.com email for communication. Decryptor available.
+2016-11-24,LOCKY’S NEW ZZZZZ VARIANT,Another edition of the Locky ransomware appending the .zzzzz extension to encrypted files.
+2016-11-24,CERBER RANSOMWARE 5.0 EMERGES,Proliferates via RIG-V exploit kit and spam. Still appends a random 4-character extension.
+2016-11-24,ONE MORE HIDDEN TEAR SPINOFF IN ROTATION,Based off of open-source Hidden Tear proof-of-concept. Uses a Jigsaw movie-themed background.
+2016-11-24,LOMIX RANSOMWARE USING CRYPTOWIRE’S CODE,A byproduct of educational ransomware project called CryptoWire. Asks for a Bitcoin equivalent of $500.
+2016-11-24,COCKBLOCKER AKA RANSOMWAREDISPLAY,Appears to be an in-development ransomware sample. Appends the .hannah extension to locked files.
+2016-11-25,CERBER’S RANSOM NOTE TWEAK,New variant of the Cerber ransomware creates _README_.hta ransom notes.
+2016-11-26,NEW SCREEN LOCKER BEING DISTRIBUTED,Claims to have found viruses and displays \u201cYour computer is locked!\u201d warning. Unlock password released.
+2016-11-26,CRYPTER RANSOMWARE TARGETING BRAZILIAN USERS,Attack are isolated to Brazil. Renames files rather than encrypt them. Demands 1 Bitcoin for recovery.
+2016-11-26,A PRIMITIVE SCREEN LOCKER DISCOVERED,Displays \u201cYour Windows Has Been Banned\u201d message. The unlock password is 123456.
+2016-11-28,THE UNUSUAL KANGAROO RANSOMWARE,An Apocalypse ransomware spinoff. Encrypts files and displays a warning screen before Windows boots up.
+2016-11-28,VINDOWS LOCKER DECRYPTED,"Security researchers create a decryptor for Vindows Locker, which uses tech support scam tactic."
+2016-11-28,SAN FRANCISCO MUNI HIT BY RANSOMWARE,HDDCryptor ransomware paralyzes San Francisco Municipal Transit Agency\u2019s IT infrastructure.
+2016-11-28,NEW RANSOMWARE BASED ON POWERSHELL,This PowerShell-based sample uses the ps2exe script and overwrites the original files.
+2016-11-28,HTCRYPTOR HARNESSING HIDDEN TEAR CODE,HTCryptor\u2019s code is based on open-source Hidden Tear ransomware. Tries to disable Windows firewall.
+2016-11-29,SFMTA DENIES DATA THEFT,San Francisco Muni\u2019s officials deny allegations about corporate data being stolen by ransomware devs.
+2016-11-29,NMOREIRA RANSOMWARE CRACKED,Emsisoft analyst Fabian Wosar creates a free decryptor for NMoreira/XPan ransomware.
+2016-11-29,RANSOMWARE ATTACKS A CANADIAN UNIVERSITY,"Unidentified rasomware sample compromises Carleton University in Canada, demanding 39 BTC."
+2016-11-30,JIGSAW RANSOMWARE’S NEW CAMOUFLAGE,A new Jigsaw variant uses a phony Electrum Coin Adder app\u2019s GUI to mask the ransomware installation.
+2016-11-30,ZETA RANSOMWARE STAINING FILES WITH NEW EXTENSION,New edition of the Zeta ransomware uses .rmd extension and # HELP_DECRYPT_YOUR_FILES #.txt ransom note.
+2016-11-30,TORRENTLOCKER UPDATE,"The latest version of TorrentLocker, aka Crypt0L0cker, appends files with 6 random characters."
+2016-11-30,PRINCESS LOCKER CHANGES TAKING EFFECT,New iteration uses random extensions of 4-6 chars and !_HOW_TO_RESTORE_[random].txt ransom note.
+2016-12-01,MATRIX RANSOMWARE USING GNUPG,This sample locks data using the free GnuPG implementation of OpenPGP cryptographic standard.
+2016-12-01,MORE FREE DECRYPTORS BY AVAST,"Avast releases 4 free decrypt tools for CrySiS, Globe, NoobCrypt and Alcatraz Locker ransomware strains."
+2016-12-02,ALPHA LOCKER FOR SALE ON DARKNET RESOURCES,Wannabe crooks can purchase the new C# based Alpha Locker ransomware on underground forums for $65.
+2016-12-02,HIDDEN MESSAGE IN NMOREIRA/XPAN CODE,Code of the updated ransomware contains a message to Fabian Wosar who cracked the previous version.
+2016-12-02,THE IN-DEV PHOENIX RANSOMWARE,Based on the Hidden Tear POC. Appends the .R.i.P extension to files and drops Important!.txt ransom note.
+2016-12-03,PADCRYPT 3.1.2 GOES LIVE,Version 3.1.2 of the PadCrypt ransomware is out. This build doesn\u2019t feature any noteworthy changes.
+2016-12-04,RANSOMWARE DEV ARRESTED IN RUSSIA,The man nicknamed \u201cPornopoker\u201d is accused of creating and distributing Ransomlock.P police ransomware.
+2016-12-04,NEWEST NEMUCOD VARIANT CRACKED,Emsisoft\u2019s Fabian Wosar creates a decrypt tool for the latest variant of the Nemucod ransomware.
+2016-12-04,NEW ITERATION OF THE APOCALYPSE RANSOMWARE,The updated Apocalypse Trojan leaves *md5*.txt ransom note and a new extension with country code in it.
+2016-12-04,ANOTHER GLOBE RANSOMWARE VERSION IS OUT,New sample. Adds the .8lock8 extension and creates READ_IT.txt ransom notes. Interaction over email.
+2016-12-05,SHADE/TROLDESH RANSOMWARE DISTRIBUTION TWEAK,"New Shade, aka Troldesh, ransomware variant (.no_more_ransom extension) uses the Kelihos botnet to spread."
+2016-12-05,NEW SCREEN LOCKER THAT DOESN’T FUNCTION RIGHT,"It\u2019s supposed to lock one\u2019s screen and encode files (.encrypted extension), but the crypto part doesn\u2019t work."
+2016-12-05,LOCKY STARTS USING THE .OSIRIS EXTENSION,New Locky ransomware variant appends the 
+2016-12-06,"GOLDENEYE RANSOMWARE, A PETYA HEIR","Affects master boot record (MBR) and encrypts master file table (MFT), thus completely blocking PCs."
+2016-12-08,NASTY MARKETING OF POPCORN TIME RANSOMWARE,Victims are suggested to infect two more users and thereby get their decryption key free of charge.
+2016-12-08,JIGSAW VARIANT CALLED THE “HACKED” RANSOMWARE,New Jigsaw ransomware build featuring \u201cHACKED\u201d logo. The ransom size starts at 0.25 BTC.
+2016-12-08,NEW SAMSAM RANSOMWARE SPOTTED,Appends the .VforVendetta file extension and leaves 000-PLEASE-READ-WE-HELP.html ransom note.
+2016-12-08,EDA2/HIDDEN TEAR VARIANT FOR SALE,"A cybercrime ring made tweaks to open-source EDA2/Hidden Tear code, now selling it on the dark web."
+2016-12-09,CRYPTOWIRE POC GIVES BIRTH TO REAL THREATS,Crooks use new proof-of-concept ransomware called CryptoWire to create Lomix and Ultralocker strains.
+2016-12-09,"ULTRALOCKER, A CRYPTOWIRE SPINOFF",Arrives at PCs with malicious Microsoft Wod documents. Demands a BTC equivalent of $1000 for decryption.
+2016-12-09,CYBER SPLITTER 2.0 DISCOVERED,Cyber SpLiTTer Vbs ransomware version 2.0 is out. Based off of the Hidden Tear POC. Demands 0.5 BTC.
+2016-12-09,THE LOCKED-IN RANSOMWARE APPEARS,Ransom notes are called RESTORE_CORUPTED_FILES.html. The payment deadline is set to 15 days.
+2016-12-10,CHIP RANSOMWARE UPDATE,Now uses the .dale extension and leaves DALE_FILES.txt ransom note.
+2016-12-10,DEADLY_60 SCREEN LOCKER SPOTTED,Uses an animated Matrix-style lock screen. Demands a Bitcoin equivalent of $400.
+2016-12-10,PADCRYPT UPDATED TO VERSION 3.1.5,"Other than the new version number, no significant differences from the previous edition."
+2016-12-10,M4N1F3STO VIRUS WITH LOW IMPACT,Locks the screen and asks for 0.3 BTC. The unlock code is \u201csuckmydicknigga\u201d.
+2016-12-12,SAMAS RANSOMWARE GROUP EARNINGS REVEALED,"According to Palo Alto Networks, the Samas ring\u2019s profits in 2016 amounted to more than $450,000."
+2016-12-12,THE PORTUGUESE PAYDAY RANSOMWARE,A Hidden Tear spinoff. Uses the .sexy extension and drops !!!!!ATEN\xc7\xc3O!!!!!.html ransom notes in Portuguese.
+2016-12-12,“YOU HAVE BEEN HACKED!!!” RANSOMWARE,Appends the .Locked extension to encrypted files and demands 0.25 BTC. Steals passwords along the way.
+2016-12-12,NEW KRAKEN RANSOMWARE,"Renames files to base64 strings, adds the .kraken extension and creates _HELP_YOUR_FILES.html ransom notes."
+2016-12-13,“YOUR WINDOWS HAS BEEN BANNED” SCREEN LOCKER,Claims to have banned a victim\u2019s PC for terms of use violations. The unlock code is \u201cnvidiagpuareshit\u201d.
+2016-12-13,CRYPTOMIX RANSOMWARE UPDATE,Uses the .lesli extension. Ransom notes are called INSTRUCTION RESTORE FILE.txt.
+2016-12-13,LOCKED-IN RANSOMWARE DECRYPTED,Michael Gillespie (@demonslay335) releases a free decryptor for the Locked-In ransomware.
+2016-12-14,NEW CERBER DISTRIBUTION TACTIC,Cerber ransomware payload arrives with rogue credit card reports that dupe users into opening a Word attachment.
+2016-12-14,ANOTHER XORIST VARIANT DISCOVERED,New edition of the Xorist ransomware appends the .antihacker2017 string to files. Decryptable for free.
+2016-12-14,GLOBE RANSOMWARE UPDATE,The only tweak is the new unlockvt@india.com extension for mutilated files. Demands 1.5 Bitcoin.
+2016-12-14,CIA SPECIAL AGENT 767 TROJAN,Clone of the M4N1F3STO screen locker using a new background. The unlock code is the same (see above).
+2016-12-14,NEW FENIXLOCKER VARIANT RELEASED,Drops \u201cHelp to decrypt.txt\u201d ransom manual and provides thedon78@mail.com email address for payment directions.\n
+2016-12-14,KOOLOVA RANSOMWARE TARGETS ITALIAN USERS,This sample is currently in development. Only scrambles data in the Test path on a targeted computer\u2019s desktop.
+2016-12-15,“NO MORE RANSOM” PROJECT ENGAGES NEW PARTNERS,"Bitdefender, Emsisoft, Trend Micro and Check Point are now on the team. 32 new decryptors added, too."
+2016-12-15,AD-SUPPORTED BANDACHOR TROJAN DISTRIBUTION,New BandaChor ransomware spreads via malvertising on X-rated sites and an e-commerce web page.
+2016-12-15,CHRIS’ EXPERIMENTS OVER HIDDEN TEAR,Researchers spotted an instance of tweaking the Hidden Tear code by a wannabe crook named Chris.
+2016-12-15,THE BUGGY CRYPTORIUM RANSOMWARE,New sample using the .ENC extension. Simply renames files rather than encode them.
+2016-12-16,A GLOBE RANSOMWARE REPLICA,Analysts discovered a Globe clone that appends the .crypt extension and leaves HOW_OPEN_FILES.hta note.
+2016-12-16,CERBER RANSOMWARE’S IP RANGE CHANGED,"According to MalwareHunterTeam, Cerber starts using several new IP ranges for UDP statistics."
+2016-12-16,GLOBE RANSOMWARE TWEAK,The updated infection switches to using the rescuers@india.com email address for interaction with victims.
+2016-12-18,DHARMA RANSOMWARE UPDATE,New Dharma edition instructs victims to reach the attacker via amagnus@india.com email address.
+2016-12-18,CRYPTOBLOCK RANSOMWARE IN DEVELOPMENT,Researchers discover CryptoBlock strain whose ransom notes resemble Cerber\u2019s. No actual encryption yet.
+2016-12-19,ANDROID BANKING TROJANS EVOLVE,New variants of Android banking malware turn out to accommodate ransomware properties.
+2016-12-19,RANSOMFREE TOOL COMBATS RANSOMWARE,The RansomFree app by Cybereason detects and blocks over 40 widespread ransom Trojans.
+2016-12-19,APOCALYPSE RANSOMWARE TWEAK,Creates *MD5*.txt ransom note and uses cryptcorp@inbox.ru for interacting with victims.
+2016-12-19,M4N1F3STO SCREEN LOCKER STARTS USING CRYPTO,New edition of M4N1F3STO screen locker encrypts data along the way. Decryption routine is buggy.
+2016-12-19,MNS CRYPTOLOCKER SURFACES,Leaves RESTORE_YOUR_FILES.txt ransom manual and uses alex.vas@dr.com email address for communication.
+2016-12-20,KASPERSKY’S RANNOHDECRYPTOR TOOL UPDATED,"RannohDecryptor now handles CryptXXX ransomware variants using the .crypt, .crypz and .cryp1 extensions."
+2016-12-20,NEW VARIANT OF SAMAS RANSOMWARE GOES LIVE,Appends .theworldisyours extension and creates CHECK-IT-HELP-FILES.html ransom note.
+2016-12-20,NEW GO-BASED RANSOMWARE SAMPLE,"Written in Go, the strain uses .braincrypt extension and !!! HOW TO DECRYPT FILES !!!.txt ransom manual."
+2016-12-20,ENKRIPSIPC RANSOMWARE SPOTTED IN THE WILD,"Aka IDRANSOMv3, targets Indonesian users. Decrypted by Michael Gillespie (@demonslay335)."
+2016-12-21,MANIFESTUS RANSOMWARE APPEARS,Mimics a Windows update while encrypting data. Demands 0.2 BTC for decryption.
+2016-12-21,PROPOSALCRYPT IS UNDERWAY,New sample. Appends the .crypted extension to files and asks for 1 BTC. Decrypted by Michael Gillespie.
+2016-12-21,PADLOCK SCREENLOCKER IS EASY TO GET AROUND,Researchers found a way to defeat the PadLock screen locker. The unlock code is ajVr/G\\RJzoR
+2016-12-21,FREE-FREEDOM RANSOMWARE MADE BY A TEENAGER,The alert by Free-freedom ransomware says it was coded by a 13-year-old boy. The unlock code is \u2018adam\u2019.
+2016-12-22,BLEEPINGCOMPUTER RELEASES A USEFUL TUTORIAL,Researchers at BleepingComputer publish a comprehensive guide on ransomware protection.
+2016-12-22,CERBER RANSOMWARE CHANGES ITS TACTIC,New Cerber edition doesn\u2019t delete Volume Shadow Copies and primarily targets Microsoft Office documents.
+2016-12-22,WINNIX CRYPTOR TEAM CAMPAIGN DISSECTED,The Winnix Cryptor Team ransomware is executed on servers via a BAT file and uses GPG crypto.
+2016-12-22,CERBER OPTS FOR NEW IP RANGES FOR STATS,"Cerber starts using 115.22.15.0/27, 114.23.16.0/27, and 91.239.24.0/23 IP ranges for UDP statistics."
+2016-12-22,THE OBNOXIOUS GUSTER RANSOMWARE,New sample. Alerts victims with an irritating warning screen and audio. Appends the .locked extension.
+2016-12-22,FREE-FREEDOM MORPHS INTO ROGA RANSOMWARE,Coded by the already familiar Adam kid. Appends the .madebyadam extension. Decrypt password is \u2018adamdude9\u2019.
+2016-12-23,KOOLOVA RANSOMWARE WANTS TO TEACH YOU A LESSON,New in-dev version of Koolova decrypts files for free if a victim reads a few articles about ransomware.
+2016-12-23,ONE MORE CRYPTOLOCKER COPYCAT,Another sample calling itself CryptoLocker concatenates the .cryptolocker string to encrypted entries.
+2016-12-23,CERBER DEVS ARE IN HOLIDAY MOOD,The bad guys are getting ready to celebrate. Several C2 domains used by Cerber have \u2018christmaas\u2019 in their URLs.
+2016-12-23,VENUS LOCKER UPDATE,New variant of the Venus Locker ransomware demands 1 BTC and sets a deadline of 72 hours.
+2016-12-23,ALPHABET RANSOMWARE IS ON ITS WAY,"The sample is still a debug version, hence not fully functional. Provides the decrypt key for free at this point."
+2016-12-24,GLOBEIMPOSTER RANSOMWARE DEFEATED,A Globe ransomware copycat using the .crypt extension and HOW_OPEN_FILES.hta ransom notes. Decrypted by Emsisoft.
+2016-12-24,DERIALOCK SCREEN LOCKER DISCOVERED,Demands $30. Victims must contact \u201cArizonacode\u201d Skype user for payment steps. The code contains an \u201cunlock all\u201d command.
+2016-12-24,CERBER RANSOMWARE TWEAK,"The update has brought about new IP ranges for statistical purposes, as well as _[random]_README.hta/jpg ransom notes."
+2016-12-25,BADENCRIPT RANSOMWARE APPEARS,Appends the .bript extension to mutilated files and leaves a recovery walkthrough called More.html.
+2016-12-25,NEW JIGSAW RANSOMWARE VERSION RELEASED,The new .hush extension being added to files is the only change made to Jigsaw in the course of this update.
+2016-12-25,NMOREIRA RANSOMWARE DECRYPTOR UPDATED,"Emsisoft\u2019s Fabian Wosar makes changes to his NMoreira decryptor, which can now handle the .maktub extension variant."
+2016-12-27,ODCODC RANSOMWARE RE-EMERGES,Creates HOW_TO_RESTORE_FILES.txt ransom note and uses the C-email-[attacker_email_address]-[filename].odcodc extension.
+2016-12-28,LG SMART TV TARGETED BY A SCREEN LOCKER,"Android ransomware attacks LG Smart TVs, generating an FBI-themed lock screen and asking for $500 to unlock."
+2016-12-28,ANOTHER COMMONPLACE SAMPLE GOES LIVE,A new strain spotted that appends the -opentoyou@india.com extension to files and drops !!!.txt ransom note.
+2016-12-29,KILLDISK MALWARE GETS NASTIER,The file-deleting virus called KillDisk can now encode data. The ransom amounts to hundreds of Bitcoins.
+2016-12-29,ROGUE ANTIVIRUS INSTALLER SPREADS RANSOMWARE,A sample of the GoldenEye ransomware was found to proliferate via a bogus ESET AV installer.
+2016-12-29,DHARMA RANSOMWARE GOES WITH NEW RANSOM NOTES,The mkgoro@india.com version of the Dharma ransomware uses HTA format for its ransom notes (Info.hta).
+2016-12-30,SAMAS INFECTION UNDERGOES A CHANGE,New Samas ransomware iteration uses the .whereisyourfiles extension and WHERE-YOUR-FILES.html help file.
+2016-12-30,PROOF-OF-CONCEPT RANSOMWARE CRITICIZED,An article posted on MalwareTech blog explains why open source ransomware is a bad idea.
