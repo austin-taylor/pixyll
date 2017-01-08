@@ -33,7 +33,7 @@ author_github: austin-taylor
 </style>
 
 <h2>Overview</h2>
-[Privacy PC](http://privacy-pc.com/articles/ransomware-chronicle.html) released a comprehensive report on ransomware-related events covering a time frame of May – December 2016. The report is beautifully done, but as an analyst I wanted to break down each category to get a better understanding of each group. Therefore, I wrote a quick script to scrape the data from the site and use it for a timeline visualization.
+[Privacy PC](http://privacy-pc.com/articles/ransomware-chronicle.html) released a comprehensive report on ransomware-related events covering a time frame of May through December 2016. The report is beautifully done. As an analyst I wanted to break down each category to get a better understanding of each group. Therefore, I wrote a quick script to scrape the data from the site and use it for a timeline visualization.
 
 Below is a time graph which you can use to explore the ransomware events. The number next to each category is the event count. If you see an event that seems interesting, you can hover to get more information. Additionally, the chart is interactive and allows you to zoom for more precision. Enjoy!
 
