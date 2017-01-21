@@ -4,7 +4,7 @@ email:       email@austintaylor.io
 author:      Austin Taylor
 description: "Blog for hacking, continuous monitoring, data science and other lessons learned in the Cybersecurity realm."
 baseurl:     ""
-url:         "http://austin-taylor.github.io"
+url:         "http://www.austintaylor.io"
 date_format: "%b %-d, %Y"
 
 # Google services

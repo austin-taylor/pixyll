@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Ransomware 2016 May-December Chronological Timeline
-date:       2017-01-07 00:00:00
+date:       2017-01-07 08:00:00
 time:   5
 summary:   Statistics and a visualization to illustrate the various ransomware events for the last half of 2016.
 
@@ -58,7 +58,6 @@ Below is a time graph which you can use to explore the ransomware events. The nu
 </div>
 
 {% include ransomware_timeline.html %}
-
 
 Events per month
 ---
