@@ -73,6 +73,16 @@ Setup
 1. Create a bootable USB Thumbdrive with the SELKS ISO. If needed, assistance available [here](http://www.howtogeek.com/191054/how-to-create-bootable-usb-drives-and-sd-cards-for-every-operating-system/)
 2. Insert thumbdrive into server and boot. **May need to set server to boot from USB in BIOS.**
    * If all goes well, you should see SELKS boot menu. Pressing enter will lead you to the graphical interface.
+
+       **Users booting from a thumbdrive may need to follow these additional steps.** _Thank you Josh S. for submitting the step-by-step_
+
+       1. At language prompt, Press ALT-f2
+       2. Type _mkdir /cdrom_
+       3. Type _mount /dev/sdb1 /cdrom_
+            * Your parition name may not be sdb1. Use fdisk -l to list available partitions
+       4. Press Alt-F1 to return to the installation process and continue.
+
+
    * Default username and password is selks-user/selks-user and root is ``StamusNetworks``
      * More information available at [SciriusUsage](https://github.com/StamusNetworks/scirius#usage)
 3. Login to server and assign a static IP address to eth1. For example, if your network uses the 192.168.1.0/24 range you can assign 192.168.1.250 to interface eth1 on your server.
