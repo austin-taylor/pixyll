@@ -74,7 +74,7 @@ Setup
 2. Insert thumbdrive into server and boot. **May need to set server to boot from USB in BIOS.**
    * If all goes well, you should see SELKS boot menu. Pressing enter will lead you to the graphical interface.
 
-       **Users booting from a thumbdrive may need to follow these additional steps.**  _Thank you Jason S._
+       **Users booting from a thumbdrive may need to follow these additional steps.**
 
        1. At language prompt, Press ALT-f2
        2. Type _mkdir /cdrom_
@@ -114,6 +114,8 @@ Recommendations on the page include:
 If you don't tune Elasticsearch or Suricata, the stack will eventually fail. Your server **MUST** be configured or the availability will not be reliable.
 
 Hope you found this guide helpful and if you have any questions, please post them in the comments section below.
+
+_Special Thanks to Jason S. for providing the step-by-step USB mount steps_
 
 
 
