@@ -74,7 +74,7 @@ Setup
 2. Insert thumbdrive into server and boot. **May need to set server to boot from USB in BIOS.**
    * If all goes well, you should see SELKS boot menu. Pressing enter will lead you to the graphical interface.
 
-       **Users booting from a thumbdrive may need to follow these additional steps.**  _Thank you Josh S._
+       **Users booting from a thumbdrive may need to follow these additional steps.**  _Thank you Jason S._
 
        1. At language prompt, Press ALT-f2
        2. Type _mkdir /cdrom_
