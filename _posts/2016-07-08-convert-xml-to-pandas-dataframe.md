@@ -16,6 +16,9 @@ author: austin_taylor
 author_github: austin-taylor
 ---
 
+_Updated June 10th, 2017: Special thanks to all the contributors in the comments section!_
+
+
 TLDR;
 -----
 
@@ -24,22 +27,21 @@ import xml.etree.ElementTree as ET
 from lxml import etree
 import pandas as pd
 
-xml_data = '/path/user_agents.xml'
+xml_data = open('/path/user_agents.xml').read()
 
 def xml2df(xml_data):
-    tree = ET.parse(xml_data)
-    root = tree.getroot()
+    root = ET.XML(xml_data) # element tree
     all_records = []
-    headers = []
     for i, child in enumerate(root):
-        record = []
+        record = {}
         for subchild in child:
-            record.append(subchild.text)
-            if subchild.tag not in headers:
-                headers.append(subchild.tag)
-        all_records.append(record)
-    return pd.DataFrame(all_records, columns=headers)
+            record[subchild.tag] = subchild.text
+            all_records.append(record)
+    return pd.DataFrame(all_records)
+
 {% endhighlight %}
+
+
 
 Our Goal
 ---
@@ -72,21 +74,17 @@ from lxml import etree
 import pandas as pd
 # END IMPORTS
 
-xml_data = '/path/user_agents.xml' #Use the path where the xml data is located.
+xml_data = open('/path/user_agents.xml').read() #Loading the raw XML data
 
 def xml2df(xml_data):
-    tree = ET.parse(xml_data) #Initiates the tree Ex: <user-agents>
-    root = tree.getroot() #Starts the root of the tree Ex: <user-agent>
+    root = ET.XML(xml_data) # element tree
     all_records = [] #This is our record list which we will convert into a dataframe
-    headers = [] #Subchildren tags will be parsed and appended here
     for i, child in enumerate(root): #Begin looping through our root tree
-        record = [] #Place holder for our record
+        record = {} #Place holder for our record
         for subchild in child: #iterate through the subchildren to user-agent, Ex: ID, String, Description.
-            record.append(subchild.text) #Extract the text and append it to our record list
-            if subchild.tag not in headers: #Check the header list to see if the subchild tag <ID>, <String>... is in our headers field. If not append it. This will be used for our headers.
-                headers.append(subchild.tag)
-        all_records.append(record) #Append this record to all_records.
-    return pd.DataFrame(all_records, columns=headers) #Finally, return our Pandas dataframe with headers in the column.
+            record[subchild.tag] = subchild.text #Extract the text create a new dictionary key, value pair
+            all_records.append(record) #Append this record to all_records.
+    return pd.DataFrame(all_records) #return records as DataFrame
 {% endhighlight %}
 
 If all went well you should now have a DataFrame as seen below:
