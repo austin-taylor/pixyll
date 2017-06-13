@@ -24,7 +24,6 @@ TLDR;
 
 {% highlight python %}
 import xml.etree.ElementTree as ET
-from lxml import etree
 import pandas as pd
 
 xml_data = open('/path/user_agents.xml').read()
@@ -70,7 +69,6 @@ It's fairly straight forward, so I'll comment each line to explain.
 {% highlight python %}
 # BEGIN IMPORTS
 import xml.etree.ElementTree as ET
-from lxml import etree
 import pandas as pd
 # END IMPORTS
 

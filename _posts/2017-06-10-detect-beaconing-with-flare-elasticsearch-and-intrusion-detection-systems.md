@@ -1,11 +1,11 @@
 ---
 layout:     post
-title:      Continuous Monitoring - Build a World-Class Monitoring System for Enterprise, Small Office or Home
-date:       2016-12-17 00:00:00
+title:      Detect Beaconing with Flare, ElasticCloud, and Intrusion Detection Systems
+date:       2017-06-10 00:00:00
 time:   5
-summary:    This paper outlines guidance for network visibility, threat intelligence implementation and methods to reduce analyst alert fatigue.
+summary:    Detect Periodic Behavior (Beaconing) in an environment already running an IDS and ElasticCloud
 
-categories: suricata elasticsearch logstash continuous monitoring intrusion detection system
+categories: suricata elasticsearch logstash flare intrusion detection system beaconing command control
 products:
  - top-level: Home System Setup
    arbitrary: Hardware
@@ -101,21 +101,6 @@ Setup
 
 Tuning
 ---
-
-Lastly, you'll want to follow the tuning considerations on the [SELKS wiki page](https://github.com/StamusNetworks/SELKS/wiki).
-
-Recommendations on the page include:
-
-    1. Initial Setup
-    2. Tuning and Maintenance
-    3. Data and Logs
-    4. Troubleshooting and Getting Help
-
-If you don't tune Elasticsearch or Suricata, the stack will eventually fail. Your server **MUST** be configured or the availability will not be reliable.
-
-Hope you found this guide helpful and if you have any questions, please post them in the comments section below.
-
-_Special Thanks to Jason S. for providing the step-by-step USB mount steps_
 
 
 
