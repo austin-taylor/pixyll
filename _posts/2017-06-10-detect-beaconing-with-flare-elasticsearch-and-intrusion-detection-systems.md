@@ -56,7 +56,7 @@ Build a Tunnel
 
 Depending on how you have elasticsearch configured, you may need to build an SSH tunnel to allow your computer to communicate with your elasticsearch node.
 
-For example, if your computers IP address is 192.168.1.150 and your elasticsearch node is at 192.168.1.2, you could open port 9200 on your local computer by running:
+For example, if your computer's IP address is 192.168.1.150 and your elasticsearch node is at 192.168.1.2, you could open port 9200 on your local computer by running:
 
 {% highlight awk %}
 ssh -NfL 9200:localhost:9200 selks-user@192.168.1.2
