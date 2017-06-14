@@ -241,7 +241,7 @@ EveBox does a great job to help analyst characterize host communication.
 Bringing It All Together
 ------------------------
 
-Using Flare, you identified periodic communication in your network. After narrowing your results, you investigated the interaction and determined an end point using Mac OS X was attempting communication over HTTP to huntoperator.com every 60 seconds and over 24 hour period sent 1.23MB and received 12.70MB from a C2 Server located in Scottsdale, Arizona.
+Using Flare, you identified periodic communication in your network. After narrowing your results, you investigated the interaction and determined an end point using Mac OS X was attempting communication over HTTP to huntoperator.com every 60 seconds and over a 24 hour period, sent 1.23MB and received 12.70MB from a C2 Server located in Scottsdale, Arizona.
 
 <hr>
 
