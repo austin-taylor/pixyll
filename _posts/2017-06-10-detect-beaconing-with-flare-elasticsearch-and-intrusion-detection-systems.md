@@ -20,18 +20,20 @@ After some variants of malware infect a computer, it can attempt to check in wit
 
 <img style="float: left;height:500px;" src="/images/killchain_lockheed_martin.png">
 
-Identifying network beaconing can be critical to preventing an adversary from taking action on objective. In the Lockheed Martin Killchain, Beaconing would be in the step prior to an Advanced Persistent Threat (APT) gaining access.
+Identifying network beaconing can be critical to preventing an adversary from taking action on objective. In the Lockheed Martin Killchain, Beaconing would occur prior to an adversary or Advanced Persistent Threat (APT) gaining access.
 
 However, it can be difficult to detect this activity. Beaconing can occur at any time and the frequency can vary. Additionally, network communication does not have perfect intervals or the malware may try to add "jitter" to prevent showing up for someone looking at hard intervals (Example: Every 30 seconds).
 
 There are legitimate uses for periodic communication such as time synchronization and software updates.
 
-<a href="https://github.com/austin-taylor/flare">Flare</a> is a network analytic framework intended to make identifying malicious behavior, such as beaconing in networks, as simple as possible. This post will use Flare to identify beaconing inside of a network.
+<a href="https://github.com/austin-taylor/flare">Flare</a> is a free open-source cyber analytic framework intended to make identifying malicious behavior, such as C2 beaconing in networks, as simple as possible.
+
+This post will use Flare to identify beaconing inside of a network.
 
 Getting Started
 ---
 
-Before we start... you will need to have the following available.
+Before we start, you will need to have the following available.
 
 | Name | Description |
 | ------------- |:-------------:|
@@ -41,9 +43,9 @@ Before we start... you will need to have the following available.
 | Elastic Stack | Entire Stack not required, but need [Elastic Search](https://www.elastic.co/products) with flow data |
 
 <hr>
-This post assumes you have some type of network monitoring system and are ingesting the output into Elastic Stack (formerly ELK). If you are interested in getting started with network monitoring, visit my post on <a href="http://www.austintaylor.io/suricata/elasticsearch/logstash/continuous/monitoring/intrusion/detection/system/2016/12/17/build-a-world-class-monitoring-system-enterprise-small-office-home/"> Building a Monitoring System for Enterprise, Small Office or Home Networks.</a>
+This post assumes you have a network monitoring system and are ingesting the output into Elastic Stack (formerly ELK). If you are interested in getting started with network monitoring, visit my post on <a href="http://www.austintaylor.io/suricata/elasticsearch/logstash/continuous/monitoring/intrusion/detection/system/2016/12/17/build-a-world-class-monitoring-system-enterprise-small-office-home/"> Building a Monitoring System for Enterprise, Small Office or Home Networks.</a>
 
-For this walk through, we'll be using <a href="https://github.com/StamusNetworks/SELKS">SELKS 4.0</a>, but Flare is modular by design and will work with <a href="https://securityonion.net/">Security Onion</a> or any any system running Snort, Bro, Suricata. The flow data inside Elastic Stack (ES) is what Flare uses to identify beacons.
+For this walk-through, we'll be using <a href="https://github.com/StamusNetworks/SELKS">SELKS 4.0</a>, but Flare is modular by design and will work with <a href="https://securityonion.net/">Security Onion</a> or any any system running Snort, Bro, Suricata. The flow data inside Elastic Stack (ES) is what Flare uses to identify beacons.
 
 Additionally, you will need to have <a href="https://github.com/austin-taylor/flare">Flare</a> installed (instructions on github).
 
@@ -78,11 +80,11 @@ Once connectivity is verified, it's time to run Flare.
 Configuring Flare
 -----------------
 
-After you've installed Flare, a binary file called *flare_beacon* will be added to your path. This file takes arguments or configuration files.
+After you've installed Flare, a binary file called *flare_beacon* should be available in your path. This file takes arguments or configuration files.
 
-In the configs directory, there are .ini files which can be customized for your environment. Included is a selks4.ini, which is configured for SELKS 4.0.
+In the configs directory, there are .ini files. Included is a selks4.ini, which is pre-configured for SELKS 4.0. Be sure to tune the settings for your environment.
 
-The settings are tuneable and should be adjusted to your environment. I've added comments to explain each field.
+ I've added comments to explain each field.
 
 {% highlight awk %}
 [beacon]
@@ -90,11 +92,11 @@ es_host=localhost           # IP address of ES Host, which we forwarded to local
 es_index=logstash-flow-*    # ES index
 es_port=9200                # Logstash port (we forwarded earlier)
 es_timeout=480              # Timeout limit for elasticsearch retrieval
-min_occur=50                # Minimum of 50 network occurances to appear in traffic
+min_occur=50                # Minimum of 50 network occurrences to appear in traffic
 min_interval=30             # Minimum interval of 30 seconds per beacon
 min_percent=30              # Beacons must represent 30% of network traffic per dyad
-window=3                    # Accounts for jitter... For example if 60 second beacons
-                            # occured at 58 seconds or 62 seconds, a window of 3 would
+window=3                    # Accounts for jitter... For example, if 60 second beacons
+                            # occurred at 58 seconds or 62 seconds, a window of 3 would
                             # factor in that traffic.
 threads=8                   # Use 8 threads to process (Should be configured)
 period=24                   # Retrieve all flows for the last 24 hours.
@@ -114,7 +116,7 @@ field_flow_id=flow_id
 suricata_defaults = true
 {% endhighlight %}
 
-Think of min_occur, min_interval, and min_percent as adjustable knobs. The more you crank the knobs up, the fewer results will be returned.
+Think of min_occur, min_interval, and min_percent as adjustable knobs. The more you crank the knobs up, the fewer results will output.
 
 _More information is available by typing_ **flare_beacon -h**
 
@@ -122,13 +124,13 @@ _More information is available by typing_ **flare_beacon -h**
 
 Now that we have flare configured and installed we are now ready to find beacons on our network.
 
-_For this walk through I generated a request for HTTP traffic every 60 seconds using this command:_
+_For this walk-through I generated a request for HTTP traffic every 60 seconds using this command:_
 
 {% highlight awk %}
 watch -n 60 curl http://www.huntoperator.com
 {% endhighlight %}
 
-In this scenario, we'll consider our infected end point beaconing back to a C2 server.
+In this scenario, we'll consider our infected endpoint beaconing back to a C2 server.
 
 **Infected IP**: 192.168.0.53 --> **C2 Server**: 160.153.76.129
 
@@ -141,7 +143,7 @@ flare_beacon --group --whois --focus_outbound -c configs/selks4.ini -html beacon
 If everything worked, you should see output similar to the following:
 <img style="height:200px;" src="/images/run_flare_selks_full.png">
 
-**Caution:** Flare will use the resourced specified in your config file and if not configured properly could freeze your computer. Computational resources are proportionate to the size of your network. _The bigger the network, the more resources are required to compute._
+**Caution:** Flare will use the resourced specified in your config file and if not configured correctly could freeze your computer. Computational resources are proportionate to the size of your network. _The bigger the network, the more resources are required to compute._
 
 Here is a screenshot of resources on my computer during flare runtime.
 <img src="/images/cores_and_memory_h.png">
@@ -176,17 +178,17 @@ Output Fields
 -------------
 * **bytes_toserver**: Total sum of bytes sent from IP address to Server
 * **dest_degree**: Amount of source IP addresses that communicate to the same destination
-* **occurrences**: Number of network occurences between dyads identified as beaconing.
+* **occurrences**: Number of network occurrences between dyads identified as beaconing.
 * **percent**: Percent of traffic between dyads considered beaconing.
 * **interval**: Intervals between each beacon in seconds
 
-Flare's output shows 192.168.0.53 communicating to 160.153.76.129 in ~61 second intervals over port 80. Of all the communication between the nodes **97%** has periodic communication. The results also indicate 2 additional internal nodes communicate to the same destination IP (In this case, it was me testing connectivity on different host.)
+Flare's output shows 192.168.0.53 communicating to 160.153.76.129 in ~61 second intervals over port 80. Of all the communication between the nodes **97%** has periodic communication. The results also indicate 2 additional internal nodes communicate to the same destination IP (In this case, it was me testing connectivity on multiple hosts.)
 
-You'll also notice the same host performing DNS lookups through google DNS with the same intervals. This is because our curl command is looking up the hostname first and then making the request the curl -- awesome!
+You'll also notice the same host performing DNS lookups through Google DNS with the same intervals -- this is because our curl command is looking up the hostname first and then making an HTTP request through curl. Awesome!
 
-Filtering out well known services such as Google & Amazon can help to narrow your result set. You can then look for communication with a low destination degree and a high percentage of beaconing.
+Filtering out well-known services such as Google & Amazon can help to narrow your result set. You can then look for communication with a low destination degree and a high percentage of beaconing.
 
-Larger networks will have a lot of results, so you're probably better off to export your results to csv where you can harness the full power of Excel.
+Larger networks will have a lot of activity, so you're probably better off to export your results to csv where you can harness the full power of Excel.
 
 <img src="/images/flare_csvoutput_highlight.png">
 
@@ -199,89 +201,50 @@ If you're using SELKS, open the SN FLOW dashboard and type in the dest_ip as a f
 
 <img src="/images/minute_beacon_full2.png">
 
-Drill into the timeseries, by selecting portions and Kibana will automatically adjust the time interval.
+Drill into the time series, by selecting portions and Kibana will automatically adjust the time interval.
 
 <img src="/images/beacon_hover_highlight.png">
 
-You can now visually see communication occuring in ~60 second intervals from our infected host communicating to a C2 server.
+You can now visually see communication occurring in ~60 second intervals from our infected host communicating to a C2 server.
 
 <img src="/images/minute_beacon.png">
 
 
 Time to pivot to the HTTP Dashboard to get some more information.
 
+Apply the same dest_ip filter which you applied to the Flow dashboard.
 
-First we'll need to get a few pieces of hardware.
+    dest_ip:160.153.76.129
 
-| Hardware | Description | Cost |
-| ------------- |:-------------:| -----:|
-| TAP or Switch     | TAP or Switch that supports spanning [Dualcomm-DCGS-1000Base-T](https://www.amazon.com/Dualcomm-DCGS-2005L-1000Base-T-Gigabit-Network/dp/B004EWVFAY/)  | $179 |
-| Server     | [Server](https://www.amazon.com/SHUTTLE-LGA1151-Skylake-Barebone-SZ170R8/dp/B01C87CQEK/) will run [SELKS](https://www.stamus-networks.com/open-source/) -- See below for minimum requirements|   $0-2000+ |
-| Dual NIC Card | Server should be equipped with two ports. One for management and another for sniffing. NICs available [here](https://www.amazon.com/Intel-1000-Dual-Server-Adapter/dp/B000BMZHX2) | $46 |
-| Management Switch | [Network switch](https://www.amazon.com/Netgear-ProSafe-48-Port-Gigabit-GS748TNA/dp/B00062WV9U) to separate your management network. |    $10-$400+ |
-| ISP Provided Router | This is the DSL/Cable modem provided by your internet provider | Monthly Bill |
+<img src="/images/view_http_traffic.png">
 
+<img src="/images/pivot_to_eve.png">
 
-A few caveats:
----
-* All products with links are personal preference. I'm sharing the setup of my network, but feel free to use replacements.
-* There are many ways to monitor network traffic. Network TAPs are the cleanest way to do it. The recommended TAP above serves as a gigabit switch and can be powered by a USB. Choose a TAP that suits you. In many cases, 100Mbps is okay, but may suffer from packet loss if the network operates at greater speeds.
-* It is possible to listen on the same interface that your management port is on (the port with an IP address), but it is best to have a dedicated interface.
-* Per [SELKS Github](https://github.com/StamusNetworks/SELKS) the minimal configuration for production usage is 2 cores and 4 Gb of memory. As Suricata and Elastisearch are multithreaded, the more cores you have the better it is. Memory is used by ElasticSearch for indexing network traffic. High traffic networks will require more memory. I have 32GB on my sensor, of which 12-19GB is consistently in use. See [Running SELKS in production](https://github.com/StamusNetworks/SELKS/wiki/Running-SELKS-in-production) page for more info.
+The HTTP Dashboard has provided additional context to our traffic. We now know a system hosting Mac OS X is communicating to a site called www.huntoperator.com
 
-Software
------
+At this point, we can pivot to [EveBox](https://github.com/jasonish/evebox) to view the network traffic across multiple indices by clicking correlate flow.
 
-Next, we'll need to download SELKS.
+<img src="/images/evebox_flowid.png">
 
-1. Download the [SELKS](https://www.stamus-networks.com/open-source/) ISO. This will be installed on the server.
+It appears our C2 beacon has also triggered an alert.
 
+<img src="/images/alert_info.png">
 
-Our Goal
----
-Gain network visibility into an enterprise, small office, or home network.
+Digging into the allows us to view the payload which triggered the alert and confirms our infected host is making GET request to a C2 node using curl.
 
-Here is an example of a network topology. The topology below may be more relevant toward a small office, but we'll use segments to emulate a home network. Many home networks may not have a switch or firewall connected (not a bad idea to get one though!)
+For bonus points, we can dig into the profile of the Destination IP to observe it's pattern of life.
 
-![NETWORK_TOPOLOGY]({{ site.base }}/images/sensor_topology_labeled_full_shadow.png)
+<img src="/images/evebox_beacon.png">
 
-Setup
----
-1. Create a bootable USB Thumbdrive with the SELKS ISO. If needed, assistance available [here](http://www.howtogeek.com/191054/how-to-create-bootable-usb-drives-and-sd-cards-for-every-operating-system/)
-2. Insert thumbdrive into server and boot. **May need to set server to boot from USB in BIOS.**
-   * If all goes well, you should see SELKS boot menu. Pressing enter will lead you to the graphical interface.
+EveBox does a great job to help analyst characterize host communication.
 
-       **Users booting from a thumbdrive may need to follow these additional steps.**
+Bringing It All Together
+------------------------
 
-       1. At language prompt, Press ALT-f2
-       2. Type _mkdir /cdrom_
-       3. Type _mount /dev/sdb1 /cdrom_
-            * Your parition name may not be sdb1. Use fdisk -l to list available partitions
-       4. Press Alt-F1 to return to the installation process and continue.
+Using Flare, you identified periodic communication on your network. After narrowing your results, you investigated the interaction and determined an end point using Mac OS X was attempting communication over HTTP to huntoperator.com every 60 seconds and over 24 hour period sent 1.23MB and received 12.70MB from a C2 Server located in Scottsdale, Arizona.
 
+<hr>
 
-   * Default username and password is selks-user/selks-user and root is ``StamusNetworks``
-     * More information available at [SciriusUsage](https://github.com/StamusNetworks/scirius#usage)
-3. Login to server and assign a static IP address to eth1. For example, if your network uses the 192.168.1.0/24 range you can assign 192.168.1.250 to interface eth1 on your server.
-4. Install your network TAP inline with your ISP provided router.
-   * If using the recommended TAP you can use the following configuration:
+_Special thank you to **Jonathan Burkert** and **Justin Henderson** for their contributions to Flare's beaconing detection capability_
 
-    | Port | Connected-To | Description |
-    | ------------- |:-------------:| -----:|
-    | 1 | ISP Router | Passes all home traffic through to router |
-    | 2 | Switch or Wireless Router | Plugin your switch or wireless router. If you have multiple wireless access points, plug them into a switch, and plug the switch into port 2. |
-    | 5 | Server | Plug into the "sniffing port" on your server. Eth0 is to set sniff by default |
-
-   * Your server should now be collecting network traffic!
-
-5. Login to your server via a web browser. https://server.assigned.ip.address
-
-Tuning
----
-
-
-
-
-
-
-
+If you found this post useful, please share with friends, and I hope you enjoy using Flare!
