@@ -236,7 +236,7 @@ For bonus points, we can dig into the profile of the Destination IP to observe i
 
 <img src="/images/evebox_beacon.png">
 
-EveBox does a great job to help analyst characterize host communication.
+EveBox does a great job to help analysts characterize host communication.
 
 Bringing It All Together
 ------------------------
