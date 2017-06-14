@@ -20,7 +20,7 @@ After some variants of malware infect a computer, it can attempt to check in wit
 
 <img style="float: left;height:500px;" src="/images/killchain_lockheed_martin.png">
 
-Identifying network beaconing can be critical to preventing an adversary from taking action on objective. In the Lockheed Martin Killchain, Beaconing would occur prior to an adversary or Advanced Persistent Threat (APT) gaining access.
+In the Lockheed Martin Killchain, Beaconing would occur prior to an adversary or Advanced Persistent Threat (APT) taking action on objective.
 
 However, it can be difficult to detect this activity. Beaconing can occur at any time and the frequency can vary. Additionally, network communication does not have perfect intervals or the malware may try to add "jitter" to prevent showing up for someone looking at hard intervals (Example: Every 30 seconds).
 
