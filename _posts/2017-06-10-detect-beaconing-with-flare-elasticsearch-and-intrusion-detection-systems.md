@@ -245,6 +245,6 @@ Using Flare, you identified periodic communication on your network. After narrow
 
 <hr>
 
-_Special thank you to **Jonathan Burkert** and **Justin Henderson** for their contributions to Flare's beaconing detection capability_
+_Special thank you to **Jonathan Burkert** and **Justin Henderson** for their contributions to Flare's beacon detection capability_
 
 If you found this post useful, please share with friends, and I hope you enjoy using Flare!
