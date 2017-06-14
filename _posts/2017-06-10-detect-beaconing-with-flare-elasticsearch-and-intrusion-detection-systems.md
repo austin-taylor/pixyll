@@ -143,7 +143,7 @@ flare_beacon --group --whois --focus_outbound -c configs/selks4.ini -html beacon
 If everything worked, you should see output similar to the following:
 <img style="height:200px;" src="/images/run_flare_selks_full.png">
 
-**Caution:** Flare will use the resourced specified in your config file and if not configured correctly could freeze your computer. Computational resources are proportionate to the size of your network. _The bigger the network, the more resources are required to compute._
+**Caution:** Flare will use the resources specified in your config file and if not configured correctly could freeze your computer. Computational resources are proportionate to the size of your network. _The bigger the network, the more resources are required to compute._
 
 Here is a screenshot of resources on my computer during flare runtime.
 <img src="/images/cores_and_memory_h.png">
