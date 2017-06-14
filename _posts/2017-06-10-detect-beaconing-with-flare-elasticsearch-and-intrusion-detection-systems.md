@@ -230,7 +230,7 @@ It appears our C2 beacon has also triggered an alert.
 
 <img src="/images/alert_info.png">
 
-Digging into the allows us to view the payload which triggered the alert and confirms our infected host is making GET request to a C2 node using curl.
+Digging into the alert allows us to view the payload which triggered the alert and confirms our infected host is making GET request to a C2 node using curl.
 
 For bonus points, we can dig into the profile of the Destination IP to observe it's pattern of life.
 
