@@ -28,6 +28,7 @@ Projects
 --------
 * [Flare](https://github.com/austin-taylor/flare) - A network analytic framework
 * [Bluewall](https://github.com/austin-taylor/bluewall) - A firewall framework designed for offensive and defensive cyber professionals
+* [VulnWhisperer](https://github.com/austin-taylor/VulnWhisperer) - Create actionable data from your Vulnerability Scans
 
 <br>
 
