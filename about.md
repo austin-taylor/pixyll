@@ -15,7 +15,6 @@ Instructor
 ----------
 * [Continuous Monitoring and Security Operations - SEC511](https://www.sans.org/mentor/class/sec511-columbia-12sep2017-austin-taylor) SANS 2017
 * [Applied Data Science for Security Professionals](https://www.blackhat.com/us-17/training/applied-data-science-for-security-professionals.html) - Blackhat 2017
-* [Build an Effective, Low-Cost Monitoring System for Enterprise, Small Office, or Home Networks](https://www.sans.org/event/columbia-2017/bonus-sessions/12850) - SANS 2017
 * [Crash Course in Data Science for Hackers](https://www.blackhat.com/us-15/training/crash-course-in-data-science-for-hackers.html) - Blackhat 2015
 
 Presentations
