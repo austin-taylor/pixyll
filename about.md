@@ -19,8 +19,7 @@ Instructor
 
 Presentations
 -------------
-* [Hunting with Data Science - Increasing the Signal-to-Noise Ratio](http://www.data-intelligence.ai/presentations/27) Data Intelligence Conference
-Practitioner Focused Machine Learning - 2017
+* [Hunting with Data Science - Increasing the Signal-to-Noise Ratio](http://www.data-intelligence.ai/presentations/27) Data Intelligence Conference Practitioner Focused Machine Learning - 2017 [Slides](https://www.slideshare.net/AustinTaylor8/threat-hunting-with-data-science)
 * [Build an Effective, Low-Cost Monitoring System for Enterprise, Small Office, or Home Networks](https://www.sans.org/event/columbia-2017/bonus-sessions/12850) - SANS 2017
 
 Projects
