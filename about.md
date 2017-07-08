@@ -21,6 +21,7 @@ Presentations
 -------------
 * [Hunting with Data Science - Increasing the Signal-to-Noise Ratio](http://www.data-intelligence.ai/presentations/27) Data Intelligence Conference Practitioner Focused Machine Learning - 2017 [Slides](https://www.slideshare.net/AustinTaylor8/threat-hunting-with-data-science)
 * [Build an Effective, Low-Cost Monitoring System for Enterprise, Small Office, or Home Networks](https://www.sans.org/event/columbia-2017/bonus-sessions/12850) - SANS 2017
+* [Taking Your SIEM to the Next Level with 3rd Party Tools and Scripts](https://www.sans.org/event/siem-tactical-analytics-summit-2017) SIEM & Tactical Analytics Summit 2017
 
 Projects
 --------
