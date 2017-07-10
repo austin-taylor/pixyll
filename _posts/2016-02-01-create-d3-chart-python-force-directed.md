@@ -572,6 +572,7 @@ for ip in unique_ips:
 Next we'll need to begin to structure our data which to reference later.
   
 {% highlight python %}
+grouped_src_dst.rename(columns={0:'count'}, inplace=True)
 temp_links_list = list(grouped_src_dst.apply(lambda row: {"source": row['source'], "target": row['target'], "value": row['count']}, axis=1))
 {% endhighlight %}
 
