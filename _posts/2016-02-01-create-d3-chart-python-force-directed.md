@@ -6,13 +6,13 @@ time:	5
 summary:    Network professionals often try to visualize their network connections. This tutorial will show you how to convert your network traffic into a beautiful interactive illustration.
 categories: d3 python pandas
 products:
- - top-level: Python 3
+ - top-level: Python 3 or Python 2
    arbitrary: Required Modules
    nested-products:
     - nested: Pandas
       sub-arbitrary: pip install pandas
     - nested: IP Address Module
-      sub-arbitrary: pre-installed with Python 3.x
+      sub-arbitrary: pre-installed with Python 3.x or Python 2.x
  - top-level: A text editor
    arbitrary: Your choice
    nested-products:
