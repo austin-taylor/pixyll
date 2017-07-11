@@ -246,9 +246,7 @@ function drawLinks(links) {
 <div align="center" id="force"></div>
 
 <script>
-/*d3.json("ong-prod-cb-im-wordpress.db.json", drawGraph);*/
 d3.json("pcap_export.json", drawGraph);
-/*d3.json("network.json", drawGraph);*/
 </script>
 </body>
 </html>
