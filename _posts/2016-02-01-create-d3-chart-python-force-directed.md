@@ -30,7 +30,6 @@ Our Goal
 ---
 Create an [interactive force directed graph](http://bl.ocks.org/mbostock/4062045) to illustrate network traffic.
 
-
 <iframe src="/static/examples/force_directed/index.html" width="960px" height="500px" frameborder="0" scrolling="no"></iframe>
 
 _You may need to edit the width and height depending on the size of your network_
@@ -907,7 +906,7 @@ Open up http://localhost:8000/index.html and view your network diagram!
 Notebook
 --
 
-For convenience, I've included a copy of a [jupyter notebook]({{ site.base }}/static/examples/force_directed/pcap_to_d3_visual.ipynb) for you to follow along.
+For convenience, I've included a copy of a <a href="https://github.com/austin-taylor/austin-taylor.github.io/blob/master/static/examples/force_directed/pcap_to_d3_visual.ipynb">jupyter notebook</a> for you to follow along.
 
 
 
