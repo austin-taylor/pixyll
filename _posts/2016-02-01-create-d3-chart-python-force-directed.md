@@ -898,7 +898,7 @@ Finally, start a python webserver
 
 ![Start Webserver]({{ site.base }}/images/start_webserver_python.png)
 
-Open up http://localhost:8000/index.html and view your network diagram!
+Open http://localhost:8000/index.html in your favorite web browser and view your network diagram!
 
 
 Notebook
