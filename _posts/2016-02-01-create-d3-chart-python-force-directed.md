@@ -39,76 +39,219 @@ _You may need to edit the width and height depending on the size of your network
 ## index.html
 
 {% highlight html %}
+<!-- python -m SimpleHTTPServer 8080 //-->
+<!-- http://bl.ocks.org/mbostock/4062045 //-->
+
 <!DOCTYPE html>
+<head>
 <meta charset="utf-8">
+<title>Pandas D3 Force Directed Example - www.austintaylor.io</title>
+
+<!-- JavaScript Libraries //-->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<!-- CSS Style //-->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900|Source+Code+Pro:300" rel="stylesheet" type="text/css">
 <style>
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+}
+
+b {
+    font-weight: 900;
+}
+
+.outline {
+    fill: none;
+    stroke: #888888;
+    stroke-width: 1px;
+}
+
+#tooltip {
+    font-size: 10pt;
+    font-weight: 900;
+
+    fill: #000000;
+    stroke: #ffffff;
+    stroke-width: 0.25px;
+}
 
 .node {
-  stroke: #fff;
-  stroke-width: 1.5px;
+    stroke: #ffffff;
+    stroke-weight: 1px;
 }
 
 .link {
-  stroke: #999;
-  stroke-opacity: .6;
+    fill: none;
+    stroke: #888888;
+    stroke-weight: 1px;
+    stroke-opacity: 0.5;
 }
 
+.highlight {
+    stroke: red;
+    stroke-weight: 4px;
+    stroke-opacity: 1.0;
+}
 </style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+
 <script>
-
-var width = 960,
-    height = 500;
-
+var width  = 960;
+var height = 500;
+var margin = 20;
+var pad = margin / 2;
 var color = d3.scale.category20();
-
-var force = d3.layout.force()
-    .charge(-120)
-    .linkDistance(30)
-    .size([width, height]);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-d3.json("pcap_export.json", function(error, graph) {
-  if (error) throw error;
-
-  force
-      .nodes(graph.nodes)
-      .links(graph.links)
-      .start();
-
-  var link = svg.selectAll(".link")
-      .data(graph.links)
-    .enter().append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-  var node = svg.selectAll(".node")
-      .data(graph.nodes)
-    .enter().append("circle")
-      .attr("class", "node")
-      .attr("r", 5)
-      .style("fill", function(d) { return color(d.group); })
-      .call(force.drag);
-
-  node.append("title")
-      .text(function(d) { return d.name; });
-
-  force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
+// Generates a tooltip for a SVG circle element based on its ID
+function addTooltip(circle) {
+    var x = parseFloat(circle.attr("cx"));
+    var y = parseFloat(circle.attr("cy"));
+    var r = parseFloat(circle.attr("r"));
+    var text = circle.attr("id");
+    var tooltip = d3.select("#plot")
+        .append("text")
+        .text(text)
+        .attr("x", x)
+        .attr("y", y)
+        .attr("dy", -r * 2)
+        .attr("id", "tooltip");
+    var offset = tooltip.node().getBBox().width / 2;
+    if ((x - offset) < 0) {
+        tooltip.attr("text-anchor", "start");
+        tooltip.attr("dx", -r);
+    }
+    else if ((x + offset) > (width - margin)) {
+        tooltip.attr("text-anchor", "end");
+        tooltip.attr("dx", r);
+    }
+    else {
+        tooltip.attr("text-anchor", "middle");
+        tooltip.attr("dx", 0);
+    }
+}
+var vis = d3.select("#chart")
+  .append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("pointer-events", "all")
+  .append('svg:g')
+    .call(d3.behavior.zoom().on("zoom", redraw))
+  .append('svg:g');
+vis.append('svg:rect')
+    .attr('width', w)
+    .attr('height', h)
+    .attr('fill', 'white');
+function redraw() {
+  console.log("here", d3.event.translate, d3.event.scale);
+  vis.attr("transform",
+      "translate(" + d3.event.translate + ")"
+      + " scale(" + d3.event.scale + ")");
+}
+function drawGraph(graph) {
+    var svg = d3.select("#force").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    // draw plot background
+    svg.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "#eeeeee");
+    // create an area within svg for plotting graph
+    var plot = svg.append("g")
+        .attr("id", "plot")
+        .attr("transform", "translate(" + pad + ", " + pad + ")");
+    // https://github.com/mbostock/d3/wiki/Force-Layout#wiki-force
+    var layout = d3.layout.force()
+        .size([width - margin, height - margin])
+        .charge(-120)
+        .linkDistance(function(d, i) {
+            return (d.source.group == d.target.group) ? 50 : 100;
+        })
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+    drawLinks(graph.links);
+    drawNodes(graph.nodes);
+    // add ability to drag and update layout
+    // https://github.com/mbostock/d3/wiki/Force-Layout#wiki-drag
+    d3.selectAll(".node").call(layout.drag);
+    // https://github.com/mbostock/d3/wiki/Force-Layout#wiki-on
+    layout.on("tick", function() {
+        d3.selectAll(".link")
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+        d3.selectAll(".node")
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+    });
+}
+    function tick(e) {
+  // Push different nodes in different directions for clustering.
+  var k = 6 * e.alpha;
+  graph.nodes.forEach(function(o, i) {
+    o.y += i & 1 ? k : -k;
+    o.x += i & 2 ? k : -k;
+  });
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+// Draws nodes on plot
+function drawNodes(nodes) {
+    // used to assign nodes color by group
+    var color = d3.scale.category20();
+    // https://github.com/mbostock/d3/wiki/Force-Layout#wiki-nodes
+    d3.select("#plot").selectAll(".node")
+        .data(nodes)
+        .enter()
+        .append("circle")
+        .attr("class", "node")
+        .attr("id", function(d, i) { return d.name; })
+        .attr("cx", function(d, i) { return d.x; })
+        .attr("cy", function(d, i) { return d.y; })
+        .attr("r",  function(d, i) { return 4; })
+        .style("fill",   function(d, i) { return color(d.group); })
+        .on("mouseover", function(d, i) { addTooltip(d3.select(this)); })
+        .on("mouseout",  function(d, i) { d3.select("#tooltip").remove(); });
+}
+// Draws edges between nodes
+function drawLinks(links) {
+    var scale = d3.scale.linear()
+        .domain(d3.extent(links, function(d, i) {
+           return d.value;
+        }))
+        .range([1, 6]);
+    // https://github.com/mbostock/d3/wiki/Force-Layout#wiki-links
+    d3.select("#plot").selectAll(".link")
+        .data(links)
+        .enter()
+        .append("line")
+        .attr("class", "link")
+        .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-  });
-});
-
+        .attr("y2", function(d) { return d.target.y; })
+        .style("stroke-width", function(d, i) {
+            return scale(d.value) + "px";
+        })
+        .style("stroke-dasharray", function(d, i) {
+            return (d.value <= 1) ? "2, 2" : "none";
+        });
+}
 </script>
+</head>
+
+<body>
+<div align="center" id="force"></div>
+
+<script>
+/*d3.json("ong-prod-cb-im-wordpress.db.json", drawGraph);*/
+d3.json("pcap_export.json", drawGraph);
+/*d3.json("network.json", drawGraph);*/
+</script>
+</body>
+</html>
 {% endhighlight %}
 
   
@@ -531,6 +674,23 @@ src_dst.sample(10)
 </table>
 <br/>
 
+Filter out any hostnames that were included (may not apply to your dataset):
+{% highlight python %}
+def ip_matcher(address):
+    # Used to validate if string is an ipaddress
+    ip = re.match(
+        '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', address)
+    if ip:
+        return True
+    else:
+        return False
+
+src_dst.rename(columns={"Source":"source","Destination":"target"}, inplace=True)
+src_dst['valid_src'] = src_dst.source.apply(ip_matcher)
+src_dst['valid_target'] = src_dst.target.apply(ip_matcher)
+
+valid_src_dest = src_dst[(src_dst.valid_src==True) & (src_dst.valid_target==True)]
+{% endhighlight %}
 
 Group by source and target fields and count number of connections
 
@@ -538,9 +698,9 @@ _Use inplace=True to rename the columns inplace without having to reassign to a 
 
 {% highlight python %}
 
-src_dst.rename(columns={"Source":"source","Destination":"target"}, inplace=True)
 
-grouped_src_dst = src_dst.groupby(["source","target"]).size().reset_index()
+grouped_src_dst = valid_src_dest.groupby(["source","target"]).size().reset_index()
+
 
 {% endhighlight %}
 
@@ -688,6 +848,7 @@ json_prep.keys()
 
 _validate data (data sample)_
 {% highlight python %}
+json_dump = json.dumps(json_prep, indent=1, sort_keys=True)
 print(json_dump)
 
 {% endhighlight %}
@@ -733,7 +894,20 @@ json_out.close()
 
 {% endhighlight %}
 
-Finally, open up index.html and view your network diagram!
+
+Finally, start a python webserver
+
+![Start Webserver]({{ site.base }}/images/start_webserver_python.png)
+
+Open up http://localhost:8000/index.html and view your network diagram!
+
+
+Notebook
+--
+
+For convenience, I've included a copy of a [jupyter notebook]({{ site.base }}/static/examples/force_directed/pcap_to_d3_visual.ipynb) for you to follow along.
+
+
 
 Bonus Examples
 --
