@@ -14,8 +14,11 @@ author_github: austin-taylor
 
 ![MINUTE_BEACONS]({{ site.base }}/images/ds_hunting_funnel.png){: class="center-image"}
 
-Today, we often hear about machine learning being applied to cybersecurity. 
-The data science hunting funnel was created to illustrate a workflow for security researchers
+In the age of Cybersecurity and data science, we often hear about machine learning being applied to cybersecurity. 
+The idea is to apply data science to catch sophisticated hackers which [evade Intrusion Detection Systems (IDS)](https://en.wikipedia.org/wiki/Intrusion_detection_system_evasion_techniques).
+Data science can be used to identify anomalous network activity, but requires an additional level of processing to prevent a flood of events being presented to an analyst to process.
+
+**The Data Science Hunting Funnel** was created to illustrate a workflow for security researchers
 and data scientist to help reduce their dataset and have the best likelihood of
 identifying malicious traffic.
 
@@ -25,7 +28,7 @@ Hunt Funnel Breakdown
 _Values are approximations_
 * **Network Traffic** - Bits flowing into the funnel ready to be processed.
 * **Produced Naturally** - Generated naturally by network users and devices. Represents all of your _normal_ network traffic. 
-* **Machine Learning** - After applying machine learning, you can reduce your set of data to a much smaller subset by identifying _anomalies_. I chose 10% to represent help loosely illustrate the smaller subset of data after applying machine learning. A few examples include:
+* **Machine Learning** - After applying machine learning, you can reduce your set of data to a much smaller subset by identifying _anomalies_. I chose ~10% to help visualize the data left to analyze after applying machine learning. A few examples include:
     * Identify periodic communication in the network in an attempt to identify an infected computer using command and control.
     * Applying the markov model to user agents with the lowest likelihood of occurrence. 
     * Identify DNS requests with high entropy or are identified as DGA using [Flare](https://github.com/austin-taylor/flare)
