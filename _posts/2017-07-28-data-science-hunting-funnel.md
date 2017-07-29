@@ -23,7 +23,7 @@ Hunt Funnel Breakdown
 ---
 
 _Values are approximations_
-* **Network Traffic** - Bits flowing into the funnel ready to be processed (could merge with )
+* **Network Traffic** - Bits flowing into the funnel ready to be processed.
 * **Produced Naturally** - Generated naturally by network users and devices. Represents all of your _normal_ network traffic. 
 * **Machine Learning** - After applying machine learning, you can reduce your set of data to a much smaller subset by identifying _anomalies_. I chose 10% to represent help loosely illustrate the smaller subset of data after applying machine learning. A few examples include:
     * Identify periodic communication in the network in an attempt to identify an infected computer using command and control.
