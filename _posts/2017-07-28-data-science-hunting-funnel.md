@@ -14,14 +14,26 @@ author_github: austin-taylor
 
 ![MINUTE_BEACONS]({{ site.base }}/images/ds_hunting_funnel.png){: class="center-image"}
 
-Today, we often hear about machine learning being applied to cybersecurity. The data science hunting funnel was created to illustrate a workflow for security researchers and data scientist to help reduce their dataset and have the best likelihood of identifying malicious traffic. It's important to note, that data science alone identifies anomalous traffic. 
+Today, we often hear about machine learning being applied to cybersecurity. 
+The data science hunting funnel was created to illustrate a workflow for security researchers
+and data scientist to help reduce their dataset and have the best likelihood of
+identifying malicious traffic.
 
-Hunt Funnel Breakdown:
+Hunt Funnel Breakdown
 ---
+
+_Values are approximations_
 * **Network Traffic** - Represents traffic being input into the funnel
 * **Produced Naturally** - Initial representation of network traffic.
-* **Machine Learning** - After applying machine learning, you can generally reduce your set of data to a much smaller subset of data by identifying anomalies. I chose 10% to represent help loosely illustrate the smaller subset of data after applying machine learning.
-* **Domain Knowledge** - Once you have you have reduced your dataset using machine learning, domain expertise must be applied to further reduce the dataset to approximately 1-5% of total network traffic.
+* **Machine Learning** - After applying machine learning, you can generally reduce your set of data to a much smaller subset of data by identifying anomalies. I chose 10% to represent help loosely illustrate the smaller subset of data after applying machine learning. A few examples include:
+    * Identify periodic communication in the network in an attempt to identify an infected computer using command and control.
+    * Applying the markov model to user agents with the lowest likelihood of occurrence. 
+    * Identify DNS requests with high entropy or are identified as DGA using [Flare](https://github.com/austin-taylor/flare)
+* **Domain Knowledge** - Once you have you have reduced your dataset using machine learning, domain expertise must be applied to further reduce the dataset to approximately 1-5% of total network traffic. This is where the "interesting" results live. Depending on the protocol you're analyzing, you can apply practices such as:
+    * Is this domain in Umbrella, Majestic or Alexa Top 1 million?
+    * Is this IP a known TOR node
+    * Does this domain have any blacklist or threat intelligence association?
+    * Who owns this IP space? 
 * **Potential Bad** - Finally, your dataset is ready to hunt on. The value .001 is meant to set expectations that finding malicious traffic, especially in larger networks, is very difficult. It requires the right amount of data science and domain expertise.
 
 
