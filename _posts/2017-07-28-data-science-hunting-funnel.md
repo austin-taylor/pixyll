@@ -23,7 +23,7 @@ Hunt Funnel Breakdown
 ---
 
 _Values are approximations_
-* **Network Traffic** - Bits flowing into the funnel ready to be 
+* **Network Traffic** - Bits flowing into the funnel ready to be processed (could merge with )
 * **Produced Naturally** - Generated naturally by network users and devices. Represents all of your _normal_ network traffic. 
 * **Machine Learning** - After applying machine learning, you can reduce your set of data to a much smaller subset by identifying _anomalies_. I chose 10% to represent help loosely illustrate the smaller subset of data after applying machine learning. A few examples include:
     * Identify periodic communication in the network in an attempt to identify an infected computer using command and control.
@@ -35,6 +35,7 @@ _Values are approximations_
     * Does this domain have any blacklist or threat intelligence association?
     * Who owns this IP space? 
 * **Potential Bad** - Finally, your data is ready to hunt on. The value .001 is meant to set expectations that finding malicious traffic, especially in larger networks, is very difficult. It requires the right amount of data science and domain expertise.
+    * If you look closely, _bad_ is written at the bottom of the funnel. It's a bit hard to see because, like reality, finding evil in networks can be very difficult.
 
 
 Below are slides from my presentation at [Data Intelligence Conference
