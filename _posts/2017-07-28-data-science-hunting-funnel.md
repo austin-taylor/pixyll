@@ -15,7 +15,7 @@ author_github: austin-taylor
 ![MINUTE_BEACONS]({{ site.base }}/images/ds_hunting_funnel.png){: class="center-image"}
 
 In the age of cybersecurity and data science, we often hear about machine learning being applied to cybersecurity to catch sophisticated hackers which [evade Intrusion Detection Systems (IDS)](https://en.wikipedia.org/wiki/Intrusion_detection_system_evasion_techniques).
-Data science can be used to identify anomalous network activity, but requires an additional level of processing to prevent a flood of events being presented to an analyst to process.
+Data science can be used to identify anomalous network activity, but requires an additional level of processing in order prevent analyst alert fatigue.
 
 **The Data Science Hunting Funnel** was created to illustrate a workflow for security researchers
 and data scientist to help reduce their dataset and have the best likelihood of
