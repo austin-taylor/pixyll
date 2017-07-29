@@ -29,11 +29,14 @@ _Values are approximations_
     * Identify periodic communication in the network in an attempt to identify an infected computer using command and control.
     * Applying the markov model to user agents with the lowest likelihood of occurrence. 
     * Identify DNS requests with high entropy or are identified as DGA using [Flare](https://github.com/austin-taylor/flare)
-* **Domain Knowledge** - Once you have you have reduced your dataset using machine learning, domain expertise must be applied to further reduce the dataset to approximately 1-5% of total network traffic. This is where the _interesting_ results live. By interesting, I mean results that are anomolous to the network and did pass common questions an analyst might ask of network traffic. Depending on the protocol you're analyzing, you can apply practices such as:
+    * and much more...
+* **Domain Knowledge** - Once you have you have reduced your dataset using machine learning, domain expertise must be applied to further reduce the dataset to approximately 1-5% of total network traffic. This is where the _interesting_ results live. By interesting, I mean results that are anomolous to the network and did pass common questions an analyst might ask of network traffic. Depending on the protocol you're analyzing, you can apply domain expertise such as:
     * Is this domain in Umbrella, Majestic or Alexa Top 1 million?
     * Is this IP a known TOR node
     * Does this domain have any blacklist or threat intelligence association?
-    * Who owns this IP space? 
+    * Who owns this IP space?
+    * How long ago was this domain registered?
+    * and much more...
 * **Potential Bad** - Finally, your data is ready to hunt on. The value .001 is meant to set expectations that finding malicious traffic, especially in larger networks, is very difficult. It requires the right amount of data science and domain expertise.
     * If you look closely, _bad_ is written at the bottom of the funnel. It's a bit hard to see because, like reality, finding evil in networks can be very difficult.
 
