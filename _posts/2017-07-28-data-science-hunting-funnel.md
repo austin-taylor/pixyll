@@ -32,7 +32,8 @@ _Values are approximations_
     * Applying the markov model to user agents with the lowest likelihood of occurrence. 
     * Identify DNS requests with high entropy or are identified as DGA using [Flare](https://github.com/austin-taylor/flare)
     * and much more...
-* **Domain Knowledge** - Once you have you have reduced your dataset using machine learning, domain expertise must be applied to categorize the results. The goal is to identify legit vs suspicious or malicious network traffic and further reduce the dataset to approximately 1-5% of total network traffic. This is where the _interesting_ results live. By interesting, I mean results that are anomolous to the network and did pass common questions an analyst might ask of network traffic (filtering out known good). Depending on the protocol you're analyzing, you can apply domain expertise such as:
+* **Domain Knowledge** - Once you have you have reduced your dataset using machine learning, domain expertise must be applied to categorize the results. 
+The goal is to identify legit vs suspicious or malicious network traffic and further reduce the dataset to approximately 1-5% of total network traffic. This is where the _interesting_ results live. By interesting, I mean results that are anomolous to the network and did NOT pass common questions an analyst might ask of network traffic (filtering out known good). Depending on the protocol you're analyzing, you can apply domain expertise such as:
     * Is this domain in Umbrella, Majestic or Alexa Top 1 million?
     * Is this IP a known TOR node
     * Does this domain have any blacklist or threat intelligence association?
