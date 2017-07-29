@@ -45,7 +45,7 @@ _Values are approximations_
 
 
 Below are slides from my presentation at [Data Intelligence Conference
-Practitioner Focused Machine Learning](http://www.data-intelligence.ai/) where I applied the Data Science Hunting funnel to results to identify beaconing and DGA.
+Practitioner Focused Machine Learning](http://www.data-intelligence.ai/) where I applied the Data Science Hunting Funnel to results to beaconing and DGA use cases.
 
 Slides from Capital One Presentation
 ------------------------------------
