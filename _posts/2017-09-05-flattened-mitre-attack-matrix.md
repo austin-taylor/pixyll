@@ -18,6 +18,8 @@ This version contains all matrix categories mapped to techniques with examples o
 
 I find it useful to filter on visibility sources to help determine your organization's strengths and weaknesses in continuous monitoring.
 
+<a href="https://docs.google.com/spreadsheets/d/1ljXt_ct2J7TuQ45KtvGppHwZUVF7lNxiaAKII6frhOs/edit?usp=sharing">Non-embedded version available here</a> 
+
 <hr>
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzc2z9ZGpr5rnsFdBlqwG0pKyziZrWmNOPfNHjrFpY3twcyueciWelTMmQETSf8IFcOXvkXYBcyd4W/pubhtml?embedded=true" width="100%" height="800"></iframe>
 
