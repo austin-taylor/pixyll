@@ -14,9 +14,9 @@ author_github: austin-taylor
 Inspired by <a href="https://attack.mitre.org/wiki/ATT%26CK_Matrix">Mitre's ATT&CK Matrix</a>
 <br>
 
-This version contains all of the categories mapped to techniques with examples of software and threat actor groups. It also includes visibility sources required to detect the attack, permissions required for the attack to be successful, whether or not network access is required, which defense is bypassed and a vignette on each example.
+This version contains all matrix categories mapped to techniques with examples of software and threat actor groups. It also includes visibility sources required to detect the attack, permissions required for the attack to be successful, whether or not network access is required, which defense is bypassed and a vignette on each example.
 
-I find it useful to filter on visibility sources to help determine your organizations strengths and weaknesses in continuous monitoring.
+I find it useful to filter on visibility sources to help determine your organization's strengths and weaknesses in continuous monitoring.
 
 <hr>
 <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzc2z9ZGpr5rnsFdBlqwG0pKyziZrWmNOPfNHjrFpY3twcyueciWelTMmQETSf8IFcOXvkXYBcyd4W/pubhtml?embedded=true" width="100%" height="800"></iframe>
