@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      Flattened Mitre ATT&CK Matrix
+title:      Flattened MITRE ATT&CK Matrix
 date:       2017-09-05 00:00:00
 time:   5
-summary:    Mitre ATT&CK Matrix flattened and mapped by category to threat actor groups and software examples of each attack.
+summary:    MITRE ATT&CK Matrix flattened and mapped by category to threat actor groups and software examples of each attack.
 
 categories: mitre attack matrix flattened threat actor mapping
 
