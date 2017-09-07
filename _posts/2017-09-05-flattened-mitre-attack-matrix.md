@@ -11,7 +11,7 @@ author: austin_taylor
 author_github: austin-taylor
 ---
 
-<center>Inspired by <a href="https://attack.mitre.org/wiki/ATT%26CK_Matrix">MITRE ATT&CK Matrix</a></center>
+<center>Inspired by <a href="https://attack.mitre.org/wiki/ATT%26CK_Matrix">MITRE's</a></center>
 
 ![HTTPMAP]({{ site.base }}/images/mitre_attack_matrix.png){: class="center-image" height="300px"}
 
