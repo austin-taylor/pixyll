@@ -33,5 +33,3 @@ Projects
 
 ![HTTPMAP]({{ site.base }}/images/netwars1.jpg){: class="center-image" height="300px"}
 <br>
-
-

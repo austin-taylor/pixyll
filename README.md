@@ -24,14 +24,6 @@ $ gem install bundler # If you don't have bundler installed
 $ bundle install
 ```
 
-If you don't want to install anything in your local machine, you can create a free development environment for this Pixyll project in the cloud on [Nitrous.io](https://www.nitrous.io) by clicking the button below.
-
-<a href="https://www.nitrous.io/quickstart">
-  <img src="https://nitrous-image-icons.s3.amazonaws.com/quickstart.png" alt="Nitrous Quickstart" width=142 height=34>
-</a>
-
-In the IDE, start Pixyll via `Run > Start Pixyll` and access your site via `Preview > 3000`.
-
 #### Verify your Jekyll version
 
 It's important to also check your version of Jekyll since this project uses Native Sass which
@@ -123,9 +115,14 @@ The contact form uses <http://formspree.io>. It will require you to fill the for
 
 More setup instructions and advanced options can be found at [http://formspree.io](http://formspree.io/)
 
+
 ### Disqus
 
 To configure Disqus, set up a [Disqus site](https://disqus.com/admin/create/) with the same name as your site. Then, in `_config.yml`, edit the `disqus_shortname` value to enable Disqus.
+
+### txtpen
+
+To configure txtpen, set up a [txtpen site](https://txtpen.com/go) with the same name as your site. Then, in `_config.yml`, edit the `txtpen_sitename` value to enable txtpen
 
 ### Customizing the CSS
 
