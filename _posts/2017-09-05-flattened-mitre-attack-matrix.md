@@ -15,8 +15,6 @@ author_github: austin-taylor
 
 ![HTTPMAP]({{ site.base }}/images/mitre_attack_matrix.png){: class="center-image" height="300px"}
 
-<br>
-
 This version contains all matrix categories mapped to techniques with examples of application by software or threat actor groups. It also includes visibility sources required to detect the attack, permissions required for the attack to be successful, whether or not network access is required, which defense is bypassed and a vignette on each example.
 
 I find it useful to filter on visibility sources to help determine your organization's strengths and weaknesses in continuous monitoring.
