@@ -11,11 +11,11 @@ author: austin_taylor
 author_github: austin-taylor
 ---
 
-<center>Inspired by <a href="https://attack.mitre.org/wiki/ATT%26CK_Matrix">MITRE</a></center>
+<center>Inspired by <a href="https://attack.mitre.org/wiki/ATT%26CK_Matrix">MITRE ATT&CK Matrix</a></center>
 
-![HTTPMAP]({{ site.base }}/images/mitre_attack_matrix.png){: class="center-image" height="250px"}
+![HTTPMAP]({{ site.base }}/images/mitre_attack_matrix.png){: class="center-image" height="300px"}
 
-
+<br>
 
 This version contains all matrix categories mapped to techniques with examples of application by software or threat actor groups. It also includes visibility sources required to detect the attack, permissions required for the attack to be successful, whether or not network access is required, which defense is bypassed and a vignette on each example.
 
