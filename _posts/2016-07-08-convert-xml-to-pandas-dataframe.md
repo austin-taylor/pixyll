@@ -35,7 +35,7 @@ def xml2df(xml_data):
         record = {}
         for subchild in child:
             record[subchild.tag] = subchild.text
-            all_records.append(record)
+        all_records.append(record)
     return pd.DataFrame(all_records)
 
 {% endhighlight %}
@@ -44,7 +44,7 @@ def xml2df(xml_data):
 
 Our Goal
 ---
-Convert any XML file into a pandas dataframe.
+Convert XML file into a pandas dataframe.
 
 I found a lot of examples on the internet of how to convert XML into DataFrames, but each example was very tailored. Our version will take in any XML file and format the headers properly.
 
@@ -81,7 +81,7 @@ def xml2df(xml_data):
         record = {} #Place holder for our record
         for subchild in child: #iterate through the subchildren to user-agent, Ex: ID, String, Description.
             record[subchild.tag] = subchild.text #Extract the text create a new dictionary key, value pair
-            all_records.append(record) #Append this record to all_records.
+        all_records.append(record) #Append this record to all_records.
     return pd.DataFrame(all_records) #return records as DataFrame
 {% endhighlight %}
 
