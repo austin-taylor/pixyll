@@ -40,10 +40,6 @@ xml_data = requests.get(user_agent_url).content
 import xml.etree.ElementTree as ET
 import pandas as pd
 
-import xml.etree.ElementTree as ET
-import pandas as pd
-
-
 class XML2DataFrame:
 
     def __init__(self, xml_data):
