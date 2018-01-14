@@ -28,7 +28,8 @@ TLDR;
 
 import requests
 
-xml_data = requests.get('http://www.user-agents.org/allagents.xml').content
+user_agent_url = 'http://www.user-agents.org/allagents.xml'
+xml_data = requests.get(user_agent_url).content
 
 {% endhighlight %}
 
