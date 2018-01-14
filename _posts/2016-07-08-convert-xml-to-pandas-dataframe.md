@@ -142,6 +142,7 @@ class XML2DataFrame:
         if element.text:
             parsed[element.tag] = element.text
 
+        """ Apply recursion"""
         for child in list(element):
             parse_element(child, parsed)
 
