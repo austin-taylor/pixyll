@@ -135,7 +135,6 @@ class XML2DataFrame:
     def process_data(self):
         """ Initiate the root XML, parse it, and return a dataframe"""
         structure_data = self.parse_root(self.root)
-
         return pd.DataFrame(structure_data)
 
 xml2df = XML2DataFrame(xml_data)
