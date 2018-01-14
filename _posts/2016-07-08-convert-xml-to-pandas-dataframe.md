@@ -88,19 +88,6 @@ Sample Data
 ![Sample XML Data]({{ site.base }}/images/xml.png)
 
 Before running the sure to download the xml file above. 
-
-{% highlight bash %}
-wget http://www.user-agents.org/allagents.xml
-{% endhighlight %}
-
-
-Code Walkthrough
-----------------
-
-It's fairly straight forward, so I'll comment each line to explain.
-
-### Gather XML Data
-
 {% highlight python %}
 
 import requests
@@ -108,6 +95,11 @@ import requests
 xml_data = requests.get('http://www.user-agents.org/allagents.xml').content
 
 {% endhighlight %}
+
+Code Walkthrough
+----------------
+
+It's fairly straight forward, so I'll comment each line to explain.
 
 ### Parse XML Data
 ---
