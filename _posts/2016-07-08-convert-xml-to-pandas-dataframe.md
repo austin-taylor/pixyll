@@ -40,6 +40,10 @@ xml_data = requests.get(user_agent_url).content
 import xml.etree.ElementTree as ET
 import pandas as pd
 
+import xml.etree.ElementTree as ET
+import pandas as pd
+
+
 class XML2DataFrame:
 
     def __init__(self, xml_data):
@@ -49,29 +53,23 @@ class XML2DataFrame:
         return [parse_element(child) for child in iter(root)]
 
     def parse_element(self, element, parsed=None):
-
         if parsed is None:
             parsed = dict()
-
         for key in element.keys():
             parsed[key] = element.attrib.get(key)
-
         if element.text:
             parsed[element.tag] = element.text
-
         for child in list(element):
             parse_element(child, parsed)
-
         return parsed
 
     def process_data(self):
         structure_data = self.parse_root(self.root)
-
         return pd.DataFrame(structure_data)
 
 xml2df = XML2DataFrame(xml_data)
-
 xml_dataframe = xml2df.process_data()
+
 {% endhighlight %}
 
 
@@ -145,8 +143,8 @@ class XML2DataFrame:
         return pd.DataFrame(structure_data)
 
 xml2df = XML2DataFrame(xml_data)
-
 xml_dataframe = xml2df.process_data()
+
 {% endhighlight %}
 
 If all went well you should now have a DataFrame as seen below:
