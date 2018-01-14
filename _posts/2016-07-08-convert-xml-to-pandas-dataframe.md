@@ -79,7 +79,7 @@ Our Goal
 ---
 Convert XML file into a pandas dataframe.
 
-I found a lot of examples on the internet of how to convert XML into DataFrames, but each example was very tailored. Our version will take in any XML file and format the headers properly.
+I found a lot of examples on the internet of how to convert XML into DataFrames, but each example was very tailored. Our version will take in most XML data and format the headers properly. Some customization may be required depending on your data structure.
 
 For this example, we're going to convert [a User Agent tracker XML feed](http://www.user-agents.org/allagents.xml)
 
