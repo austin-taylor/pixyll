@@ -16,28 +16,65 @@ author: austin_taylor
 author_github: austin-taylor
 ---
 
-_Updated June 10th, 2017: Special thanks to all the contributors in the comments section!_
+_Updated January 14, 2018: Special thanks to all the contributors in the comments section!_
 
 
 TLDR;
 -----
 
+### Gather XML Data
+
+{% highlight python %}
+
+import requests
+
+xml_data = requests.get('http://www.user-agents.org/allagents.xml').content
+
+{% endhighlight %}
+
+### Parse XML Data
+---
+
 {% highlight python %}
 import xml.etree.ElementTree as ET
 import pandas as pd
 
-xml_data = open('/path/user_agents.xml').read()
+class XML2DataFrame:
 
-def xml2df(xml_data):
-    root = ET.XML(xml_data) # element tree
-    all_records = []
-    for i, child in enumerate(root):
-        record = {}
-        for subchild in child:
-            record[subchild.tag] = subchild.text
-        all_records.append(record)
-    return pd.DataFrame(all_records)
+    def __init__(self, xml_data):
+        self.root = ET.XML(xml_data)
 
+    def parse_root(self, root):
+        """Return a list of dictionaries from the text and attributes of the
+        children under this XML root."""
+        return [parse_element(child) for child in iter(root)]
+
+    def parse_element(self, element, parsed=None):
+        """ Collect {key:attribute} and {tag:text} from thie XML element and all
+        its children into a single dictionary of strings."""
+        if parsed is None:
+            parsed = dict()
+
+        for key in element.keys():
+            parsed[key] = element.attrib.get(key)
+
+        if element.text:
+            parsed[element.tag] = element.text
+
+        for child in list(element):
+            parse_element(child, parsed)
+
+        return parsed
+
+    def process_data(self):
+        """ Initiate the root of XML, parse it, and return a dataframe"""
+        structure_data = self.parse_root(self.root)
+
+        return pd.DataFrame(structure_data)
+
+xml2df = XML2DataFrame(xml_data)
+
+xml_dataframe = xml2df.process_data()
 {% endhighlight %}
 
 
@@ -66,23 +103,59 @@ Code Walkthrough
 
 It's fairly straight forward, so I'll comment each line to explain.
 
+### Gather XML Data
+
 {% highlight python %}
-# BEGIN IMPORTS
+
+import requests
+
+xml_data = requests.get('http://www.user-agents.org/allagents.xml').content
+
+{% endhighlight %}
+
+### Parse XML Data
+---
+
+{% highlight python %}
 import xml.etree.ElementTree as ET
 import pandas as pd
-# END IMPORTS
 
-xml_data = open('/path/user_agents.xml').read() #Loading the raw XML data
+class XML2DataFrame:
 
-def xml2df(xml_data):
-    root = ET.XML(xml_data) # element tree
-    all_records = [] #This is our record list which we will convert into a dataframe
-    for i, child in enumerate(root): #Begin looping through our root tree
-        record = {} #Place holder for our record
-        for subchild in child: #iterate through the subchildren to user-agent, Ex: ID, String, Description.
-            record[subchild.tag] = subchild.text #Extract the text create a new dictionary key, value pair
-        all_records.append(record) #Append this record to all_records.
-    return pd.DataFrame(all_records) #return records as DataFrame
+    def __init__(self, xml_data):
+        self.root = ET.XML(xml_data)
+
+    def parse_root(self, root):
+        """Return a list of dictionaries from the text and attributes of the
+        children under this XML root."""
+        return [parse_element(child) for child in iter(root)]
+
+    def parse_element(self, element, parsed=None):
+        """ Collect {key:attribute} and {tag:text} from thie XML element and all
+        its children into a single dictionary of strings."""
+        if parsed is None:
+            parsed = dict()
+
+        for key in element.keys():
+            parsed[key] = element.attrib.get(key)
+
+        if element.text:
+            parsed[element.tag] = element.text
+
+        for child in list(element):
+            parse_element(child, parsed)
+
+        return parsed
+
+    def process_data(self):
+        """ Initiate the root of XML, parse it, and return a dataframe"""
+        structure_data = self.parse_root(self.root)
+
+        return pd.DataFrame(structure_data)
+
+xml2df = XML2DataFrame(xml_data)
+
+xml_dataframe = xml2df.process_data()
 {% endhighlight %}
 
 If all went well you should now have a DataFrame as seen below:
