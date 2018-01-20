@@ -46,7 +46,7 @@ class XML2DataFrame:
         self.root = ET.XML(xml_data)
 
     def parse_root(self, root):
-        return [parse_element(child) for child in iter(root)]
+        return [self.parse_element(child) for child in iter(root)]
 
     def parse_element(self, element, parsed=None):
         if parsed is None:
@@ -112,7 +112,7 @@ class XML2DataFrame:
     def parse_root(self, root):
         """Return a list of dictionaries from the text
          and attributes of the children under this XML root."""
-        return [parse_element(child) for child in iter(root)]
+        return [self.parse_element(child) for child in iter(root)]
 
     def parse_element(self, element, parsed=None):
         """ Collect {key:attribute} and {tag:text} from thie XML
