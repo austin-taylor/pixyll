@@ -46,7 +46,7 @@ class XML2DataFrame:
         self.root = ET.XML(xml_data)
 
     def parse_root(self, root):
-        return [self.parse_element(child) for child in iter(root)]
+        return [self.parse_element(child) for child in iter(root)]
 
     def parse_element(self, element, parsed=None):
         if parsed is None:
@@ -56,7 +56,7 @@ class XML2DataFrame:
         if element.text:
             parsed[element.tag] = element.text
         for child in list(element):
-            parse_element(child, parsed)
+            self.parse_element(child, parsed)
         return parsed
 
     def process_data(self):
@@ -128,7 +128,7 @@ class XML2DataFrame:
 
         """ Apply recursion"""
         for child in list(element):
-            parse_element(child, parsed)
+            self.parse_element(child, parsed)
 
         return parsed
 
