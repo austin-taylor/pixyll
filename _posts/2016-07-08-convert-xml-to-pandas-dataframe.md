@@ -121,10 +121,11 @@ class XML2DataFrame:
             parsed = dict()
 
         for key in element.keys():
-            parsed[key] = element.attrib.get(key)
+            if key not in parsed:
+                parsed[key] = element.attrib.get(key)
+            else:
+                raise ValueError('duplicate attribute {0} at element {1}                 
 
-        if element.text:
-            parsed[element.tag] = element.text
 
         """ Apply recursion"""
         for child in list(element):
