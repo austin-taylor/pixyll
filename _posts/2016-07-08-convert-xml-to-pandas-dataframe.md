@@ -124,7 +124,7 @@ class XML2DataFrame:
             if key not in parsed:
                 parsed[key] = element.attrib.get(key)
             else:
-                raise ValueError('duplicate attribute {0} at element {1}                 
+                raise ValueError('duplicate attribute {0} at element {1}'.format(key, element.getroottree().getpath(element))           
 
 
         """ Apply recursion"""
