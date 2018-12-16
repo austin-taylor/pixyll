@@ -39,16 +39,15 @@ xml_data = requests.get(user_agent_url).content
 {% highlight python %}
 import xml.etree.ElementTree as ET
 import pandas as pd
-
 class XML2DataFrame:
 
     def __init__(self, xml_data):
         self.root = ET.XML(xml_data)
 
     def parse_root(self, root):
-        """Return a list of dictionaries from the text
-         and attributes of the children under this XML root."""
-        return [self.parse_element(child) for child in iter(root)]
+        """Return a list of dictionaries from the text and attributes of the
+        children under this XML root."""
+        return [parse_element(child) for child in root.getchildren()]
 
     def parse_element(self, element, parsed=None):
         """ Collect {key:attribute} and {tag:text} from thie XML
@@ -59,14 +58,14 @@ class XML2DataFrame:
         for key in element.keys():
             if key not in parsed:
                 parsed[key] = element.attrib.get(key)
+            if element.text:
+                parsed[element.tag] = element.text                
             else:
                 raise ValueError('duplicate attribute {0} at element {1}'.format(key, element.getroottree().getpath(element)))           
-
 
         """ Apply recursion"""
         for child in list(element):
             self.parse_element(child, parsed)
-
         return parsed
 
     def process_data(self):
@@ -76,7 +75,6 @@ class XML2DataFrame:
 
 xml2df = XML2DataFrame(xml_data)
 xml_dataframe = xml2df.process_data()
-
 {% endhighlight %}
 
 
@@ -114,16 +112,15 @@ It's fairly straight forward, so I'll comment each line to explain.
 {% highlight python %}
 import xml.etree.ElementTree as ET
 import pandas as pd
-
 class XML2DataFrame:
 
     def __init__(self, xml_data):
         self.root = ET.XML(xml_data)
 
     def parse_root(self, root):
-        """Return a list of dictionaries from the text
-         and attributes of the children under this XML root."""
-        return [self.parse_element(child) for child in iter(root)]
+        """Return a list of dictionaries from the text and attributes of the
+        children under this XML root."""
+        return [parse_element(child) for child in root.getchildren()]
 
     def parse_element(self, element, parsed=None):
         """ Collect {key:attribute} and {tag:text} from thie XML
@@ -134,14 +131,14 @@ class XML2DataFrame:
         for key in element.keys():
             if key not in parsed:
                 parsed[key] = element.attrib.get(key)
+            if element.text:
+                parsed[element.tag] = element.text                
             else:
-                raise ValueError('duplicate attribute {0} at element {1}'.format(key, element.getroottree().getpath(element)))        
-
+                raise ValueError('duplicate attribute {0} at element {1}'.format(key, element.getroottree().getpath(element)))           
 
         """ Apply recursion"""
         for child in list(element):
             self.parse_element(child, parsed)
-
         return parsed
 
     def process_data(self):
