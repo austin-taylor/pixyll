@@ -77,9 +77,6 @@ class XML2DataFrame:
 xml2df = XML2DataFrame(xml_data)
 xml_dataframe = xml2df.process_data()
 
-xml2df = XML2DataFrame(xml_data)
-xml_dataframe = xml2df.process_data()
-
 {% endhighlight %}
 
 
