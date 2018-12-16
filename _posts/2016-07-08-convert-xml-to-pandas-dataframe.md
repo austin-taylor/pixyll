@@ -16,7 +16,8 @@ author: austin_taylor
 author_github: austin-taylor
 ---
 
-_Updated January 14, 2018: Special thanks to all the contributors in the comments section!_
+_Tested with Python 3 and updated December 16, 2019: Special thanks to all the contributors in the comments section!_
+
 
 
 TLDR;
